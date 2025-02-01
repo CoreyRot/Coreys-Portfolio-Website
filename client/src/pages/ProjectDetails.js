@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_URL from "../config";
 import "../styles/ProjectDetail.css";
 
 const ProjectDetails = () => {
@@ -10,13 +11,19 @@ const ProjectDetails = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`https://my-portfolio-w07c.onrender.com//api/projects/${id}`)
+    if (!id || id.length !== 24) {
+      console.error("❌ Invalid Project ID:", id);
+      setLoading(false);
+      return;
+    }
+
+    axios.get(`${API_URL}/api/projects/${id}`)
       .then((response) => {
         setProject(response.data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching project:", error);
+        console.error("❌ Error fetching project:", error);
         setLoading(false);
       });
   }, [id]);

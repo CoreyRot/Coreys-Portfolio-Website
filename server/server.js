@@ -3,56 +3,59 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
-// Load environment variables
-dotenv.config();
-
 const projectRoutes = require("./routes/projectRoutes");
-const contactRoutes = require("./routes/contactRoutes");
+const contactRoutes = require("./routes/contactRoutes"); // ✅ Import contact routes
+
+dotenv.config(); // Load environment variables
 
 const app = express();
-app.use(express.json());
+app.use(express.json()); // Middleware for parsing JSON
 
-// ✅ Fix CORS to allow your frontend
+// ✅ Fix CORS to allow both local & deployed frontends
+const allowedOrigins = [
+  "http://localhost:3000", // ✅ Allow local development
+  "http://192.168.56.1:3000", // ********************************
+  "https://coreys-portfolio-website-murex.vercel.app", // ✅ Allow deployed frontend
+];
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: function (origin, callback) {
+    console.log("🔍 Checking CORS for:", origin || "❌ No Origin Header");
+    if (!origin) {
+      console.log("✅ Allowing request with no origin (e.g., Postman, direct browser access)");
+      return callback(null, true);
+    }
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.error("🚨 CORS Blocked Origin:", origin);
+      callback(new Error("CORS policy does not allow this origin"), false);
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
 };
+
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
-// ✅ Fix CORS Headers (Ensure Preflight Requests Work)
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", process.env.FRONTEND_URL || "http://localhost:3000");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
-});
-
-// ✅ MongoDB Connection
+// ✅ Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("✅ MongoDB connected successfully"))
-  .catch((err) => {
-    console.error("❌ MongoDB connection error:", err);
-    process.exit(1);
-  });
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // ✅ API Routes
 app.use("/api/projects", projectRoutes);
-app.use("/api/contact", contactRoutes);
+app.use("/api/contact", contactRoutes); // ✅ Add Contact API route
 
-// ✅ Default Route for Testing
+// ✅ Default Route
 app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
-});
-
-// ✅ Error Handling Middleware
-app.use((err, req, res, next) => {
-  console.error("❌ Server Error:", err.stack);
-  res.status(500).json({ message: "Internal Server Error" });
 });
 
 const PORT = process.env.PORT || 5000;

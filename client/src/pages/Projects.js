@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import API_URL from "../config"; // ✅ Use centralized API URL
+import API_URL from "../config";
 import "../styles/Projects.css";
 
 const Project = () => {
@@ -12,11 +12,28 @@ const Project = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/projects`); // ✅ Fix API URL
-        setProjects(response.data);
-        setFilteredProjects(response.data);
+        console.log("🔄 Fetching projects from:", `${API_URL}/api/projects`);
+        const response = await axios.get(`${API_URL}/api/projects`, {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Origin: window.location.origin,
+          },
+        });
+
+        console.log("✅ API Response:", response.data);
+        if (Array.isArray(response.data)) {
+          setProjects(response.data);
+          setFilteredProjects(response.data);
+        } else {
+          console.error("❌ Unexpected response format:", response.data);
+        }
       } catch (error) {
         console.error("❌ Error fetching projects:", error);
+        if (error.response) {
+          console.error("🔹 Server Response:", error.response.data);
+        }
       }
     };
 
@@ -64,7 +81,7 @@ const Project = () => {
               </Link>
             ))
           ) : (
-            <p className="no-projects">No projects available.</p> // ✅ Handle empty state
+            <p className="no-projects">No projects available.</p>
           )}
 
           {/* ✅ Contact Section */}
