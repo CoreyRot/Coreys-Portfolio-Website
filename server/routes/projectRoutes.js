@@ -1,5 +1,5 @@
 const express = require("express");
-const Project = require("../models/project");
+const Project = require("../models/Project.js");
 const router = express.Router();
 
 // ✅ Get all projects

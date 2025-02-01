@@ -20,7 +20,7 @@ const Contact = () => {
     setStatus("Sending...");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/contact", formData);
+      const response = await axios.post("https://my-portfolio-w07c.onrender.com//api/contact", formData);
       setStatus(response.data.message);
       setFormData({ name: "", email: "", message: "" }); // Reset form
     } catch (error) {

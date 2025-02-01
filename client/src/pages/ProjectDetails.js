@@ -10,7 +10,7 @@ const ProjectDetails = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/projects/${id}`)
+    axios.get(`https://my-portfolio-w07c.onrender.com//api/projects/${id}`)
       .then((response) => {
         setProject(response.data);
         setLoading(false);

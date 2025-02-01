@@ -9,7 +9,7 @@ const Project = () => {
   const [activeFilter, setActiveFilter] = useState("All");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/projects")
+    axios.get("https://my-portfolio-w07c.onrender.com//api/projects")
       .then((response) => {
         setProjects(response.data);
         setFilteredProjects(response.data);
