@@ -1,0 +1,9 @@
+.home {
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: center;
+  .container {
+    width: 100%;
+  }
+}

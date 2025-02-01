@@ -1,0 +1,255 @@
+/* Import Font */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
+
+/* Global Styles */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+svg {
+  fill: white;
+}
+.app-layout {
+  position: relative;
+  overflow: hidden;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: #1a1a1a;
+  pointer-events: none;
+}
+
+/* === Layout === */
+.container {
+  padding: 0 1.5rem;
+}
+
+.site-content__start {
+  margin-left: 270px;
+  transition: margin-left 0.3s ease-in-out;
+  position: relative;
+
+  @media (max-width: 1024px) {
+    margin-left: 0;
+  }
+}
+
+/* === BUTTON === */
+.btn,
+button {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #5a189a;
+  color: white !important;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none !important;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background: #e6b400;
+    color: #121212;
+    box-shadow: 0px 0px 10px #e6b400;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    background: #e6b400;
+    color: #121212;
+    box-shadow: 0px 0px 10px #e6b400;
+    transform: translateY(-2px);
+  }
+  &.active {
+    background: #e6b400;
+    color: #121212;
+    box-shadow: 0px 0px 10px #e6b400;
+    transform: translateY(-2px);
+  }
+}
+
+/* === FLEX & GRID UTILITIES === */
+.flex-background {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  &-left {
+    text-align: left;
+  }
+  &-center {
+    text-align: center;
+  }
+  &-right {
+    text-align: right;
+  }
+  &-justify {
+    text-align: justify;
+  }
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+
+  .cell {
+    flex: 0 0 auto;
+    min-height: 0;
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+/* === Section Styling === */
+section {
+  min-height: 100vh;
+  padding: 60px 0;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heading-title {
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+.section-title {
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #198754;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.home-background,
+.about-background,
+.resume-background,
+.projects-background,
+.project-info,
+.contact-background {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  color: black;
+}
+
+/* === Typography === */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 56px;
+}
+h2 {
+  font-size: 40px;
+  font-weight: 600;
+}
+h3 {
+  font-size: 28px;
+  font-weight: 500;
+}
+h4 {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* === Responsive Typography === */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 48px;
+  }
+  h2 {
+    font-size: 36px;
+  }
+  h3 {
+    font-size: 26px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 42px;
+  }
+  h2 {
+    font-size: 32px;
+  }
+  h3 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 36px;
+  }
+  h2 {
+    font-size: 28px;
+  }
+  h3 {
+    font-size: 22px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+}
+
+/* === Fix for Shadow Host === */
+#shadow-host-companion {
+  min-height: 100%;
+}
