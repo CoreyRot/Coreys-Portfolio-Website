@@ -133,11 +133,14 @@ button {
 /* === Section Styling === */
 section {
   min-height: 100vh;
-  padding: 60px 0;
+  padding: 40px 0;
   overflow: clip;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: 1024px) {
+    padding: 27px 0;
+  }
 }
 
 .heading-title {
