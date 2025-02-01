@@ -4,6 +4,14 @@
   gap: 10px;
   margin-bottom: 20px;
   flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+    }
+  }
 }
 
 .projects-grid {
