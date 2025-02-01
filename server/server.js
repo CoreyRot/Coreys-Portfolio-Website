@@ -12,7 +12,7 @@ const contactRoutes = require("./routes/contactRoutes");
 const app = express();
 app.use(express.json());
 
-// CORS Configuration
+// ✅ Fix CORS to allow your frontend
 const corsOptions = {
   origin: process.env.FRONTEND_URL || "http://localhost:3000",
   methods: ["GET", "POST", "PUT", "DELETE"],
@@ -20,7 +20,15 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// MongoDB Connection
+// ✅ Fix CORS Headers (Ensure Preflight Requests Work)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", process.env.FRONTEND_URL || "http://localhost:3000");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  next();
+});
+
+// ✅ MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -32,16 +40,16 @@ mongoose
     process.exit(1);
   });
 
-// API Routes
+// ✅ API Routes
 app.use("/api/projects", projectRoutes);
 app.use("/api/contact", contactRoutes);
 
-// Default Route for API Testing
+// ✅ Default Route for Testing
 app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
-// Error Handling Middleware
+// ✅ Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error("❌ Server Error:", err.stack);
   res.status(500).json({ message: "Internal Server Error" });
