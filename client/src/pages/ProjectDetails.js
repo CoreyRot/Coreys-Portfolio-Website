@@ -39,7 +39,7 @@ const ProjectDetails = () => {
   return (
     <section className="project-detail">
       <header className="project-header">
-        <h2>{project.title}</h2>
+        <h1>{project.title}</h1>
         <button className="back-button" onClick={handleBack}>Back to Project</button>
       </header>
       <div className="container">

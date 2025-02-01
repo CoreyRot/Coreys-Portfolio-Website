@@ -12,10 +12,17 @@
   padding: 25px;
   position: relative;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  h1 {
+    font-size: 24px;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
+    gap: 1rem;
+    button {
+      align-self: flex-start;
+    }
   }
 }
 
