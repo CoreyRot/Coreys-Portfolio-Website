@@ -118,6 +118,7 @@
   }
 
   .mobile-menu-btn {
-    display: block;
+    display: flex;
+    align-items: center;
   }
 }
