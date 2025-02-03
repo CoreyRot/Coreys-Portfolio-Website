@@ -10,34 +10,40 @@ const contactRoutes = require("./routes/contactRoutes"); // ✅ Import contact r
 dotenv.config(); // Load environment variables
 
 const app = express();
-app.use(express.json()); // Middleware for parsing JSON
+app.use(express.json()); // ✅ Middleware for parsing JSON
+app.use(express.urlencoded({ extended: true })); // ✅ Parses URL-encoded data
 
 // ✅ Serve uploaded files statically
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// ✅ Debugging Logs
+console.log("🛠️ Initializing API Routes...");
+
+// ✅ Check if contactRoutes is being loaded
+if (contactRoutes) {
+  console.log("✅ Contact routes loaded!");
+} else {
+  console.log("❌ Contact routes failed to load.");
+}
+
 // ✅ Fix CORS to allow both local & deployed frontends
 const allowedOrigins = [
-  "http://localhost:3000", // ✅ Local development
-  "http://192.168.56.1:3000", // ✅ Internal network testing
-  "https://coreys-portfolio-website-murex.vercel.app", // ✅ Deployed frontend
-  "https://www.coreydevstudio.com", // ✅ Production frontend
+  "http://localhost:3000",
+  "https://coreys-portfolio-website-murex.vercel.app",
+  "https://www.coreydevstudio.com",
 ];
 
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("🔍 Checking CORS for:", origin || "❌ No Origin Header");
-    if (!origin) {
-      console.log("✅ Allowing request with no origin (e.g., Postman, direct browser access)");
+    if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true);
-    }
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
     } else {
       console.error("🚨 CORS Blocked Origin:", origin);
-      callback(new Error("CORS policy does not allow this origin"), false);
+      return callback(new Error("CORS policy does not allow this origin"), false);
     }
   },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST"],
   credentials: true,
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
 };
@@ -45,31 +51,28 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-// ✅ Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
-
-// ✅ API Routes
+// ✅ Register Routes
+console.log("📌 Registering API Routes...");
 app.use("/api/projects", projectRoutes);
-app.use("/api/contact", contactRoutes); // ✅ Add Contact API route
+app.use("/api/contact", contactRoutes); // ✅ Ensure this line is here!
 
 // ✅ Default Route
 app.get("/", (req, res) => {
+  console.log("📩 GET / hit");
   res.send("Backend is running 🚀");
 });
 
-// ✅ Graceful Shutdown Handling
-process.on("SIGINT", async () => {
-  console.log("🔴 Shutting down server...");
-  await mongoose.connection.close();
-  console.log("🔴 MongoDB disconnected.");
-  process.exit(0);
+// ✅ Log Unrecognized Routes
+app.use((req, res, next) => {
+  console.log(`⚠️ 404 - Route not found: ${req.method} ${req.url}`);
+  res.status(404).json({ message: "Route not found" });
 });
+
+// ✅ Connect to MongoDB
+mongoose
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
