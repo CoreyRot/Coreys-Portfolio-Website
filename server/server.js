@@ -17,13 +17,26 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // ✅ Fix CORS to allow both local & deployed frontends
 const allowedOrigins = [
-  "http://localhost:3000",
-  "https://coreys-portfolio-website-murex.vercel.app",
-  "https://www.coreydevstudio.com",
+  "http://localhost:3000", // ✅ Local development
+  "http://192.168.56.1:3000", // ✅ Internal network testing
+  "https://coreys-portfolio-website-murex.vercel.app", // ✅ Deployed frontend
+  "https://www.coreydevstudio.com", // ✅ Production frontend
 ];
 
 const corsOptions = {
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    console.log("🔍 Checking CORS for:", origin || "❌ No Origin Header");
+    if (!origin) {
+      console.log("✅ Allowing request with no origin (e.g., Postman, direct browser access)");
+      return callback(null, true);
+    }
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.error("🚨 CORS Blocked Origin:", origin);
+      callback(new Error("CORS policy does not allow this origin"), false);
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
@@ -32,27 +45,31 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-// ✅ Ensure Routes Exist
-app.use("/api/projects", projectRoutes);
-app.use("/api/contact", contactRoutes); // ✅ Should be here!
+// ✅ Connect to MongoDB
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// ✅ Default Route for Debugging
+// ✅ API Routes
+app.use("/api/projects", projectRoutes);
+app.use("/api/contact", contactRoutes); // ✅ Add Contact API route
+
+// ✅ Default Route
 app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
-// ✅ Debugging Logs
-app.use((req, res, next) => {
-  console.log(`🔍 Received ${req.method} request at ${req.url}`);
-  next();
+// ✅ Graceful Shutdown Handling
+process.on("SIGINT", async () => {
+  console.log("🔴 Shutting down server...");
+  await mongoose.connection.close();
+  console.log("🔴 MongoDB disconnected.");
+  process.exit(0);
 });
 
-// ✅ Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
-
-// ✅ Server Startup
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
