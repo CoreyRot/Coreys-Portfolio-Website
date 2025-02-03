@@ -9,16 +9,6 @@
     .section-title {
       text-align: left !important;
     }
-
-    a {
-      color: #5a5aed;
-      font-weight: bold;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
 
   .about-skills {

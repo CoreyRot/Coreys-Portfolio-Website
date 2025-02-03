@@ -24,6 +24,10 @@
       align-self: flex-start;
     }
   }
+  .back-button {
+    color: white !important;
+    background: #161b22 !important;
+  }
 }
 
 .project-main {
