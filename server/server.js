@@ -16,6 +16,7 @@ const allowedOrigins = [
   "http://localhost:3000", // ✅ Allow local development
   "http://192.168.56.1:3000", // ********************************
   "https://coreys-portfolio-website-murex.vercel.app", // ✅ Allow deployed frontend
+  "https://www.coreydevstudio.com/", // ✅ Allow deployed production frontend
 ];
 
 const corsOptions = {

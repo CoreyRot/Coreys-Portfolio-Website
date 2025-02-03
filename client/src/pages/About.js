@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import "../styles/About.css";
 const roles = [
-  "Full Stack Developer",
-  "Front-end Developer",
+  "Fullstack Developer",
+  "Frontend Developer",
   "UI/UX Developer",
   "Web Designer"
 ];
@@ -41,18 +41,15 @@ const About = () => {
           <div className="about-text">
             <h2 className="section-title">Get to know me!</h2>
             <div className="section-subheading">
-              <p>
-                I am a <span ref={textRef} className="morph-text">{roles[currentIndex]}</span>
-                &nbsp;based in Toronto, Ontario, Canada, passionate about crafting high-performance, intuitive web applications.
-              </p>
+              <span>
+                I'm a <strong ref={textRef} className="morph-text">{roles[currentIndex]}</strong>
+                &nbsp;based in Toronto, Ontario, Canada.</span>
+                
+              <p>Passionate about crafting high-performance, intuitive web applications.</p>
 
-              <p>
-                On the <strong>front-end</strong>, I bring ideas to life using <strong>React</strong>, <strong>Next.js</strong>, <strong>TypeScript</strong>, <strong>TailwindCSS</strong>, <strong>JavaScript</strong>, <strong>HTML</strong>, and <strong>CSS</strong>. On the <strong>back-end</strong>, I build robust and scalable applications with <strong>Node.js</strong>, <strong>Express.js</strong>, <strong>MongoDB</strong>, <strong>MySQL</strong>, and <strong>RESTful APIs</strong>.
-              </p>
+              <p>On the frontend, I bring ideas to life using React, Next.js,TypeScript, TailwindCSS, JavaScript, HTML, and CSS3 / SASS / SCSS. On the backend, I build robust and scalable applications with Node.js, Express.js, MongoDB, MySQL, and RESTful APIs.</p>
 
-              <p>
-                With a blend of technical expertise and creativity, I bridge the gap between aesthetics and functionality to deliver engaging user experiences.
-              </p>
+              <p>With a blend of technical expertise and creativity, I bridge the gap between aesthetics and functionality to deliver engaging user experiences.</p>
             </div>
             <a href="#contact" className="btn">Contact</a>
           </div>
