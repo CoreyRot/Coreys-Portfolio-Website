@@ -87,15 +87,3 @@
     background: #673ab7;
   }
 }
-
-/* ✅ More Coming Soon CTA */
-.more-coming-soon {
-  text-align: center;
-  margin-top: 40px;
-  h2 {
-    margin-bottom: 10px;
-  }
-  p {
-    margin-bottom: 20px;
-  }
-}
