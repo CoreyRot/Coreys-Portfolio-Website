@@ -16,7 +16,7 @@ const Home = () => {
               </p>
             </div>
 
-            <div className="button-group flex-background">
+            <div className="button-group flex-container">
               <a href="#projects" className="btn">View My Projects</a>
               <a href="#contact" className="btn">Hire Me</a>
             </div>

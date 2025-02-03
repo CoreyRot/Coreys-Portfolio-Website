@@ -35,7 +35,7 @@
   gap: 5px;
 }
 
-.button-group.flex-container {
+.contact .button-group.flex-container {
   justify-content: space-between;
 }
 
@@ -49,10 +49,10 @@
   }
 
   .checkbox-group {
-    grid-template-columns: 1fr !important; /* Stack checkboxes in one column */
+    grid-template-columns: 1fr !important;
   }
 
-  .button-group.flex-container {
-    flex-direction: column !important; /* Stack buttons on top of each other */
+  .contact .button-group.flex-container {
+    flex-direction: column !important;
   }
 }

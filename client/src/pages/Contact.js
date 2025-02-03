@@ -17,6 +17,7 @@ const Contact = () => {
     salaryRange: "",
     message: "",
     file: null,
+    uploadedFile: null, // Store uploaded file name from API response
   });
 
   const [status, setStatus] = useState("");
@@ -41,7 +42,7 @@ const Contact = () => {
       Object.entries(formData).forEach(([key, value]) => {
         if (Array.isArray(value)) {
           value.forEach((v) => formDataToSend.append(`${key}[]`, v));
-        } else if (value) {
+        } else if (value && key !== "uploadedFile") {
           formDataToSend.append(key, value);
         }
       });
@@ -66,6 +67,7 @@ const Contact = () => {
         salaryRange: "",
         message: "",
         file: null,
+        uploadedFile: response.data.file || null, // Store uploaded file name
       });
       setStep(1);
     } catch (error) {
@@ -107,11 +109,8 @@ const Contact = () => {
             {/* Step 1 - Basic Info */}
             {step === 1 && (
               <>
-                {/* First Name & Last Name Side by Side */}
                 <FormInput label="First Name:" name="firstName" type="text" value={formData.firstName} onChange={handleChange} required />
                 <FormInput label="Last Name:" name="lastName" type="text" value={formData.lastName} onChange={handleChange} required />
-
-                {/* Email & Phone Number Side by Side */}
                 <FormInput label="Email:" name="email" type="email" value={formData.email} onChange={handleChange} required />
                 <FormInput label="Phone Number:" name="phone" type="tel" value={formData.phone} onChange={handleChange} required />
               </>
@@ -120,17 +119,15 @@ const Contact = () => {
             {/* Step 2 - Job/Freelance Info */}
             {step === 2 && (formType === "job" || formType === "freelance") && (
               <>
-                {/* Company Name & Website Side by Side */}
                 <FormInput label="Company Name:" name="company" type="text" value={formData.company} onChange={handleChange} required />
                 <FormInput label="Company Website:" name="website" type="url" value={formData.website} onChange={handleChange} />
 
                 {formType === "job" && (
                   <>
-                    {/* Job Title & Job Description Side by Side */}
                     <FormInput label="Job Title:" name="jobTitle" type="text" value={formData.jobTitle} onChange={handleChange} required />
                     <FormInput label="Job Description (File Upload):" name="file" type="file" onChange={handleFileChange} />
 
-                    {/* Work Type Checkboxes (Onsite, Hybrid, Remote) */}
+                    {/* Work Type Checkboxes */}
                     <div className="form-group full-width">
                       <label className="form-label">Work Type:</label>
                       <div className="checkbox-group">
@@ -156,11 +153,9 @@ const Contact = () => {
                       </div>
                     </div>
 
-                    {/* Full-width Salary Dropdown */}
                     <FormDropdown label="Salary Range:" name="salaryRange" value={formData.salaryRange} onChange={handleChange} options={["Select", "0-40000", "40000-60000", "60000-80000", "80000-100000", "100000+"]} fullWidth />
                   </>
                 )}
-
               </>
             )}
 
@@ -169,6 +164,16 @@ const Contact = () => {
               <FormTextarea label="Message:" name="message" value={formData.message} onChange={handleChange} required fullWidth />
             )}
           </div>
+
+          {/* Display Uploaded File */}
+          {formData.uploadedFile && (
+            <div className="uploaded-file">
+              <p>Uploaded File:</p>
+              <a href={`https://coreys-portfolio-website.onrender.com/uploads/${formData.uploadedFile}`} target="_blank" rel="noopener noreferrer">
+                {formData.uploadedFile}
+              </a>
+            </div>
+          )}
 
           {/* Navigation Buttons */}
           <div className="button-group flex-container">
