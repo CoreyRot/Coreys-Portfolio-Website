@@ -38,7 +38,7 @@ const Sidebar = () => {
         <div className="profile-section">
           <h2 className="profile-name">Corey Rotstein</h2>
           <div className="social-icons">
-            <a href="https://firebasestorage.googleapis.com/v0/b/my-portfolio-1fc61.appspot.com/o/CoreyRotstein_Resume.pdf?alt=media&token=d41cd562-08f5-4176-aeff-2f28f31a903d" target="_blank" rel="noopener noreferrer" download className="resume-download">
+            <a href="https://firebasestorage.googleapis.com/v0/b/my-portfolio-1fc61.appspot.com/o/Corey's%20Resume.pdf?alt=media&token=7611125a-bf6c-4290-8418-5cecbd798f98" target="_blank" rel="noopener noreferrer" download className="resume-download">
               <AiOutlineFileText />
             </a>
             <a href="https://www.linkedin.com/in/corey-rotstein/" target="_blank" rel="noopener noreferrer">
