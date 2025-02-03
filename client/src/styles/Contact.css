@@ -15,7 +15,8 @@
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
-  grid-gap: 1.875rem !important;
+  grid-gap: 16px;
+  margin: 15px 0;
 }
 
 .full-width {
@@ -32,4 +33,26 @@
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.button-group.flex-container {
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr !important; /* 1 column for small screens */
+  }
+
+  .form-group {
+    grid-column: span 2;
+  }
+
+  .checkbox-group {
+    grid-template-columns: 1fr !important; /* Stack checkboxes in one column */
+  }
+
+  .button-group.flex-container {
+    flex-direction: column !important; /* Stack buttons on top of each other */
+  }
 }

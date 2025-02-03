@@ -130,10 +130,37 @@ const Contact = () => {
                     <FormInput label="Job Title:" name="jobTitle" type="text" value={formData.jobTitle} onChange={handleChange} required />
                     <FormInput label="Job Description (File Upload):" name="file" type="file" onChange={handleFileChange} />
 
+                    {/* Work Type Checkboxes (Onsite, Hybrid, Remote) */}
+                    <div className="form-group full-width">
+                      <label className="form-label">Work Type:</label>
+                      <div className="checkbox-group">
+                        {["Onsite", "Hybrid", "Remote"].map((type) => (
+                          <label key={type}>
+                            <input
+                              type="checkbox"
+                              value={type}
+                              checked={formData.workType.includes(type)}
+                              onChange={(e) => {
+                                const { value, checked } = e.target;
+                                setFormData((prev) => {
+                                  const updatedWorkType = checked
+                                    ? [...prev.workType, value]
+                                    : prev.workType.filter((t) => t !== value);
+                                  return { ...prev, workType: updatedWorkType };
+                                });
+                              }}
+                            />
+                            {type}
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
                     {/* Full-width Salary Dropdown */}
                     <FormDropdown label="Salary Range:" name="salaryRange" value={formData.salaryRange} onChange={handleChange} options={["Select", "0-40000", "40000-60000", "60000-80000", "80000-100000", "100000+"]} fullWidth />
                   </>
                 )}
+
               </>
             )}
 
@@ -144,7 +171,7 @@ const Contact = () => {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="button-group">
+          <div className="button-group flex-container">
             {step > 1 && (
               <button type="button" className="btn-prev" onClick={() => setStep(step - 1)}>
                 Previous
