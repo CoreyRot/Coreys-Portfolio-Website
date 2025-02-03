@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "concurrently": "^9.1.2",
-    "react-scroll": "^1.9.0"
+    "react-scroll": "^1.9.0",
+    "sass": "^1.83.4"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",

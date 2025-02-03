@@ -1,34 +1,35 @@
-.contact-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.contact-form label {
+.form-label {
   font-weight: bold;
-  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
-.contact-form input,
-.contact-form textarea {
+.form-input,
+.dropdown,
+.form-textarea {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ddd;
+  padding: 8px;
   border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-.contact-form textarea {
-  height: 100px;
-  resize: none;
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
+  grid-gap: 1.875rem !important;
 }
 
-.contact-form button {
-  margin-top: 15px;
+.full-width {
+  grid-column: span 2;
 }
 
-.status-message {
-  margin-top: 10px;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+  gap: 10px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
