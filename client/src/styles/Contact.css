@@ -16,7 +16,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
   grid-gap: 16px;
-  margin: 15px 0;
+  margin: 16px 0;
 }
 
 .full-width {
