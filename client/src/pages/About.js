@@ -41,13 +41,11 @@ const About = () => {
           <div className="about-text">
             <h2 className="section-title">Get to know me!</h2>
             <div className="section-subheading">
-              <span>
-                I'm a <strong ref={textRef} className="morph-text">{roles[currentIndex]}</strong>
-                &nbsp;based in Toronto, Ontario, Canada.</span>
+              <span>I'm a <strong ref={textRef} className="morph-text">{roles[currentIndex]}</strong> &nbsp;based in Toronto, Ontario, Canada.</span>
                 
               <p>Passionate about crafting high-performance, intuitive web applications.</p>
 
-              <p>On the frontend, I bring ideas to life using React, Next.js,TypeScript, TailwindCSS, JavaScript, HTML, and CSS3 / SASS / SCSS. On the backend, I build robust and scalable applications with Node.js, Express.js, MongoDB, MySQL, and RESTful APIs.</p>
+              <p>On the frontend, I bring ideas to life using React, Next.js, TypeScript, TailwindCSS, JavaScript, HTML, and CSS3 / SASS / SCSS. On the backend, I build robust and scalable applications with Node.js, Express.js, MongoDB, MySQL, and RESTful APIs.</p>
 
               <p>With a blend of technical expertise and creativity, I bridge the gap between aesthetics and functionality to deliver engaging user experiences.</p>
             </div>

@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
-import CanvasBackground from "./components/CanvasBackground"; // Import the canvas
+import CanvasBackground from "./components/CanvasBackground";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Resume from "./pages/Resume";
 import Portfolio from "./pages/Projects";
 import ProjectDetails from "./pages/ProjectDetails";
+import MoreComingSoon from "./pages/MoreComingSoon";
 import Contact from "./pages/Contact";
 import "./App.css";
 
@@ -44,6 +45,7 @@ const App = () => {
               </>
             } />
             <Route path="/projects/:id" element={<ProjectDetails />} />
+            <Route path="/projects/more-coming-soon" element={<MoreComingSoon />} /> {/* ✅ New CTA Page */}
           </Routes>
         </div>
       </div>

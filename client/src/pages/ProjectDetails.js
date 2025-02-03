@@ -9,6 +9,7 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     if (!id || id.length !== 24) {
@@ -17,20 +18,49 @@ const ProjectDetails = () => {
       return;
     }
 
-    axios.get(`${API_URL}/api/projects/${id}`)
+    // ✅ Fetch all projects
+    axios.get(`${API_URL}/api/projects`)
       .then((response) => {
-        setProject(response.data);
+        setProjects(response.data);
+
+        // ✅ Find current project
+        const foundIndex = response.data.findIndex((p) => p._id === id);
+        if (foundIndex !== -1) {
+          setProject(response.data[foundIndex]);
+        } else {
+          console.error("❌ Project not found in list:", id);
+        }
+
         setLoading(false);
       })
       .catch((error) => {
-        console.error("❌ Error fetching project:", error);
+        console.error("❌ Error fetching projects:", error);
         setLoading(false);
       });
   }, [id]);
 
+  // ✅ Navigate to next/previous project or CTA page
+  const navigateToProject = (direction) => {
+    const currentIndex = projects.findIndex((p) => p._id === project._id);
+    if (currentIndex === -1) return;
+
+    let newIndex;
+    if (direction === "prev" && currentIndex > 0) {
+      newIndex = currentIndex - 1;
+      navigate(`/projects/${projects[newIndex]._id}`);
+    } else if (direction === "next") {
+      if (currentIndex < projects.length - 1) {
+        newIndex = currentIndex + 1;
+        navigate(`/projects/${projects[newIndex]._id}`);
+      } else {
+        navigate("/projects/more-coming-soon"); // ✅ Redirects to CTA page
+      }
+    }
+  };
+
   const handleBack = () => {
     navigate("/#projects", { replace: true });
-    window.location.reload(); // Ensures proper scrolling to the anchor
+    window.location.reload();
   };
 
   if (loading) return <p>Loading...</p>;
@@ -40,7 +70,7 @@ const ProjectDetails = () => {
     <section className="project-detail">
       <header className="project-header">
         <h1>{project.title}</h1>
-        <button className="back-button" onClick={handleBack}>Back to Project</button>
+        <button className="back-button" onClick={handleBack}>Back to Projects</button>
       </header>
       <div className="container">
         <div className="project-main">
@@ -54,6 +84,16 @@ const ProjectDetails = () => {
               <li><strong>Project URL:</strong> <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">Check Out The Project!</a></li>
             </ul>
           </div>
+        </div>
+
+        {/* ✅ Show Next/Previous Only if Available */}
+        <div className="project-navigation">
+          {projects.findIndex((p) => p._id === project._id) > 0 && (
+            <button className="prev-button" onClick={() => navigateToProject("prev")}>Previous Project</button>
+          )}
+          <button className="next-button" onClick={() => navigateToProject("next")}>
+            {projects.findIndex((p) => p._id === project._id) < projects.length - 1 ? "Next Project" : "See More Projects"}
+          </button>
         </div>
       </div>
     </section>
