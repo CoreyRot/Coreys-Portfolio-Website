@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Resume.css"; // Ensure this file contains grid-based styling
+import "../styles/Resume.css";
 
 const Resume = () => {
   return (
@@ -8,7 +8,6 @@ const Resume = () => {
         <h2 className="section-title">Resume</h2>
         <div className="resume-grid">
           
-          {/* Left Column - Summary & Education */}
           <div className="resume-left">
             <h2 className="resume-title">Summary</h2>
             <div className="resume-item">

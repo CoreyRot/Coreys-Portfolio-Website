@@ -5,28 +5,28 @@ const dotenv = require("dotenv");
 const path = require("path");
 
 const projectRoutes = require("./routes/projectRoutes");
-const contactRoutes = require("./routes/contactRoutes"); // ✅ Import contact routes
+const contactRoutes = require("./routes/contactRoutes");
 
-dotenv.config(); // Load environment variables
+dotenv.config();
 
 const app = express();
-app.use(express.json()); // ✅ Middleware for parsing JSON
-app.use(express.urlencoded({ extended: true })); // ✅ Parses URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// ✅ Serve uploaded files statically
+//Serve uploaded files statically
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// ✅ Debugging Logs
+//Debugging Logs
 console.log("🛠️ Initializing API Routes...");
 
-// ✅ Check if contactRoutes is being loaded
+//Check if contactRoutes is being loaded
 if (contactRoutes) {
   console.log("✅ Contact routes loaded!");
 } else {
   console.log("❌ Contact routes failed to load.");
 }
 
-// ✅ Fix CORS to allow both local & deployed frontends
+//Fix CORS to allow both local & deployed frontends
 const allowedOrigins = [
   "http://localhost:3000",
   "https://coreys-portfolio-website-murex.vercel.app",
@@ -51,24 +51,24 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-// ✅ Register Routes
+//Register Routes
 console.log("📌 Registering API Routes...");
 app.use("/api/projects", projectRoutes);
-app.use("/api/contact", contactRoutes); // ✅ Ensure this line is here!
+app.use("/api/contact", contactRoutes);
 
-// ✅ Default Route
+//Default Route
 app.get("/", (req, res) => {
   console.log("📩 GET / hit");
   res.send("Backend is running 🚀");
 });
 
-// ✅ Log Unrecognized Routes
+//Log Unrecognized Routes
 app.use((req, res, next) => {
   console.log(`⚠️ 404 - Route not found: ${req.method} ${req.url}`);
   res.status(404).json({ message: "Route not found" });
 });
 
-// ✅ Connect to MongoDB
+//Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("✅ MongoDB connected"))

@@ -31,7 +31,7 @@ const App = () => {
     <Router>
       <ScrollToAnchor />
       <div className="app-layout">
-        <CanvasBackground /> {/* Add this component */}
+        <CanvasBackground />
         <Sidebar />
         <div id="content" className="site-content__start">
           <Routes>
@@ -45,7 +45,7 @@ const App = () => {
               </>
             } />
             <Route path="/projects/:id" element={<ProjectDetails />} />
-            <Route path="/projects/more-coming-soon" element={<MoreComingSoon />} /> {/* ✅ New CTA Page */}
+            <Route path="/projects/more-coming-soon" element={<MoreComingSoon />} />
           </Routes>
         </div>
       </div>

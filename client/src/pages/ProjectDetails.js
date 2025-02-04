@@ -18,7 +18,6 @@ const ProjectDetails = () => {
       return;
     }
 
-    // ✅ Fetch all projects
     axios.get(`${API_URL}/api/projects`)
       .then((response) => {
         setProjects(response.data);
@@ -39,7 +38,6 @@ const ProjectDetails = () => {
       });
   }, [id]);
 
-  // ✅ Navigate to next/previous project or CTA page
   const navigateToProject = (direction) => {
     const currentIndex = projects.findIndex((p) => p._id === project._id);
     if (currentIndex === -1) return;
@@ -53,7 +51,7 @@ const ProjectDetails = () => {
         newIndex = currentIndex + 1;
         navigate(`/projects/${projects[newIndex]._id}`);
       } else {
-        navigate("/projects/more-coming-soon"); // ✅ Redirects to CTA page
+        navigate("/projects/more-coming-soon");
       }
     }
   };
@@ -86,7 +84,6 @@ const ProjectDetails = () => {
           </div>
         </div>
 
-        {/* ✅ Show Next/Previous Only if Available */}
         <div className="project-navigation">
           {projects.findIndex((p) => p._id === project._id) > 0 && (
             <button className="prev-button" onClick={() => navigateToProject("prev")}>Previous Project</button>

@@ -3,7 +3,7 @@ import axios from "axios";
 import "../styles/Contact.css";
 
 const Contact = () => {
-  const [formType, setFormType] = useState("chat"); // Default to "chat"
+  const [formType, setFormType] = useState("chat");
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -17,11 +17,11 @@ const Contact = () => {
     salaryRange: "",
     message: "",
     file: null,
-    uploadedFile: null, // Store uploaded file name from API response
+    uploadedFile: null,
   });
 
   const [status, setStatus] = useState("");
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,7 +67,7 @@ const Contact = () => {
         salaryRange: "",
         message: "",
         file: null,
-        uploadedFile: response.data.file || null, // Store uploaded file name
+        uploadedFile: response.data.file || null,
       });
       setStep(1);
     } catch (error) {
@@ -106,7 +106,6 @@ const Contact = () => {
 
         <form onSubmit={handleSubmit} className="contact-form">
           <div className="form-grid">
-            {/* Step 1 - Basic Info */}
             {step === 1 && (
               <>
                 <FormInput label="First Name:" name="firstName" type="text" value={formData.firstName} onChange={handleChange} required />
@@ -116,7 +115,6 @@ const Contact = () => {
               </>
             )}
 
-            {/* Step 2 - Job/Freelance Info */}
             {step === 2 && (formType === "job" || formType === "freelance") && (
               <>
                 <FormInput label="Company Name:" name="company" type="text" value={formData.company} onChange={handleChange} required />
@@ -127,7 +125,6 @@ const Contact = () => {
                     <FormInput label="Job Title:" name="jobTitle" type="text" value={formData.jobTitle} onChange={handleChange} required />
                     <FormInput label="Job Description (File Upload):" name="file" type="file" onChange={handleFileChange} />
 
-                    {/* Work Type Checkboxes */}
                     <div className="form-group full-width">
                       <label className="form-label">Work Type:</label>
                       <div className="checkbox-group">
@@ -159,13 +156,11 @@ const Contact = () => {
               </>
             )}
 
-            {/* Step 3 - Message */}
             {(step === 3 || formType === "chat") && (
               <FormTextarea label="Message:" name="message" value={formData.message} onChange={handleChange} required fullWidth />
             )}
           </div>
 
-          {/* Display Uploaded File */}
           {formData.uploadedFile && (
             <div className="uploaded-file">
               <p>Uploaded File:</p>
@@ -174,8 +169,6 @@ const Contact = () => {
               </a>
             </div>
           )}
-
-          {/* Navigation Buttons */}
           <div className="button-group flex-container">
             {step > 1 && (
               <button type="button" className="btn-prev" onClick={() => setStep(step - 1)}>

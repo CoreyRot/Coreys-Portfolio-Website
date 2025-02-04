@@ -52,7 +52,7 @@ const CanvasBackground = () => {
   const drawLines = (ctx) => {
     if (window.innerWidth <= 1024) return; // Disable connections on mobile
 
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.8)"; // **Always White**
+    ctx.strokeStyle = "rgba(255, 255, 255, 1)";
     ctx.lineWidth = 1;
 
     particles.forEach((particle) => {
@@ -77,7 +77,7 @@ const CanvasBackground = () => {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
-            ctx.strokeStyle = "rgba(255, 255, 255, 0.5)"; // **Force White**
+            ctx.strokeStyle = "rgba(255, 255, 255, 1)";
             ctx.stroke();
             ctx.closePath();
           }

@@ -55,7 +55,6 @@ const Project = () => {
           My projects, ranging from web applications to branding designs.
         </p>
 
-        {/* ✅ Project Category Filters */}
         <div className="filters">
           {["All", "Web Development", "Design"].map((category) => (
             <button
@@ -68,7 +67,6 @@ const Project = () => {
           ))}
         </div>
 
-        {/* ✅ Projects Grid */}
         <div className="projects-grid">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project) => (
@@ -84,7 +82,6 @@ const Project = () => {
             <p className="no-projects">No projects available.</p>
           )}
 
-          {/* ✅ Contact Section */}
           <div className="projects-item contact-item" onClick={() => window.location.href = "#contact"}>
             <div className="plus-icon">
               <svg 

@@ -31,7 +31,7 @@ const About = () => {
       });
     };
 
-    const interval = setInterval(morphText, 2500); // Morph every 2.5 seconds
+    const interval = setInterval(morphText, 2500);
     return () => clearInterval(interval);
   }, []);
   return (
@@ -51,8 +51,6 @@ const About = () => {
             </div>
             <a href="#contact" className="btn">Contact</a>
           </div>
-
-          {/* Right Side - Skills List */}
           <div className="about-skills">
             <h3 className="skills-title">My Skills</h3>
             <div className="skills-grid">
