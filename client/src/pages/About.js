@@ -56,10 +56,10 @@ const About = () => {
             <div className="skills-grid">
               {[
                 "HTML5", "CSS3 / SASS / SCSS", "JavaScript", "TailwindCSS",
-                "PHP", "Node.js", "Express.js", "Python",
+                "PHP", "Node.js", "Express.js", "Python", "Flask",
                 "ReactJS", "jQuery", "Next.js",
                 "WordPress", "Shopify",
-                "MySQL", "MongoDB",
+                "MySQL", "PostgreSQL", "MongoDB",
                 "RESTful APIs", "GraphQL",
                 "Page Load Optimization", "SEO", "GA4 / GTM",
                 "Git / GitHub", "Bitbucket"
