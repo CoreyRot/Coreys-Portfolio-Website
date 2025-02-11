@@ -4,8 +4,7 @@ import he from "he";
 import axios from "axios";
 import "../styles/BlogDetails.css";
 
-const PROXY_URL = "https://api.allorigins.win/raw?url=";
-const WORDPRESS_API_URL = "http://coreys-headless-blog.great-site.net/wp-json/wp/v2/posts?_embed&orderby=date&order=asc";
+const WORDPRESS_API_URL = "https://public-api.wordpress.com/rest/v1.1/sites/free59822.wordpress.com/posts/?orderby=date&order=asc";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -15,22 +14,22 @@ const BlogDetails = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    if (!id) {
-      console.error("❌ Invalid Blog ID:", id);
-      setLoading(false);
-      return;
-    }
-
-    axios.get(`${PROXY_URL}${encodeURIComponent(WORDPRESS_API_URL)}`)
+    axios.get(WORDPRESS_API_URL)
       .then((response) => {
-        setBlogs(response.data);
+        let posts = response.data.posts;
 
-        // ✅ Find the current blog post
-        const foundIndex = response.data.findIndex((b) => b.id.toString() === id);
-        if (foundIndex !== -1) {
-          setBlog(response.data[foundIndex]);
+        // ✅ Ensure the posts are sorted by date (oldest first)
+        posts.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        setBlogs(posts);
+
+        // ✅ Find the current blog post by slug
+        const foundPost = posts.find((post) => post.slug === id || post.ID.toString() === id);
+
+        if (foundPost) {
+          setBlog(foundPost);
         } else {
-          console.error("❌ Blog not found in list:", id);
+          console.error("❌ Blog not found:", id);
         }
 
         setLoading(false);
@@ -42,16 +41,16 @@ const BlogDetails = () => {
   }, [id]);
 
   const navigateToBlog = (direction) => {
-    const currentIndex = blogs.findIndex((b) => b.id.toString() === blog.id.toString());
+    const currentIndex = blogs.findIndex((b) => b.slug === blog.slug);
     if (currentIndex === -1) return;
 
     let newIndex;
     if (direction === "prev" && currentIndex > 0) {
       newIndex = currentIndex - 1;
-      navigate(`/blogs/${blogs[newIndex].id}`);
+      navigate(`/blogs/${blogs[newIndex].slug}`);
     } else if (direction === "next" && currentIndex < blogs.length - 1) {
       newIndex = currentIndex + 1;
-      navigate(`/blogs/${blogs[newIndex].id}`);
+      navigate(`/blogs/${blogs[newIndex].slug}`);
     }
   };
 
@@ -66,31 +65,31 @@ const BlogDetails = () => {
   return (
     <section className="blog-detail">
       <header className="blog-header">
-        <h1>{he.decode(blog.title.rendered)}</h1>
+        <h1>{he.decode(blog.title)}</h1>
         <button className="back-button" onClick={handleBack}>Back to Blogs</button>
       </header>
       <div className="container">
         <div className="blog-main blog-background">
           <div className="blog-image">
             <img 
-              src={blog._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "https://via.placeholder.com/400x250"} 
-              alt={blog.title.rendered}
+              src={blog.featured_image || "https://via.placeholder.com/400x250"} 
+              alt={blog.title}
             />
           </div>
           <div className="blog-content">
-            <div dangerouslySetInnerHTML={{ __html: blog.content.rendered }}></div>
+            <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
           </div>
         </div>
 
-        {/* ✅ Blog Navigation: Ensures Next & Previous buttons work properly */}
+        {/* ✅ Blog Navigation: Fixes Next & Previous Navigation */}
         <div className="blog-navigation">
           {blogs.length > 1 && (
             <>
-              {blogs.findIndex((b) => b.id.toString() === blog.id.toString()) > 0 && (
-                <button className="prev-button" onClick={() => navigateToBlog("prev")}>Previous Blog</button>
+              {blogs.findIndex((b) => b.slug === blog.slug) > 0 && (
+                <button className="prev-button" onClick={() => navigateToBlog("prev")}>Previous Post</button>
               )}
-              {blogs.findIndex((b) => b.id.toString() === blog.id.toString()) < blogs.length - 1 && (
-                <button className="next-button" onClick={() => navigateToBlog("next")}>Next Blog</button>
+              {blogs.findIndex((b) => b.slug === blog.slug) < blogs.length - 1 && (
+                <button className="next-button" onClick={() => navigateToBlog("next")}>Next Post</button>
               )}
             </>
           )}

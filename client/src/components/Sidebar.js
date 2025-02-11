@@ -66,7 +66,7 @@ const Sidebar = () => {
             <li><button onClick={() => handleNavigation("about")}><AiOutlineUser /> About</button></li>
             <li><button onClick={() => handleNavigation("resume")}><AiOutlineFileText /> Resume</button></li>
             <li><button onClick={() => handleNavigation("projects")}><BsImage /> Projects</button></li>
-            <li><button onClick={() => handleNavigation("blogs")}><BsPencilSquare /> Blogs</button></li>
+            <li><button onClick={() => handleNavigation("blogs")}><BsPencilSquare /> Posts</button></li>
             <li><button onClick={() => handleNavigation("contact")}><AiOutlineMail /> Contact</button></li>
           </ul>
         </nav>
