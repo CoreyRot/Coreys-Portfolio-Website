@@ -11,6 +11,7 @@ import Blog from "./pages/Blog";
 import BlogDetails from "./pages/BlogDetails";
 import MoreComingSoon from "./pages/MoreComingSoon";
 import Contact from "./pages/Contact";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 
 // Smooth Scrolling to Anchor
@@ -31,34 +32,38 @@ const ScrollToAnchor = () => {
 
 const App = () => {
   return (
-    <Router>
-      <ScrollToAnchor />
-      <div className="app-layout">
-        <CanvasBackground />
-        <Sidebar />
-        <div id="content" className="site-content__start">
-          <Routes>
-            {/* Main Sections */}
-            <Route path="/" element={
-              <>
-                <section id="home" className="home"><Home /></section>
-                <section id="about" className="about"><About /></section>
-                <section id="resume" className="resume"><Resume /></section>
-                <section id="projects" className="projects"><Portfolio /></section>
-                <section id="blogs" className="blogs"><Blog /></section>
-                <section id="contact" className="contact"><Contact /></section>
-              </>
-            } />
-            
-            {/* Dynamic Pages */}
-            <Route path="/projects/:id" element={<ProjectDetails />} />
-            <Route path="/blogs/:id" element={<BlogDetails />} />
-            <Route path="/projects/more-coming-soon" element={<MoreComingSoon />} />
-          </Routes>
+    <>
+      <SpeedInsights />
+      <Router>
+        <ScrollToAnchor />
+        <div className="app-layout">
+          <CanvasBackground />
+          <Sidebar />
+          <div id="content" className="site-content__start">
+            <Routes>
+              {/* Main Sections */}
+              <Route path="/" element={
+                <>
+                  <section id="home" className="home"><Home /></section>
+                  <section id="about" className="about"><About /></section>
+                  <section id="resume" className="resume"><Resume /></section>
+                  <section id="projects" className="projects"><Portfolio /></section>
+                  <section id="blogs" className="blogs"><Blog /></section>
+                  <section id="contact" className="contact"><Contact /></section>
+                </>
+              } />
+              
+              {/* Dynamic Pages */}
+              <Route path="/projects/:id" element={<ProjectDetails />} />
+              <Route path="/blogs/:id" element={<BlogDetails />} />
+              <Route path="/projects/more-coming-soon" element={<MoreComingSoon />} />
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </>
   );
 };
+
 
 export default App;

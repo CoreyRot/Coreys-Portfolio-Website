@@ -19,11 +19,8 @@ const Blog = () => {
 
         // ✅ Sort posts manually (oldest first)
         posts.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-        // ✅ Featured Blog: Oldest post
+        
         const featured = posts[0];
-
-        // ✅ Other Blogs: Next 4 oldest posts
         const nonFeaturedBlogs = posts.slice(1, 5);
 
         setFeaturedBlog(featured);
