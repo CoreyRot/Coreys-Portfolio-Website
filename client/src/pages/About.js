@@ -41,7 +41,7 @@ const About = () => {
           <div className="about-text">
             <h2 className="section-title">Get to know me!</h2>
             <div className="section-subheading">
-              <span>I'm a <strong ref={textRef} className="morph-text">{roles[currentIndex]}</strong> &nbsp;based in Toronto, Ontario, Canada.</span>
+              <span>I'm a <strong ref={textRef} className="morph-text">{roles[currentIndex]}</strong>&nbsp;based in Toronto, Ontario, Canada.</span>
                 
               <p>Passionate about crafting high-performance, intuitive web applications.</p>
 
@@ -49,7 +49,7 @@ const About = () => {
 
               <p>With a blend of technical expertise and creativity, I bridge the gap between aesthetics and functionality to deliver engaging user experiences.</p>
             </div>
-            <a href="#contact" className="btn">Contact</a>
+            <a href="#blogs" className="btn">Check Out My Blog</a>
           </div>
           <div className="about-skills">
             <h3 className="skills-title">My Skills</h3>

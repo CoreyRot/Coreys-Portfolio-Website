@@ -145,7 +145,6 @@ section {
 .heading-title {
   font-weight: 700;
   margin-bottom: 20px;
-  padding-bottom: 20px;
 }
 .section-title {
   font-weight: 700;
@@ -171,6 +170,7 @@ section {
 .projects-background,
 .project-info,
 .contact-background,
+.blog-background,
 .more-coming-soon-background {
   background: white;
   padding: 40px;
