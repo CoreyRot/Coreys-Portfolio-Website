@@ -37,6 +37,9 @@
 
 .contact .button-group.flex-container {
   justify-content: space-between;
+  .btn-submit {
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
