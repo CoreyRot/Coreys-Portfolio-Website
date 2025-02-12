@@ -67,8 +67,10 @@ const ProjectDetails = () => {
   return (
     <section className="project-detail">
       <header className="project-header">
-        <h1>{project.title}</h1>
-        <button className="back-button" onClick={handleBack}>Back to Projects</button>
+        <div className="project-header-grid">
+          <h1>{project.title}</h1>
+          <button className="back-button" onClick={handleBack}>Back to Projects</button>
+        </div>
       </header>
       <div className="container">
         <div className="project-main">

@@ -65,8 +65,10 @@ const BlogDetails = () => {
   return (
     <section className="blog-detail">
       <header className="blog-header">
-        <h1>{he.decode(blog.title)}</h1>
-        <button className="back-button" onClick={handleBack}>Back to Posts</button>
+        <div className="blog-header-grid">
+          <h1>{he.decode(blog.title)}</h1>
+          <button className="back-button" onClick={handleBack}>Back to Posts</button>
+        </div>
       </header>
       <div className="container">
         <div className="blog-main blog-background">
