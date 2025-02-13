@@ -1,37 +1,78 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import axios from "axios";
 import "../styles/Contact.css";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  company: "",
+  website: "",
+  jobTitle: "",
+  workType: [],
+  salaryRange: "",
+  message: "",
+  file: null,
+  uploadedFile: null,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "UPDATE_FIELD":
+      return { ...state, [action.field]: action.value };
+    case "RESET_FORM":
+      return initialState;
+    case "SET_FILE":
+      return { ...state, file: action.file };
+    case "SET_UPLOADED_FILE":
+      return { ...state, uploadedFile: action.file };
+    default:
+      return state;
+  }
+};
 
 const Contact = () => {
   const [formType, setFormType] = useState("chat");
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    company: "",
-    website: "",
-    jobTitle: "",
-    workType: [],
-    salaryRange: "",
-    message: "",
-    file: null,
-    uploadedFile: null,
-  });
-
+  const [formData, dispatch] = useReducer(reducer, initialState);
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // ✅ Handle Field Changes
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    dispatch({ type: "UPDATE_FIELD", field: e.target.name, value: e.target.value });
   };
 
+  // ✅ Handle Checkbox Selection
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    dispatch({
+      type: "UPDATE_FIELD",
+      field: "workType",
+      value: checked ? [...formData.workType, value] : formData.workType.filter((t) => t !== value),
+    });
+  };
+
+  // ✅ Handle File Upload Validation
   const handleFileChange = (e) => {
-    setFormData((prev) => ({ ...prev, file: e.target.files[0] }));
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const allowedTypes = ["application/pdf", "image/png", "image/jpeg"];
+    if (!allowedTypes.includes(file.type)) {
+      setStatus("❌ Invalid file type. Only PDF, PNG, and JPEG are allowed.");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setStatus("❌ File too large. Maximum size is 5MB.");
+      return;
+    }
+
+    dispatch({ type: "SET_FILE", file });
   };
 
+  // ✅ Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -54,24 +95,12 @@ const Contact = () => {
         formDataToSend
       );
 
-      setStatus(response.data.message);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        company: "",
-        website: "",
-        jobTitle: "",
-        workType: [],
-        salaryRange: "",
-        message: "",
-        file: null,
-        uploadedFile: response.data.file || null,
-      });
+      setStatus("✅ Message sent successfully!");
+      dispatch({ type: "SET_UPLOADED_FILE", file: response.data.file || null });
+      dispatch({ type: "RESET_FORM" });
       setStep(1);
     } catch (error) {
-      setStatus(error.response?.data?.message || "Error sending message.");
+      setStatus(error.response?.data?.message || "❌ Error sending message.");
     } finally {
       setLoading(false);
     }
@@ -85,18 +114,14 @@ const Contact = () => {
           Do you have a question or are you interested in working with me?
         </p>
 
+        {/* ✅ Inquiry Type Selector */}
         <div className="form-group">
-          <label className="form-label" htmlFor="inquiry-type">
-            Select Inquiry Type:
-          </label>
+          <label className="form-label" htmlFor="inquiry-type">Select Inquiry Type:</label>
           <select
             id="inquiry-type"
             className="dropdown"
             value={formType}
-            onChange={(e) => {
-              setFormType(e.target.value);
-              setStep(1);
-            }}
+            onChange={(e) => { setFormType(e.target.value); setStep(1); }}
           >
             <option value="job">Job Opportunity</option>
             <option value="freelance">Freelance</option>
@@ -130,20 +155,7 @@ const Contact = () => {
                       <div className="checkbox-group">
                         {["Onsite", "Hybrid", "Remote"].map((type) => (
                           <label key={type}>
-                            <input
-                              type="checkbox"
-                              value={type}
-                              checked={formData.workType.includes(type)}
-                              onChange={(e) => {
-                                const { value, checked } = e.target;
-                                setFormData((prev) => {
-                                  const updatedWorkType = checked
-                                    ? [...prev.workType, value]
-                                    : prev.workType.filter((t) => t !== value);
-                                  return { ...prev, workType: updatedWorkType };
-                                });
-                              }}
-                            />
+                            <input type="checkbox" value={type} checked={formData.workType.includes(type)} onChange={handleCheckboxChange} />
                             {type}
                           </label>
                         ))}
@@ -161,30 +173,26 @@ const Contact = () => {
             )}
           </div>
 
-          {formData.uploadedFile && (
-            <div className="uploaded-file">
-              <p>Uploaded File:</p>
-              <a href={`https://coreys-portfolio-website.onrender.com/uploads/${formData.uploadedFile}`} target="_blank" rel="noopener noreferrer">
-                {formData.uploadedFile}
-              </a>
-            </div>
-          )}
-          <div className="button-group flex-container">
-            {step > 1 && (
-              <button type="button" className="btn-prev" onClick={() => setStep(step - 1)}><span>Previous</span></button>
-            )}
-            {step === 3 || formType === "chat" ? (
-              <button type="submit" className="btn-submit" disabled={loading}><span>{loading ? "Sending..." : "Submit"}</span></button>
-            ) : (
-              <button type="button" className="btn-next" onClick={() => setStep(step + 1)}><span>Next</span></button>
-            )}
-          </div>
+          <FormNavigation step={step} setStep={setStep} formType={formType} loading={loading} />
+
+          {status && <p className="status-message">{status}</p>}
         </form>
-        {status && <p className="status-message">{status}</p>}
       </div>
     </div>
   );
 };
+
+// ✅ Form Navigation Buttons
+const FormNavigation = ({ step, setStep, formType, loading }) => (
+  <div className="button-group flex-container">
+    {step > 1 && <button type="button" className="btn-prev" onClick={() => setStep(step - 1)}>Previous</button>}
+    {step === 3 || formType === "chat" ? (
+      <button type="submit" className="btn-submit" disabled={loading}>{loading ? "Sending..." : "Submit"}</button>
+    ) : (
+      <button type="button" className="btn-next" onClick={() => setStep(step + 1)}>Next</button>
+    )}
+  </div>
+);
 
 // Reusable Form Components
 const FormInput = ({ label, name, type, value, onChange, required, fullWidth }) => (

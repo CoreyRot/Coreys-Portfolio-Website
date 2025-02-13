@@ -14,7 +14,7 @@ import Contact from "./pages/Contact";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 
-// Smooth Scrolling to Anchor
+// ✅ Smooth Scrolling on Anchor Navigation
 const ScrollToAnchor = () => {
   const { hash } = useLocation();
 
@@ -22,7 +22,7 @@ const ScrollToAnchor = () => {
     if (hash) {
       setTimeout(() => {
         const element = document.getElementById(hash.replace("#", ""));
-        if (element) element.scrollIntoView({ behavior: "smooth" });
+        if (element) element.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
     }
   }, [hash]);
@@ -30,40 +30,48 @@ const ScrollToAnchor = () => {
   return null;
 };
 
+const AppLayout = () => {
+  return (
+    <div className="app-layout">
+      <CanvasBackground />
+      <Sidebar />
+      <div id="content" className="site-content__start">
+        <Routes>
+          {/* ✅ Main Sections */}
+          <Route path="/" element={<MainSections />} />
+
+          {/* ✅ Dynamic Pages */}
+          <Route path="/projects/:id" element={<ProjectDetails />} />
+          <Route path="/blogs/:id" element={<BlogDetails />} />
+          <Route path="/projects/more-coming-soon" element={<MoreComingSoon />} />
+        </Routes>
+      </div>
+    </div>
+  );
+};
+
+// ✅ Main Sections (Modular for Better Performance)
+const MainSections = () => (
+  <>
+    <section id="home" className="home"><Home /></section>
+    <section id="about" className="about"><About /></section>
+    <section id="resume" className="resume"><Resume /></section>
+    <section id="projects" className="projects"><Portfolio /></section>
+    <section id="blogs" className="blogs"><Blog /></section>
+    <section id="contact" className="contact"><Contact /></section>
+  </>
+);
+
 const App = () => {
   return (
     <>
       <SpeedInsights />
       <Router>
         <ScrollToAnchor />
-        <div className="app-layout">
-          <CanvasBackground />
-          <Sidebar />
-          <div id="content" className="site-content__start">
-            <Routes>
-              {/* Main Sections */}
-              <Route path="/" element={
-                <>
-                  <section id="home" className="home"><Home /></section>
-                  <section id="about" className="about"><About /></section>
-                  <section id="resume" className="resume"><Resume /></section>
-                  <section id="projects" className="projects"><Portfolio /></section>
-                  <section id="blogs" className="blogs"><Blog /></section>
-                  <section id="contact" className="contact"><Contact /></section>
-                </>
-              } />
-              
-              {/* Dynamic Pages */}
-              <Route path="/projects/:id" element={<ProjectDetails />} />
-              <Route path="/blogs/:id" element={<BlogDetails />} />
-              <Route path="/projects/more-coming-soon" element={<MoreComingSoon />} />
-            </Routes>
-          </div>
-        </div>
+        <AppLayout />
       </Router>
     </>
   );
 };
-
 
 export default App;
