@@ -10,7 +10,8 @@
   padding: 8px;
   border-bottom-color: #ccc !important;
   border: 1px solid transparent;
-  line-height: 1.75rem;
+  font-size: 15px;
+  line-height: 1.5rem;
 }
 
 .form-textarea {
