@@ -49,7 +49,9 @@ const About = () => {
 
               <p>With a blend of technical expertise and creativity, I bridge the gap between aesthetics and functionality to deliver engaging user experiences.</p>
             </div>
-            <a href="#blogs" className="btn">Check Out My Posts</a>
+            <div className="button-group flex-container">
+              <a href="#blogs" className="btn"><span>Check Out My Posts</span></a>
+            </div>
           </div>
           <div className="about-skills">
             <h3 className="skills-title">My Skills</h3>

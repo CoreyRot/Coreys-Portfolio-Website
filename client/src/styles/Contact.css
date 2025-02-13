@@ -8,15 +8,21 @@
 .form-textarea {
   width: 100%;
   padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border-bottom-color: #ccc !important;
+  border: 1px solid transparent;
+  line-height: 1.75rem;
+}
+
+.form-textarea {
+  height: 8.6875rem;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 16px;
-  margin: 16px 0;
+  grid-column-gap: 16px;
+  grid-row-gap: 1.875rem;
+  margin: 1.875rem 0;
 }
 
 .full-width {
@@ -37,9 +43,6 @@
 
 .contact .button-group.flex-container {
   justify-content: space-between;
-  .btn-submit {
-    width: 100%;
-  }
 }
 
 @media (max-width: 768px) {

@@ -21,6 +21,7 @@ html {
 svg {
   fill: white;
 }
+
 .app-layout {
   position: relative;
   overflow: hidden;
@@ -52,47 +53,62 @@ canvas {
   }
 }
 
-/* === BUTTON === */
+/* Optimized Button Styles */
 .btn,
 button {
-  display: inline-block;
-  padding: 12px 20px;
+  position: relative;
+  padding: 10px 20px;
   font-size: 16px;
-  font-weight: bold;
-  background: #161b22;
-  color: white;
+  color: #000;
+  background-color: transparent;
   border: none;
-  border-radius: 5px;
-  text-decoration: none !important;
-  transition: all 0.3s ease-in-out, transform 0.2s ease-in-out;
+  text-decoration: none;
   cursor: pointer;
+  overflow: hidden;
 
-  &:hover {
-    background: #e6b400;
-    color: #121212;
-    box-shadow: 0px 0px 10px #e6b400;
-    transform: translateY(-2px);
-  }
+  &:not(.mobile-menu-btn):not(.sidebar .nav-links li button) {
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 2px solid #000;
+      transition: all 0.3s ease;
+    }
 
-  &:active {
-    background: #e6b400;
-    color: #121212;
-    box-shadow: 0px 0px 10px #e6b400;
-    transform: translateY(-2px);
-  }
-  &.active {
-    background: #e6b400;
-    color: #121212;
-    box-shadow: 0px 0px 10px #e6b400;
-    transform: translateY(-2px);
+    &::before {
+      top: 0;
+      left: 0;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    &::after {
+      bottom: 0;
+      right: 0;
+      border-left: none;
+      border-top: none;
+    }
+
+    &:hover,
+    &.active {
+      &::before,
+      &::after {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }
-
-/* === FLEX & GRID UTILITIES === */
+/* === Utilities === */
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 32px;
+  @media (max-width: 600px) {
+    gap: 24px;
+  }
 }
 
 .align-center {
@@ -132,23 +148,20 @@ button {
 
 /* === Section Styling === */
 section {
-  padding: 50px 0;
+  padding: 40px 0;
   overflow: clip;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media (max-width: 768px) {
-    padding: 25px 0;
-  }
 }
 
-.heading-title {
-  font-weight: 700;
-  margin-bottom: 20px;
-}
+.heading-title,
 .section-title {
   font-weight: 700;
   margin-bottom: 20px;
+}
+
+.section-title {
   padding-bottom: 20px;
   position: relative;
 
@@ -176,8 +189,9 @@ section {
   padding: 50px;
   border-radius: 5px;
   color: black;
-  box-shadow: 0px 4px 6px rgb(0, 0, 0, 0.1);
-  @media (max-width: 425px) {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
     padding: 25px;
   }
 }

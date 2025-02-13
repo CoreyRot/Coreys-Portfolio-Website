@@ -55,14 +55,14 @@ const Project = () => {
           My projects, ranging from web applications to branding designs.
         </p>
 
-        <div className="filters">
+        <div className="filters flex-container">
           {["All", "Web Development", "Design"].map((category) => (
             <button
               key={category}
               className={activeFilter === category ? "active" : ""}
               onClick={() => filterProjects(category)}
             >
-              {category}
+              <span>{category}</span>
             </button>
           ))}
         </div>

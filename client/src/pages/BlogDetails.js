@@ -67,7 +67,7 @@ const BlogDetails = () => {
       <header className="blog-header">
         <div className="blog-header-grid">
           <h1>{he.decode(blog.title)}</h1>
-          <button className="back-button" onClick={handleBack}>Back to Posts</button>
+          <button className="back-button" onClick={handleBack}><span>Back to Posts</span></button>
         </div>
       </header>
       <div className="container">
@@ -88,10 +88,10 @@ const BlogDetails = () => {
           {blogs.length > 1 && (
             <>
               {blogs.findIndex((b) => b.slug === blog.slug) > 0 && (
-                <button className="prev-button" onClick={() => navigateToBlog("prev")}>Previous Post</button>
+                <button className="prev-button" onClick={() => navigateToBlog("prev")}><span>Previous</span></button>
               )}
               {blogs.findIndex((b) => b.slug === blog.slug) < blogs.length - 1 && (
-                <button className="next-button" onClick={() => navigateToBlog("next")}>Next Post</button>
+                <button className="next-button" onClick={() => navigateToBlog("next")}><span>Next</span></button>
               )}
             </>
           )}

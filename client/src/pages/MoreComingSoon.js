@@ -13,7 +13,7 @@ const MoreComingSoon = () => {
                 <div className="cell">
                     <h1>More Coming Soon!</h1>
                     <p>If you want your project to be featured, contact me below.</p>
-                    <button className="cta-button" onClick={() => navigate("/#contact")}>Get in Touch</button>
+                    <button className="cta-button" onClick={() => navigate("/#contact")}><span>Get in Touch</span></button>
                 </div>
             </div>
         </div>

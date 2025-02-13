@@ -17,8 +17,8 @@ const Home = () => {
             </div>
 
             <div className="button-group flex-container">
-              <a href="#projects" className="btn">View My Projects</a>
-              <a href="#contact" className="btn">Hire Me</a>
+              <a href="#projects" className="btn"><span>View My Projects</span></a>
+              <a href="#contact" className="btn"><span>Hire Me</span></a>
             </div>
           </div>
         </div>

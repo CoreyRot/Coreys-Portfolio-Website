@@ -88,10 +88,10 @@ const ProjectDetails = () => {
 
         <div className="project-navigation">
           {projects.findIndex((p) => p._id === project._id) > 0 && (
-            <button className="prev-button" onClick={() => navigateToProject("prev")}>Previous Project</button>
+            <button className="prev-button" onClick={() => navigateToProject("prev")}><span>Previous</span></button>
           )}
           <button className="next-button" onClick={() => navigateToProject("next")}>
-            {projects.findIndex((p) => p._id === project._id) < projects.length - 1 ? "Next Project" : "See More Projects"}
+            <span>{projects.findIndex((p) => p._id === project._id) < projects.length - 1 ? "Next" : "See More"}</span>
           </button>
         </div>
       </div>
