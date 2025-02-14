@@ -5,7 +5,7 @@ const Project = require("../models/Project.js");
 
 const router = express.Router();
 
-/** ✅ Middleware to check if the ID is a valid MongoDB ObjectId */
+/** ✅ Middleware to validate MongoDB ObjectId */
 const validateObjectId = (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ error: "Invalid project ID format" });
@@ -13,16 +13,10 @@ const validateObjectId = (req, res, next) => {
   next();
 };
 
-/** ✅ Async wrapper to catch errors and avoid redundant try-catch */
+/** ✅ Async wrapper for cleaner error handling */
 const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
-
-/** ✅ Centralized error handling */
-router.use((err, req, res, next) => {
-  console.error("❌ Server Error:", err);
-  res.status(err.status || 500).json({ error: err.message || "Internal Server Error" });
-});
 
 /** ✅ Get all projects */
 router.get("/", asyncHandler(async (req, res) => {
@@ -58,7 +52,7 @@ router.post(
   })
 );
 
-/** ✅ Update a project by ID with validation */
+/** ✅ Update a project by ID */
 router.put(
   "/:id",
   validateObjectId,

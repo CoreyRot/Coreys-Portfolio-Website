@@ -13,7 +13,6 @@ const Contact = () => {
     company: "",
     website: "",
     jobTitle: "",
-    salaryRange: "",
     message: "",
     file: null,
   });
@@ -42,55 +41,23 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     setStatus("Sending...");
-  
+
     try {
       const formDataToSend = new FormData();
-  
-      console.log("🚀 Submitting Form...");
-      console.table(formData);
-  
-      // ✅ Ensure required fields are filled
-      if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.message) {
-        setStatus("❌ Please fill out all required fields.");
-        setLoading(false);
-        return;
-      }
-  
-      if (formType === "freelance" && (!formData.company || !formData.website)) {
-        setStatus("❌ Company Name and Website are required for Freelance inquiries.");
-        setLoading(false);
-        return;
-      }
-  
-      if (formType === "job" && (!formData.company || !formData.website || !formData.jobTitle || !formData.file)) {
-        setStatus("❌ Company Name, Website, Job Title, and Job Description File are required for Job inquiries.");
-        setLoading(false);
-        return;
-      }
-  
-      // ✅ Append form fields, setting empty values to null
       Object.entries(formData).forEach(([key, value]) => {
-        if (value === "" || value === undefined || value === null) {
-          formDataToSend.append(key, null); // Explicitly set empty values to null
-        } else {
+        if (value !== null && value !== undefined) {
           formDataToSend.append(key, value);
         }
       });
-  
+
       formDataToSend.append("formType", formType);
-  
-      console.log("✅ Final Data Being Sent:");
-      for (let [key, value] of formDataToSend.entries()) {
-        console.log(`   ➤ ${key}:`, value);
-      }
-  
+
       const response = await axios.post(
         "https://coreys-portfolio-website.onrender.com/api/contact",
         formDataToSend,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-  
-      console.log("✅ Response from Server:", response.data);
+
       setStatus(response.data.message);
       setFormData({
         firstName: "",
@@ -100,13 +67,11 @@ const Contact = () => {
         company: "",
         website: "",
         jobTitle: "",
-        salaryRange: "",
         message: "",
         file: null,
       });
       setStep(1);
     } catch (error) {
-      console.error("❌ Error submitting form:", error.response?.data || error.message);
       setStatus(error.response?.data?.message || "❌ Error sending message.");
     } finally {
       setLoading(false);
@@ -160,14 +125,6 @@ const Contact = () => {
                   <>
                     <FormInput label="Job Title:" name="jobTitle" type="text" value={formData.jobTitle} onChange={handleChange} required />
                     <FormInput label="Job Description (File Upload):" name="file" type="file" onChange={handleFileChange} />
-                    <FormDropdown
-                      label="Salary Range:"
-                      name="salaryRange"
-                      value={formData.salaryRange}
-                      onChange={handleChange}
-                      options={["Select", "0-40000", "40000-60000", "60000-80000", "80000-100000", "100000+"]}
-                      fullWidth
-                    />
                   </>
                 )}
               </>
@@ -213,15 +170,6 @@ const FormTextarea = ({ label, name, value, onChange, required, fullWidth }) => 
   <div className={`form-group ${fullWidth ? "full-width" : ""}`}>
     <label className="form-label" htmlFor={name}>{label}</label>
     <textarea id={name} className="form-textarea" name={name} value={value} onChange={onChange} required={required} />
-  </div>
-);
-
-const FormDropdown = ({ label, name, value, onChange, options, fullWidth }) => (
-  <div className={`form-group ${fullWidth ? "full-width" : ""}`}>
-    <label className="form-label">{label}</label>
-    <select className="dropdown" name={name} value={value} onChange={onChange}>
-      {options.map((option) => <option key={option} value={option}>{option}</option>)}
-    </select>
   </div>
 );
 

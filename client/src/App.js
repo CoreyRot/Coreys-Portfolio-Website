@@ -14,7 +14,6 @@ import Contact from "./pages/Contact";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 
-// ✅ Smooth Scrolling on Anchor Navigation
 const ScrollToAnchor = () => {
   const { hash } = useLocation();
 
@@ -50,7 +49,6 @@ const AppLayout = () => {
   );
 };
 
-// ✅ Main Sections (Modular for Better Performance)
 const MainSections = () => (
   <>
     <section id="home" className="home"><Home /></section>

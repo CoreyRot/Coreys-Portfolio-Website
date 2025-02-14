@@ -18,13 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // ✅ Serve uploaded files statically
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// ✅ Debugging Middleware: Log All Incoming Requests
-app.use((req, res, next) => {
-  console.log(`📩 [${req.method}] ${req.url} - Body:`, req.body);
-  next();
-});
-
-// ✅ Fix CORS to allow both local & deployed frontends
+// ✅ CORS Configuration
 const allowedOrigins = [
   "http://localhost:3000",
   "https://coreys-portfolio-website-murex.vercel.app",
@@ -36,7 +30,6 @@ const corsOptions = {
     if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true);
     } else {
-      console.warn("🚨 CORS Blocked:", origin);
       return callback(new Error("CORS policy does not allow this origin"), false);
     }
   },
@@ -46,7 +39,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-// ✅ Register Routes (AFTER logging middleware)
+// ✅ Register Routes
 app.use("/api/projects", projectRoutes);
 app.use("/api/contact", contactRoutes);
 

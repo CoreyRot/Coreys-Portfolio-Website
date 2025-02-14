@@ -15,7 +15,6 @@ const Projects = () => {
   // ✅ Fetch Projects
   const fetchProjects = useCallback(async () => {
     try {
-      console.log("🔄 Fetching projects from:", `${API_URL}/api/projects`);
       const response = await axios.get(`${API_URL}/api/projects`, {
         withCredentials: true,
         headers: {
@@ -23,23 +22,18 @@ const Projects = () => {
           Accept: "application/json",
         },
       });
-  
-      console.log("✅ API Response:", response.data);
-  
-      // 🔥 Ensure proper response format
+
       if (response.data.success && Array.isArray(response.data.data)) {
-        setProjects(response.data.data); // ✅ Corrected to use response.data.data
+        setProjects(response.data.data);
       } else {
         throw new Error("Unexpected response format.");
       }
     } catch (err) {
-      console.error("❌ Error fetching projects:", err);
       setError(err.response?.data?.message || "Failed to load projects.");
     } finally {
       setLoading(false);
     }
   }, []);
-  
 
   useEffect(() => {
     fetchProjects();
@@ -57,9 +51,7 @@ const Projects = () => {
     <div className="container">
       <div className="projects-background">
         <h2 className="section-title">Projects</h2>
-        <p className="section-subheading">
-          My projects, ranging from web applications to branding designs.
-        </p>
+        <p className="section-subheading">My projects, ranging from web applications to branding designs.</p>
 
         {/* ✅ Category Filters */}
         <div className="filters flex-container">
