@@ -18,6 +18,12 @@ app.use(express.urlencoded({ extended: true }));
 // ✅ Serve uploaded files statically
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// ✅ Debugging Middleware: Log All Incoming Requests
+app.use((req, res, next) => {
+  console.log(`📩 [${req.method}] ${req.url} - Body:`, req.body);
+  next();
+});
+
 // ✅ Fix CORS to allow both local & deployed frontends
 const allowedOrigins = [
   "http://localhost:3000",
@@ -40,10 +46,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-// ✅ Debugging Logs
-console.log("🛠️ Initializing API Routes...");
-
-// ✅ Register Routes
+// ✅ Register Routes (AFTER logging middleware)
 app.use("/api/projects", projectRoutes);
 app.use("/api/contact", contactRoutes);
 
@@ -52,19 +55,7 @@ app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
-// ✅ Log Unrecognized Routes
-app.use((req, res, next) => {
-  console.warn(`⚠️ 404 - Route not found: ${req.method} ${req.url}`);
-  res.status(404).json({ error: "Route not found" });
-});
-
-// ✅ Centralized Error Handling
-app.use((err, req, res, next) => {
-  console.error("❌ Server Error:", err.message);
-  res.status(err.status || 500).json({ error: err.message || "Internal Server Error" });
-});
-
-// ✅ MongoDB Connection with Error Handling & Reconnect Strategy
+// ✅ MongoDB Connection
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
@@ -74,7 +65,7 @@ const connectDB = async () => {
     console.log("✅ MongoDB connected successfully");
   } catch (err) {
     console.error("❌ MongoDB connection error:", err);
-    setTimeout(connectDB, 5000); // Retry after 5 seconds
+    setTimeout(connectDB, 5000);
   }
 };
 
