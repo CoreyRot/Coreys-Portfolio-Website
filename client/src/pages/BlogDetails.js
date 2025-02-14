@@ -4,7 +4,8 @@ import he from "he";
 import axios from "axios";
 import "../styles/BlogDetails.css";
 
-const WORDPRESS_API_URL = "https://public-api.wordpress.com/rest/v1.1/sites/free59822.wordpress.com/posts/";
+const WORDPRESS_API_URL =
+  "https://public-api.wordpress.com/rest/v1.1/sites/free59822.wordpress.com/posts/?orderby=date&order=asc";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -14,26 +15,25 @@ const BlogDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // ✅ Fetch Blog Posts
   const fetchBlogs = useCallback(async () => {
     try {
       const response = await axios.get(WORDPRESS_API_URL);
       let posts = response.data.posts || [];
 
-      if (posts.length === 0) throw new Error("No posts available.");
+      if (!Array.isArray(posts) || posts.length === 0)
+        throw new Error("No posts available.");
 
-      // ✅ Ensure the posts are sorted by date (oldest first)
       posts.sort((a, b) => new Date(a.date) - new Date(b.date));
 
       setBlogs(posts);
 
-      // ✅ Find the current blog post by slug or ID
-      const foundPost = posts.find((post) => post.slug === id || post.ID.toString() === id);
+      const foundPost = posts.find(
+        (post) => post.slug === id || post.ID.toString() === id
+      );
       if (!foundPost) throw new Error("Blog not found.");
 
       setBlog(foundPost);
     } catch (err) {
-      console.error("❌ Error fetching blogs:", err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -44,8 +44,9 @@ const BlogDetails = () => {
     fetchBlogs();
   }, [fetchBlogs]);
 
-  // ✅ Handle Blog Navigation
   const navigateToBlog = (direction) => {
+    if (!blogs.length || !blog) return;
+
     const currentIndex = blogs.findIndex((b) => b.slug === blog?.slug);
     if (currentIndex === -1) return;
 
@@ -61,7 +62,6 @@ const BlogDetails = () => {
     navigate(`/blogs/${blogs[newIndex].slug}`);
   };
 
-  // ✅ Handle Back Button
   const handleBack = () => {
     navigate("/#blogs");
   };
@@ -71,46 +71,67 @@ const BlogDetails = () => {
 
   return (
     <section className="blog-detail">
-      <header className="blog-header">
-        <div className="blog-header-grid">
-          <h1>{he.decode(blog.title)}</h1>
-          <button className="back-button" onClick={handleBack}>
-            <span>Back to Posts</span>
-          </button>
-        </div>
-      </header>
+      <BlogHeader title={blog.title} handleBack={handleBack} />
       <div className="container">
         <div className="blog-main blog-background">
-          <div className="blog-image">
-            <img 
-              src={blog.featured_image || "https://via.placeholder.com/400x250"} 
-              alt={he.decode(blog.title)}
-            />
-          </div>
-          <div className="blog-content">
-            <div dangerouslySetInnerHTML={{ __html: blog.content }}></div>
-          </div>
+          <BlogImage imageUrl={blog.featured_image} title={blog.title} />
+          <BlogContent content={blog.content} />
         </div>
 
         {/* ✅ Blog Navigation */}
-        <div className="blog-navigation">
-          {blogs.length > 1 && (
-            <>
-              {blogs.findIndex((b) => b.slug === blog.slug) > 0 && (
-                <button className="prev-button" onClick={() => navigateToBlog("prev")}>
-                  <span>Previous</span>
-                </button>
-              )}
-              {blogs.findIndex((b) => b.slug === blog.slug) < blogs.length - 1 && (
-                <button className="next-button" onClick={() => navigateToBlog("next")}>
-                  <span>Next</span>
-                </button>
-              )}
-            </>
-          )}
-        </div>
+        <BlogNavigation blogs={blogs} blog={blog} navigateToBlog={navigateToBlog} />
       </div>
     </section>
+  );
+};
+
+/** ✅ Reusable Components */
+const BlogHeader = ({ title, handleBack }) => (
+  <header className="blog-header">
+    <div className="blog-header-grid">
+      <h1>{he.decode(title)}</h1>
+      <button className="back-button" onClick={handleBack}>
+        <span>Back to Posts</span>
+      </button>
+    </div>
+  </header>
+);
+
+const BlogImage = ({ imageUrl, title }) => (
+  <div className="blog-image">
+    <img
+      src={imageUrl || "https://via.placeholder.com/400x250"}
+      alt={he.decode(title)}
+    />
+  </div>
+);
+
+const BlogContent = ({ content }) => (
+  <div className="blog-content">
+    <div dangerouslySetInnerHTML={{ __html: content }}></div>
+  </div>
+);
+
+const BlogNavigation = ({ blogs, blog, navigateToBlog }) => {
+  const currentIndex = blogs.findIndex((b) => b.slug === blog.slug);
+
+  return (
+    <div className="blog-navigation">
+      {blogs.length > 1 && (
+        <>
+          {currentIndex > 0 && (
+            <button className="prev-button" onClick={() => navigateToBlog("prev")}>
+              <span>Previous</span>
+            </button>
+          )}
+          {currentIndex < blogs.length - 1 && (
+            <button className="next-button" onClick={() => navigateToBlog("next")}>
+              <span>Next</span>
+            </button>
+          )}
+        </>
+      )}
+    </div>
   );
 };
 

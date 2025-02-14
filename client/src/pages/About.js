@@ -29,7 +29,7 @@ const About = () => {
     const textElement = textRef.current;
     if (!textElement) return;
 
-    if (timelineRef.current) timelineRef.current.kill(); // Kill existing timeline to avoid stacking animations
+    if (timelineRef.current) timelineRef.current.kill();
 
     timelineRef.current = gsap.timeline()
       .to(textElement, { opacity: 0, scale: 0.95, duration: 0.5, onComplete: () => {
@@ -47,30 +47,39 @@ const About = () => {
     <div className="container">
       <div className="about-background">
         <div className="grid">
+          {/* ✅ About Section */}
           <div className="about-text">
             <h2 className="section-title">Get to know me!</h2>
             <div className="section-subheading">
-              <span>
+              <p>
                 I'm a <strong ref={textRef} className="morph-text">{roles[currentIndex]}</strong>&nbsp;
                 based in Toronto, Ontario, Canada.
-              </span>
-              <p>Passionate about crafting high-performance, intuitive web applications.</p>
-              <p>
-                On the frontend, I bring ideas to life using <strong>React</strong>, <strong>Next.js</strong>, 
-                <strong>TypeScript</strong>, <strong>TailwindCSS</strong>, <strong>JavaScript</strong>, 
-                <strong>HTML</strong>, and <strong>CSS3 / SASS / SCSS</strong>. 
-                On the backend, I build robust and scalable applications with <strong>Node.js</strong>, 
-                <strong>Express.js</strong>, <strong>MongoDB</strong>, <strong>MySQL</strong>, and <strong>RESTful APIs</strong>.
               </p>
               <p>
-                With a blend of technical expertise and creativity, I bridge the gap between aesthetics and 
-                functionality to deliver engaging user experiences.
+                Passionate about crafting high-performance, intuitive web applications.
+              </p>
+              <p>
+                On the frontend, I bring ideas to life using 
+                <strong> React</strong>, <strong>Next.js</strong>, 
+                <strong> TypeScript</strong>, <strong>TailwindCSS</strong>, 
+                <strong> JavaScript</strong>, <strong>HTML</strong>, and 
+                <strong> CSS3 / SASS / SCSS</strong>. 
+                On the backend, I build robust and scalable applications with 
+                <strong> Node.js</strong>, <strong>Express.js</strong>, 
+                <strong> MongoDB</strong>, <strong>MySQL</strong>, and 
+                <strong> RESTful APIs</strong>.
+              </p>
+              <p>
+                With a blend of technical expertise and creativity, I bridge the gap 
+                between aesthetics and functionality to deliver engaging user experiences.
               </p>
             </div>
             <div className="button-group flex-container">
               <a href="#blogs" className="btn"><span>Check Out My Posts</span></a>
             </div>
           </div>
+
+          {/* ✅ Skills Section */}
           <div className="about-skills">
             <h3 className="skills-title">My Skills</h3>
             <div className="skills-grid">

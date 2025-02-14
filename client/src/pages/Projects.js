@@ -12,7 +12,6 @@ const Projects = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Fetch Projects
   const fetchProjects = useCallback(async () => {
     try {
       const response = await axios.get(`${API_URL}/api/projects`, {
@@ -39,7 +38,6 @@ const Projects = () => {
     fetchProjects();
   }, [fetchProjects]);
 
-  // ✅ Filtered Projects (Memoized for Performance)
   const filteredProjects = useMemo(() => {
     return activeFilter === "All" ? projects : projects.filter((p) => p.category === activeFilter);
   }, [activeFilter, projects]);

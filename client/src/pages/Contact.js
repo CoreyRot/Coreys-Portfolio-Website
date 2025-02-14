@@ -143,12 +143,12 @@ const Contact = () => {
           
           <div className="button-group flex-container">
             {step > 1 && (
-              <button type="button" className="btn-prev" onClick={() => setStep(step - 1)}>Previous</button>
+              <button type="button" className="btn-prev" onClick={() => setStep(step - 1)}><span>Previous</span></button>
             )}
             {step === 3 || formType === "chat" ? (
-              <button type="submit" className="btn-submit" disabled={loading}>{loading ? "Sending..." : "Submit"}</button>
+              <button type="submit" className="btn-submit" disabled={loading}><span>{loading ? "Sending..." : "Submit"}</span></button>
             ) : (
-              <button type="button" className="btn-next" onClick={() => setStep(step + 1)}>Next</button>
+              <button type="button" className="btn-next" onClick={() => setStep(step + 1)}><span>Next</span></button>
             )}
           </div>
         </form>

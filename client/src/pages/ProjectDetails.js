@@ -12,32 +12,24 @@ const ProjectDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // ✅ Fetch Projects & Find Current Project
   const fetchProjects = useCallback(async () => {
     try {
-      if (!id || id.length !== 24) {
-        throw new Error("Invalid Project ID.");
-      }
+      if (!id || id.length !== 24) throw new Error("Invalid Project ID.");
 
       const response = await axios.get(`${API_URL}/api/projects`);
       const projectsData = Array.isArray(response.data) ? response.data : response.data.data;
-      
-      if (!Array.isArray(projectsData)) {
-        throw new Error("Unexpected response format.");
-      }
-      
 
-      if (projectsData.length === 0) throw new Error("No projects available.");
+      if (!Array.isArray(projectsData) || projectsData.length === 0) {
+        throw new Error("No projects available.");
+      }
 
       setProjects(projectsData);
 
-      // ✅ Find the current project
       const foundProject = projectsData.find((p) => p._id === id);
       if (!foundProject) throw new Error("Project not found.");
 
       setProject(foundProject);
     } catch (err) {
-      console.error("❌ Error:", err.message);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -48,7 +40,6 @@ const ProjectDetails = () => {
     fetchProjects();
   }, [fetchProjects]);
 
-  // ✅ Handle Navigation to Next / Previous Project
   const navigateToProject = (direction) => {
     if (!projects.length || !project) return;
 
@@ -68,7 +59,6 @@ const ProjectDetails = () => {
     navigate(`/projects/${projects[newIndex]._id}`);
   };
 
-  // ✅ Handle Back Button (No Page Reload)
   const handleBack = () => {
     navigate("/#projects");
   };
@@ -86,33 +76,54 @@ const ProjectDetails = () => {
       </header>
       <div className="container">
         <div className="project-main">
-          <div className="project-image">
-            <img src={project.imageUrl || "https://via.placeholder.com/600x400"} alt={project.title} />
-          </div>
-          <div className="project-info">
-            <h3>Project Information</h3>
-            <ul>
-              <li><strong>Category:</strong> {project.category || "N/A"}</li>
-              {project.liveUrl && (
-                <li><strong>Project URL:</strong> <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">Check Out The Project!</a></li>
-              )}
-            </ul>
-          </div>
+          <ProjectImage imageUrl={project.imageUrl} title={project.title} />
+          <ProjectInfo category={project.category} liveUrl={project.liveUrl} />
         </div>
 
         {/* ✅ Project Navigation */}
-        <div className="project-navigation">
-          {projects.findIndex((p) => p._id === project._id) > 0 && (
-            <button className="prev-button" onClick={() => navigateToProject("prev")}>
-              <span>Previous</span>
-            </button>
-          )}
-          <button className="next-button" onClick={() => navigateToProject("next")}>
-            <span>{projects.findIndex((p) => p._id === project._id) < projects.length - 1 ? "Next" : "See More"}</span>
-          </button>
-        </div>
+        <ProjectNavigation
+          projects={projects}
+          project={project}
+          navigateToProject={navigateToProject}
+        />
       </div>
     </section>
+  );
+};
+
+/** ✅ Reusable Components */
+const ProjectImage = ({ imageUrl, title }) => (
+  <div className="project-image">
+    <img src={imageUrl || "https://via.placeholder.com/600x400"} alt={title} />
+  </div>
+);
+
+const ProjectInfo = ({ category, liveUrl }) => (
+  <div className="project-info">
+    <h3>Project Information</h3>
+    <ul>
+      <li><strong>Category:</strong> {category || "N/A"}</li>
+      {liveUrl && (
+        <li><strong>Project URL:</strong> <a href={liveUrl} target="_blank" rel="noopener noreferrer">Check Out The Project!</a></li>
+      )}
+    </ul>
+  </div>
+);
+
+const ProjectNavigation = ({ projects, project, navigateToProject }) => {
+  const currentIndex = projects.findIndex((p) => p._id === project._id);
+
+  return (
+    <div className="project-navigation">
+      {currentIndex > 0 && (
+        <button className="prev-button" onClick={() => navigateToProject("prev")}>
+          <span>Previous</span>
+        </button>
+      )}
+      <button className="next-button" onClick={() => navigateToProject("next")}>
+        <span>{currentIndex < projects.length - 1 ? "Next" : "See More"}</span>
+      </button>
+    </div>
   );
 };
 
