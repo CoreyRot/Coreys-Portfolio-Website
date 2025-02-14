@@ -21,12 +21,14 @@ const Projects = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Origin: window.location.origin,
         },
       });
-
-      if (Array.isArray(response.data)) {
-        setProjects(response.data);
+  
+      console.log("✅ API Response:", response.data);
+  
+      // 🔥 Ensure proper response format
+      if (response.data.success && Array.isArray(response.data.data)) {
+        setProjects(response.data.data); // ✅ Corrected to use response.data.data
       } else {
         throw new Error("Unexpected response format.");
       }
@@ -37,6 +39,7 @@ const Projects = () => {
       setLoading(false);
     }
   }, []);
+  
 
   useEffect(() => {
     fetchProjects();

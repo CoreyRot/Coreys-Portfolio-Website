@@ -51,7 +51,8 @@ const About = () => {
             <h2 className="section-title">Get to know me!</h2>
             <div className="section-subheading">
               <span>
-                I'm a <strong ref={textRef} className="morph-text">{roles[currentIndex]}</strong>&nbsp;based in Toronto, Ontario, Canada.
+                I'm a <strong ref={textRef} className="morph-text">{roles[currentIndex]}</strong>&nbsp;
+                based in Toronto, Ontario, Canada.
               </span>
               <p>Passionate about crafting high-performance, intuitive web applications.</p>
               <p>

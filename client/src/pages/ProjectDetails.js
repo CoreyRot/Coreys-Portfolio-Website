@@ -20,7 +20,12 @@ const ProjectDetails = () => {
       }
 
       const response = await axios.get(`${API_URL}/api/projects`);
-      const projectsData = response.data || [];
+      const projectsData = Array.isArray(response.data) ? response.data : response.data.data;
+      
+      if (!Array.isArray(projectsData)) {
+        throw new Error("Unexpected response format.");
+      }
+      
 
       if (projectsData.length === 0) throw new Error("No projects available.");
 
