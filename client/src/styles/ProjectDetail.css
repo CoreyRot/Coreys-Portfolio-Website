@@ -8,7 +8,6 @@
   background-color: black;
   padding: 25px;
   position: relative;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 
   .project-header-grid {
     display: flex;
@@ -93,11 +92,17 @@
   }
 }
 
+.project-footer {
+  background-color: black;
+  padding: 25px;
+  position: fixed;
+  bottom: 0;
+  width: -webkit-fill-available;
+}
 .project-navigation {
   display: flex;
   justify-content: space-between;
   gap: 100px;
-  padding: 20px 0;
 
   button {
     color: white;

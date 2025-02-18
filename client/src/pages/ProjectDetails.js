@@ -86,12 +86,12 @@ const ProjectDetails = () => {
         </div>
 
         {/* ✅ Project Navigation */}
-        <ProjectNavigation
+      </div>
+      <ProjectNavigation
           projects={projects}
           project={project}
           navigateToProject={navigateToProject}
         />
-      </div>
     </section>
   );
 };
@@ -149,16 +149,18 @@ const ProjectNavigation = ({ projects, project, navigateToProject }) => {
   const currentIndex = projects.findIndex((p) => p._id === project._id);
 
   return (
-    <div className="project-navigation">
-      {currentIndex > 0 && (
-        <button className="prev-button" onClick={() => navigateToProject("prev")}>
-          <span>Previous</span>
+    <footer className="project-footer">
+      <div className="project-navigation">
+        {currentIndex > 0 && (
+          <button className="prev-button" onClick={() => navigateToProject("prev")}>
+            <span>Previous</span>
+          </button>
+        )}
+        <button className="next-button" onClick={() => navigateToProject("next")}>
+          <span>{currentIndex < projects.length - 1 ? "Next" : "See More"}</span>
         </button>
-      )}
-      <button className="next-button" onClick={() => navigateToProject("next")}>
-        <span>{currentIndex < projects.length - 1 ? "Next" : "See More"}</span>
-      </button>
-    </div>
+      </div>
+    </footer>
   );
 };
 

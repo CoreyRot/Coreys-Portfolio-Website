@@ -11,6 +11,7 @@ import Blog from "./pages/Blog";
 import BlogDetails from "./pages/BlogDetails";
 import MoreComingSoon from "./pages/MoreComingSoon";
 import Contact from "./pages/Contact";
+import ScrollToTop from "./components/ScrollToTop";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 
@@ -45,6 +46,7 @@ const AppLayout = () => {
           <Route path="/projects/more-coming-soon" element={<MoreComingSoon />} />
         </Routes>
       </div>
+      <ScrollToTop />
     </div>
   );
 };

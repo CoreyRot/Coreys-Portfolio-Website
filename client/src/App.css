@@ -67,7 +67,9 @@ button {
   cursor: pointer;
   overflow: hidden;
 
-  &:not(.mobile-menu-btn):not(.sidebar .nav-links li button) {
+  &:not(.mobile-menu-btn):not(.sidebar .nav-links li button):not(
+      .scroll-to-top
+    ) {
     &::before,
     &::after {
       content: "";
