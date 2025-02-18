@@ -77,7 +77,12 @@ const ProjectDetails = () => {
       <div className="container">
         <div className="project-main">
           <ProjectImage imageUrl={project.imageUrl} title={project.title} />
-          <ProjectInfo category={project.category} liveUrl={project.liveUrl} />
+          <ProjectInfo 
+            category={project.category} 
+            liveUrl={project.liveUrl} 
+            description={project.description} 
+            stackUsed={project.stackUsed} 
+          />
         </div>
 
         {/* ✅ Project Navigation */}
@@ -98,17 +103,47 @@ const ProjectImage = ({ imageUrl, title }) => (
   </div>
 );
 
-const ProjectInfo = ({ category, liveUrl }) => (
+const ProjectInfo = ({ category, liveUrl, description, stackUsed }) => (
   <div className="project-info">
     <h3>Project Information</h3>
     <ul>
       <li><strong>Category:</strong> {category || "N/A"}</li>
+      
+      {description && (
+        <li>
+          <strong>Description:</strong> 
+          {Array.isArray(description) ? (
+            <ul>
+              {description.map((line, index) => (
+                <li key={index}>{line}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>{description}</p>
+          )}
+        </li>
+      )}
+
+      {/* ✅ Display Stack Used */}
+      {stackUsed && stackUsed.length > 0 && (
+        <li>
+          <strong>Stack Used:</strong> {stackUsed.join(", ")}
+        </li>
+      )}
+
+      {/* ✅ Display Project URL */}
       {liveUrl && (
-        <li><strong>Project URL:</strong> <a href={liveUrl} target="_blank" rel="noopener noreferrer">Check Out The Project!</a></li>
+        <li>
+          <strong>Project URL: </strong> 
+          <a href={liveUrl} target="_blank" rel="noopener noreferrer">Check Out The Project!</a>
+        </li>
       )}
     </ul>
   </div>
 );
+
+
+
 
 const ProjectNavigation = ({ projects, project, navigateToProject }) => {
   const currentIndex = projects.findIndex((p) => p._id === project._id);

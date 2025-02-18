@@ -13,7 +13,7 @@ const validateObjectId = (req, res, next) => {
   next();
 };
 
-/** ✅ Async wrapper for cleaner error handling */
+
 const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
@@ -36,9 +36,12 @@ router.get("/:id", validateObjectId, asyncHandler(async (req, res) => {
 router.post(
   "/",
   [
-    body("name").trim().notEmpty().withMessage("Project name is required"),
+    body("title").trim().notEmpty().withMessage("Project title is required"),
+    body("category").trim().notEmpty().withMessage("Project category is required"),
+    body("imageUrl").trim().notEmpty().withMessage("Project image URL is required"),
     body("description").trim().optional(),
-    body("status").trim().isIn(["active", "completed", "pending"]).optional(),
+    body("stackUsed").optional().isArray().withMessage("Stack should be an array of technologies"),
+    body("liveUrl").trim().optional().isURL().withMessage("Invalid URL format"),
   ],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
@@ -57,9 +60,12 @@ router.put(
   "/:id",
   validateObjectId,
   [
-    body("name").optional().trim().notEmpty().withMessage("Project name cannot be empty"),
+    body("title").optional().trim().notEmpty().withMessage("Project title cannot be empty"), // ✅ Fixed field name
+    body("category").optional().trim().notEmpty().withMessage("Project category cannot be empty"),
+    body("imageUrl").optional().trim().notEmpty().withMessage("Project image URL cannot be empty"),
     body("description").optional().trim(),
-    body("status").optional().trim().isIn(["active", "completed", "pending"]),
+    body("stackUsed").optional().isArray().withMessage("Stack should be an array of technologies"),
+    body("liveUrl").optional().trim().isURL().withMessage("Invalid URL format"),
   ],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
