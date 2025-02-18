@@ -109,7 +109,7 @@ const ProjectInfo = ({ category, liveUrl, description, stackUsed }) => (
     <ul>
       <li><strong>Category:</strong> {category || "N/A"}</li>
       
-      {description && (
+      {description && description.length > 0 && (
         <li>
           <strong>Description:</strong> 
           {Array.isArray(description) ? (
