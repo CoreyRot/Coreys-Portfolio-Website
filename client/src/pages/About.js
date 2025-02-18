@@ -1,48 +1,77 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
+import OrbitingCircles from "../components/OrbitingCircles";
+
+import {
+  SiMongodb, SiExpress, SiLinux, SiApache, SiMysql, SiPhp,
+  SiNextdotjs, SiTypescript, SiGraphql, SiTailwindcss, SiBitbucket,
+  SiWordpress, SiPostgresql, SiGit, SiHtml5, SiCss3, SiJavascript,
+  SiShopify
+} from "react-icons/si";
+
+import {
+  FaNodeJs, FaReact, FaPython, FaHtml5, FaCss3Alt,
+  FaJsSquare, FaGitAlt
+} from "react-icons/fa";
+
 import "../styles/About.css";
 
 const roles = [
-  "Web Developer",
   "Front-End Developer",
   "Full-Stack Developer",
   "WordPress Developer",
 ];
 
-const skills = [
-  "HTML5", "CSS3 / SASS / SCSS", "JavaScript", "TypeScript", "TailwindCSS",
-  "PHP", "Node.js", "Express.js", "Python", "Flask",
-  "ReactJS", "jQuery", "Next.js",
-  "WordPress", "Shopify",
-  "MySQL", "PostgreSQL", "MongoDB",
-  "RESTful APIs", "GraphQL",
-  "Page Load Optimization", "SEO", "GA4 / GTM",
-  "Git / GitHub", "Bitbucket"
+const outerIcons = [
+  { icon: <SiMongodb />, label: "MongoDB" },
+  { icon: <SiExpress />, label: "Express.js" },
+  { icon: <FaReact />, label: "React" },
+  { icon: <FaNodeJs />, label: "Node.js" },
+  { icon: <SiLinux />, label: "Linux" },
+  { icon: <SiMysql />, label: "MySQL" },
+  { icon: <SiPhp />, label: "PHP" },
+  { icon: <SiNextdotjs />, label: "Next.js" },
+  { icon: <FaHtml5 />, label: "HTML5" },
+  { icon: <FaCss3Alt />, label: "CSS3" },
+  { icon: <FaJsSquare />, label: "JavaScript" }
+];
+
+const innerIcons = [
+  { icon: <SiTypescript />, label: "TypeScript" },
+  { icon: <SiTailwindcss />, label: "TailwindCSS" },
+  { icon: <FaGitAlt />, label: "Git" },
+  { icon: <SiBitbucket />, label: "Bitbucket" },
+  { icon: <FaPython />, label: "Python" },
+  { icon: <SiWordpress />, label: "WordPress" },
+  { icon: <SiPostgresql />, label: "PostgreSQL" },
+  { icon: <SiShopify />, label: "Shopify" }
 ];
 
 const About = () => {
   const textRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
+
+  // ✅ Optimized resize handler
+  const handleResize = useCallback(() => {
+    setIsMobile(window.innerWidth < 800);
+  }, []);
 
   useEffect(() => {
-    const textElement = textRef.current;
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
 
+  useEffect(() => {
     const animateText = () => {
-      gsap.to(textElement, {
-        y: -20,
-        opacity: 0,
-        duration: 0.5,
+      gsap.to(textRef.current, {
+        y: -20, opacity: 0, duration: 0.5,
         onComplete: () => {
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % roles.length);
-          gsap.fromTo(
-            textElement,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5 }
-          );
+          setCurrentIndex(prev => (prev + 1) % roles.length);
+          gsap.fromTo(textRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 });
         },
       });
     };
-
     const interval = setInterval(animateText, 2500);
     return () => clearInterval(interval);
   }, []);
@@ -51,6 +80,8 @@ const About = () => {
     <div className="container">
       <div className="about-background">
         <div className="about-grid">
+          
+          {/* ✅ Main Text Section */}
           <div className="about-text">
             <h2 className="section-title">Get to Know Me!</h2>
             <div className="section-subheading">
@@ -59,22 +90,20 @@ const About = () => {
                 <strong ref={textRef} className="morph-text">
                   {roles[currentIndex]}
                 </strong>
-                {" "}
-                based in Toronto, Ontario, Canada.
+                {" "}based in Toronto, Ontario, Canada.
               </p>
-
               <p>
                 Passionate about crafting high-performance, intuitive web applications, 
                 I thrive on blending technical expertise with creativity to build seamless 
                 user experiences. My work ensures a perfect balance between aesthetics and functionality, 
                 delivering engaging interactions and lightning-fast performance.
               </p>
-
               <p>
-                On the frontend, I bring ideas to life using React, Next.js, TypeScript, TailwindCSS, JavaScript, HTML, and CSS3 / SASS / SCSS.  
-                On the backend, I develop scalable, efficient applications with Node.js, Express.js, MongoDB, MySQL, and RESTful APIs.
+                On the frontend, I bring ideas to life using <strong>React, Next.js, TypeScript, TailwindCSS, JavaScript, HTML,</strong> 
+                and <strong>CSS3 / SASS / SCSS.</strong>  
+                On the backend, I develop scalable, efficient applications with <strong>Node.js, Express.js, MongoDB, MySQL,</strong> 
+                and <strong>RESTful APIs.</strong>
               </p>
-
               <p>
                 When I'm not coding, you'll find me hiking, camping, and indulging in my passion for cooking.  
                 Whether I'm out in the wilderness or in the kitchen, there's always music playing—ranging from the 
@@ -86,14 +115,39 @@ const About = () => {
             </div>
           </div>
 
-          {/* ✅ Skills Section */}
+          {/* ✅ Tech Stack Section */}
           <div className="about-skills">
-            <h3 className="skills-title">My Skills</h3>
-            <div className="skills-grid">
-              {skills.map((skill, index) => (
-                <span key={index} className="skill-tag">{skill}</span>
-              ))}
-            </div>
+            <h3>My Tech Stacks</h3>
+
+            {isMobile ? (
+              // ✅ Fallback Grid for Small Screens
+              <div className="skills-grid">
+                {[...outerIcons, ...innerIcons].map((tech, index) => (
+                  <div key={index} className="skill-icon" aria-label={tech.label}>
+                    {tech.icon}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              // ✅ Orbiting Circles for Large Screens
+              <div className="about-skills-orbiting-circles">
+                <OrbitingCircles radius={200} iconSize={40}>
+                  {outerIcons.map((tech, index) => (
+                    <div key={index} aria-label={tech.label}>
+                      {tech.icon}
+                    </div>
+                  ))}
+                </OrbitingCircles>
+                <OrbitingCircles radius={100} iconSize={30} reverse speed={2}>
+                  {innerIcons.map((tech, index) => (
+                    <div key={index} aria-label={tech.label}>
+                      {tech.icon}
+                    </div>
+                  ))}
+                </OrbitingCircles>
+              </div>
+            )}
+
           </div>
         </div>
       </div>

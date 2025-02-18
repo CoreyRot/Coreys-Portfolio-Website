@@ -16,43 +16,77 @@
     }
 
     .about-skills {
-      flex: 1;
-
-      .skills-title {
-        font-size: 22px;
-        font-weight: bold;
+      h3 {
+        font-weight: 700;
         margin-bottom: 20px;
       }
-
       .skills-grid {
         display: flex;
-        flex-wrap: wrap;
+        flex-flow: row wrap;
+        justify-content: center;
         gap: 10px;
 
-        .skill-tag {
+        .skill-icon {
           background: #e4e4e4;
           padding: 10px 15px;
           border-radius: 5px;
-          font-size: 16px;
-          color: #000;
-          display: inline-block;
+          flex: 1;
+          text-align: center;
+          svg {
+            fill: #000 !important;
+            font-size: 40px;
+          }
+        }
+      }
+      .about-skills-orbiting-circles {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        .orbiting-circles-container {
+          position: relative;
+          width: 100%;
+          height: 30rem;
+          &:nth-child(2) {
+            position: absolute;
+            top: 0;
+          }
+          .orbiting-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: var(--icon-size);
+            height: var(--icon-size);
+            margin: calc(var(--icon-size) / -2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            border-radius: 50%;
+            animation: orbit var(--duration) linear infinite;
+            transform: rotate(var(--angle)) translateY(var(--radius))
+              rotate(calc(-1 * var(--angle)));
+            svg {
+              fill: black !important;
+            }
+            .reverse {
+              animation-direction: reverse;
+            }
+          }
         }
       }
     }
   }
 
-  @media (max-width: 600px) {
-    .grid {
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem !important;
-
+  @media (max-width: 800px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
       .about-text,
       .about-skills {
         max-width: 100%;
       }
 
-      .skills-title {
+      h3 {
         text-align: center;
       }
 
@@ -61,10 +95,13 @@
         text-align: center;
         display: block;
       }
-
-      .skills-grid {
-        justify-content: center;
-      }
     }
+  }
+}
+
+@keyframes orbit {
+  100% {
+    transform: rotate(calc(var(--angle) + 360deg)) translateY(var(--radius))
+      rotate(calc(-1 * (var(--angle) + 360deg)));
   }
 }
