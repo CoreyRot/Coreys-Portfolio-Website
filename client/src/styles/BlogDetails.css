@@ -51,7 +51,8 @@
   gap: 20px;
   align-items: center;
   padding: 20px 0;
-  margin: 20px 0;
+  margin: 20px 0 0;
+  margin-bottom: 6rem;
 }
 
 .blog-image {
@@ -144,16 +145,23 @@
 }
 
 /* === Blog Navigation (Next & Previous Buttons) === */
-.blog-navigation {
-  display: flex;
-  justify-content: space-between;
-  gap: 100px;
-  padding: 20px 0;
-  button {
-    color: white;
-  }
-  button::before,
-  button::after {
-    border-color: white !important;
+.blog-footer {
+  background-color: black;
+  padding: 25px;
+  position: fixed;
+  bottom: 0;
+  width: -webkit-fill-available;
+  margin-top: 100px;
+  .blog-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+    button {
+      color: white;
+    }
+    button::before,
+    button::after {
+      border-color: white !important;
+    }
   }
 }

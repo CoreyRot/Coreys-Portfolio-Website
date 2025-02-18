@@ -77,10 +77,9 @@ const BlogDetails = () => {
           <BlogImage imageUrl={blog.featured_image} title={blog.title} />
           <BlogContent content={blog.content} />
         </div>
-
-        {/* ✅ Blog Navigation */}
-        <BlogNavigation blogs={blogs} blog={blog} navigateToBlog={navigateToBlog} />
       </div>
+      {/* ✅ Blog Navigation */}
+      <BlogNavigation blogs={blogs} blog={blog} navigateToBlog={navigateToBlog} />
     </section>
   );
 };
@@ -116,22 +115,24 @@ const BlogNavigation = ({ blogs, blog, navigateToBlog }) => {
   const currentIndex = blogs.findIndex((b) => b.slug === blog.slug);
 
   return (
-    <div className="blog-navigation">
-      {blogs.length > 1 && (
-        <>
-          {currentIndex > 0 && (
-            <button className="prev-button" onClick={() => navigateToBlog("prev")}>
-              <span>Previous</span>
-            </button>
-          )}
-          {currentIndex < blogs.length - 1 && (
-            <button className="next-button" onClick={() => navigateToBlog("next")}>
-              <span>Next</span>
-            </button>
-          )}
-        </>
-      )}
-    </div>
+    <footer className="blog-footer">
+      <div className="blog-navigation">
+        {blogs.length > 1 && (
+          <>
+            {currentIndex > 0 && (
+              <button className="prev-button" onClick={() => navigateToBlog("prev")}>
+                <span>Previous</span>
+              </button>
+            )}
+            {currentIndex < blogs.length - 1 && (
+              <button className="next-button" onClick={() => navigateToBlog("next")}>
+                <span>Next</span>
+              </button>
+            )}
+          </>
+        )}
+      </div>
+    </footer>
   );
 };
 

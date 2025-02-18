@@ -98,17 +98,17 @@
   position: fixed;
   bottom: 0;
   width: -webkit-fill-available;
-}
-.project-navigation {
-  display: flex;
-  justify-content: space-between;
-  gap: 100px;
+  .project-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
 
-  button {
-    color: white;
-  }
-  button::before,
-  button::after {
-    border-color: white !important;
+    button {
+      color: white;
+    }
+    button::before,
+    button::after {
+      border-color: white !important;
+    }
   }
 }
