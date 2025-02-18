@@ -2,7 +2,7 @@
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10rem;
+    gap: 40px;
 
     .about-text {
       flex: 1;
