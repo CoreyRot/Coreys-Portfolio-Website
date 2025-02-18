@@ -113,11 +113,11 @@ const ProjectInfo = ({ category, liveUrl, description, stackUsed }) => (
         <li>
           <strong>Description:</strong> 
           {Array.isArray(description) ? (
-            <ul>
+            <div>
               {description.map((line, index) => (
-                <li key={index}>{line}</li>
+                <p key={index}>{line}</p>
               ))}
-            </ul>
+            </div>
           ) : (
             <p>{description}</p>
           )}
