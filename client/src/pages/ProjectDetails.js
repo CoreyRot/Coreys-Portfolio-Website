@@ -84,34 +84,34 @@ const ProjectDetails = () => {
             stackUsed={project.stackUsed} 
           />
         </div>
-
-        {/* ✅ Project Navigation */}
       </div>
       <ProjectNavigation
-          projects={projects}
-          project={project}
-          navigateToProject={navigateToProject}
-        />
+        projects={projects}
+        project={project}
+        navigateToProject={navigateToProject}
+      />
     </section>
   );
 };
 
-/** ✅ Reusable Components */
+/** ✅ Project Image Component */
 const ProjectImage = ({ imageUrl, title }) => (
   <div className="project-image">
     <img src={imageUrl || "https://via.placeholder.com/600x400"} alt={title} />
   </div>
 );
 
+/** ✅ Project Info Component (Only Render Description & Stack If Present) */
 const ProjectInfo = ({ category, liveUrl, description, stackUsed }) => (
   <div className="project-info">
     <h3>Project Information</h3>
     <ul>
       <li><strong>Category:</strong> {category || "N/A"}</li>
-      
+
+      {/* ✅ Render Description ONLY If Present */}
       {description && description.length > 0 && (
         <li>
-          <strong>Description:</strong> 
+          <strong>Description:</strong>
           {Array.isArray(description) ? (
             <div>
               {description.map((line, index) => (
@@ -124,14 +124,14 @@ const ProjectInfo = ({ category, liveUrl, description, stackUsed }) => (
         </li>
       )}
 
-      {/* ✅ Display Stack Used */}
+      {/* ✅ Render Stack Used ONLY If Present */}
       {stackUsed && stackUsed.length > 0 && (
         <li>
           <strong>Stack Used:</strong> {stackUsed.join(", ")}
         </li>
       )}
 
-      {/* ✅ Display Project URL */}
+      {/* ✅ Display Project URL If Available */}
       {liveUrl && (
         <li>
           <strong>Project URL: </strong> 
@@ -142,9 +142,7 @@ const ProjectInfo = ({ category, liveUrl, description, stackUsed }) => (
   </div>
 );
 
-
-
-
+/** ✅ Project Navigation Component */
 const ProjectNavigation = ({ projects, project, navigateToProject }) => {
   const currentIndex = projects.findIndex((p) => p._id === project._id);
 
