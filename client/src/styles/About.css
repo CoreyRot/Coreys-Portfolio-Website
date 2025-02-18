@@ -1,20 +1,22 @@
 .about {
-  .grid {
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 50px;
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10rem;
 
     .about-text {
       flex: 1;
-      max-width: 600px;
       .section-title {
         text-align: left !important;
+      }
+      .morph-text {
+        display: inline-block;
+        transition: transform 0.5s ease, opacity 0.5s ease;
       }
     }
 
     .about-skills {
       flex: 1;
-      max-width: 400px;
 
       .skills-title {
         font-size: 22px;

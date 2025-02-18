@@ -52,7 +52,7 @@
     .read-more {
       font-weight: bold;
       text-decoration: none;
-
+      color: #198754;
       &:hover {
         text-decoration: underline;
       }
@@ -92,6 +92,7 @@
       .read-more {
         font-weight: bold;
         text-decoration: none;
+        color: #198754;
 
         &:hover {
           text-decoration: underline;

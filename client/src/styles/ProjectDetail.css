@@ -81,6 +81,14 @@
     width: 100%;
     text-align: center;
   }
+  a {
+    color: #198754;
+    text-decoration: none;
+    font-weight: bold;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .project-description {

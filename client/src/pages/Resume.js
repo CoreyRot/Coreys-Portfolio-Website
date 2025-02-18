@@ -34,10 +34,14 @@ const SectionTitle = ({ title }) => <h3 className="resume-title">{title}</h3>;
 
 const ResumeSummary = () => (
   <div className="resume-item">
+    <p> Results-driven Web Developer with 3+ years of experience specializing in front-end & full-stack development. Expertise in WordPress, Shopify, and the M.E.R.N Stack, with a passion for building high-performance, user-friendly websites that drive engagement and business growth. Proven ability to lead projects, optimize workflows, and bridge the gap between development and marketing to enhance data-driven decision-making. </p>
     <p>
-      Results-driven Web Developer with 6+ years of experience in front-end and full-stack development, specializing in WordPress, Shopify, and the MERN Stack.
-      Passionate about creating high-performance, user-friendly websites that drive engagement and business growth.
-      Proven ability to lead projects, optimize workflows, and bridge the gap between development and marketing to enhance data-driven decision-making.
+    <strong>Achievements include:</strong>
+    <ul>
+      <li>Reduced page load times by 25%, improving SEO and engagement.</li>
+      <li>Eliminated development backlogs, saving companies tens of thousands.</li>
+      <li>Increased e-commerce revenue for clients through optimized UX and strategy.</li>
+    </ul>
     </p>
   </div>
 );
