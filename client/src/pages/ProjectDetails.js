@@ -106,7 +106,7 @@ const ProjectImage = ({ imageUrl, title }) => (
 /** ✅ Project Info Component */
 const ProjectInfo = ({ category, liveUrl, description, stackUsed, agency, backlink }) => (
   <div className="project-info">
-    <h3>Project Information</h3>
+    <h2 className="section-title">Project Information</h2>
     <ul>
       <li><strong>Category:</strong> {category || "N/A"}</li>
 
