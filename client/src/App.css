@@ -1,7 +1,7 @@
-/* Import Font */
+/* === Import Font === */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
 
-/* Global Styles */
+/* === Global Styles === */
 *,
 ::before,
 ::after {
@@ -53,19 +53,33 @@ canvas {
   }
 }
 
-/* Optimized Button Styles */
+/* === Button Styles === */
 .btn,
 button {
   position: relative;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
-  color: #000;
+  color: #198754;
   background-color: transparent;
   border: none;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: #145c32;
+
+    &:not(.mobile-menu-btn):not(.sidebar .nav-links li button):not(
+        .scroll-to-top
+      ) {
+      &::before,
+      &::after {
+        border-color: #145c32;
+      }
+    }
+  }
 
   &:not(.mobile-menu-btn):not(.sidebar .nav-links li button):not(
       .scroll-to-top
@@ -76,7 +90,7 @@ button {
       position: absolute;
       width: 10px;
       height: 10px;
-      border: 2px solid #000;
+      border: 2px solid #198754;
       transition: all 0.3s ease;
     }
 
@@ -102,26 +116,16 @@ button {
         width: 100%;
         height: 100%;
       }
-      /* @media (max-width: 800px) {
-        background: black;
-        color: white;
-      } */
     }
-
-    /* @media (max-width: 800px) {
-      &::before,
-      &::after {
-        width: 100%;
-        height: 100%;
-      }
-    } */
   }
 }
+
 /* === Utilities === */
 .flex-container {
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
+
   @media (max-width: 600px) {
     gap: 24px;
   }
@@ -169,6 +173,9 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: 500px) {
+    padding: 20px 0;
+  }
 }
 
 .heading-title,
@@ -193,6 +200,7 @@ section {
   }
 }
 
+/* === Background Sections === */
 .home-background,
 .about-background,
 .resume-background,
@@ -201,13 +209,12 @@ section {
 .contact-background,
 .blog-background,
 .more-coming-soon-background {
-  background: white;
+  background: #fafafa;
   padding: 50px;
   border-radius: 5px;
   color: black;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-
-  @media (max-width: 768px) {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  @media (max-width: 800px) {
     padding: 25px;
   }
 }

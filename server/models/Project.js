@@ -7,6 +7,8 @@ const ProjectSchema = new mongoose.Schema({
   description: { type: [String] },
   stackUsed: { type: [String], default: [] },
   liveUrl: { type: String },
+  agency: { type: String },
+  backlink: { type: String },
 });
 
 module.exports = mongoose.model("Project", ProjectSchema, "project");

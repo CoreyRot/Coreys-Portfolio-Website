@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaLinkedinIn } from "react-icons/fa";
 import { AiOutlineHome, AiOutlineUser, AiOutlineMail, AiOutlineFileText } from "react-icons/ai";
-import { BsImage, BsPencilSquare } from "react-icons/bs"; 
+import { BsImage, BsPencilSquare } from "react-icons/bs";
 import { IoClose, IoMenu } from "react-icons/io5";
 import "../styles/Sidebar.css";
 
@@ -28,6 +28,11 @@ const Sidebar = () => {
     } else {
       document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
     }
+
+    // ✅ Close Sidebar on Mobile/Tablets
+    if (window.innerWidth <= 1024) {
+      setIsSidebarOpen(false);
+    }
   };
 
   return (
@@ -44,8 +49,26 @@ const Sidebar = () => {
       {/* ✅ Sidebar Navigation */}
       <aside className={`sidebar ${isSidebarOpen ? "open" : "closed"}`} aria-label="Main Navigation">
         <div className="profile-section">
-          <h2 className="profile-name">Corey Rotstein</h2>
-          <div className="social-icons">
+          
+          <div className="profile-img">
+            <a href="/">
+              <img className="logo" src="https://firebasestorage.googleapis.com/v0/b/my-portfolio-1fc61.appspot.com/o/logo.png?alt=media&token=028e1ea1-6b08-4f86-baa4-7ef926223a9f" alt="logo" />
+            </a>
+          </div>
+        </div>
+
+        {/* ✅ Navigation Links */}
+        <nav>
+          <ul className="nav-links">
+            <NavItem icon={<AiOutlineHome />} label="Home" section="home" handleNavigation={handleNavigation} />
+            <NavItem icon={<AiOutlineUser />} label="About" section="about" handleNavigation={handleNavigation} />
+            <NavItem icon={<AiOutlineFileText />} label="Resume" section="resume" handleNavigation={handleNavigation} />
+            <NavItem icon={<BsImage />} label="Projects" section="projects" handleNavigation={handleNavigation} />
+            <NavItem icon={<BsPencilSquare />} label="Posts" section="blogs" handleNavigation={handleNavigation} />
+            <NavItem icon={<AiOutlineMail />} label="Contact" section="contact" handleNavigation={handleNavigation} />
+          </ul>
+        </nav>
+        <div className="social-icons">
             {/* ✅ Resume Download (Opens in New Tab) */}
             <a
               href="https://firebasestorage.googleapis.com/v0/b/my-portfolio-1fc61.appspot.com/o/Corey's%20Resume.pdf?alt=media&token=7611125a-bf6c-4290-8418-5cecbd798f98"
@@ -66,19 +89,6 @@ const Sidebar = () => {
               <FaLinkedinIn />
             </a>
           </div>
-        </div>
-
-        {/* ✅ Navigation Links */}
-        <nav>
-          <ul className="nav-links">
-            <NavItem icon={<AiOutlineHome />} label="Home" section="home" handleNavigation={handleNavigation} />
-            <NavItem icon={<AiOutlineUser />} label="About" section="about" handleNavigation={handleNavigation} />
-            <NavItem icon={<AiOutlineFileText />} label="Resume" section="resume" handleNavigation={handleNavigation} />
-            <NavItem icon={<BsImage />} label="Projects" section="projects" handleNavigation={handleNavigation} />
-            <NavItem icon={<BsPencilSquare />} label="Posts" section="blogs" handleNavigation={handleNavigation} />
-            <NavItem icon={<AiOutlineMail />} label="Contact" section="contact" handleNavigation={handleNavigation} />
-          </ul>
-        </nav>
       </aside>
     </>
   );

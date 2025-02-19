@@ -42,6 +42,8 @@ router.post(
     body("description").trim().optional(),
     body("stackUsed").optional().isArray().withMessage("Stack should be an array of technologies"),
     body("liveUrl").trim().optional().isURL().withMessage("Invalid URL format"),
+    body("agency").optional().trim(),
+    body("backlink").optional().trim().isURL(),
   ],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
@@ -60,12 +62,14 @@ router.put(
   "/:id",
   validateObjectId,
   [
-    body("title").optional().trim().notEmpty().withMessage("Project title cannot be empty"), // ✅ Fixed field name
+    body("title").optional().trim().notEmpty().withMessage("Project title cannot be empty"),
     body("category").optional().trim().notEmpty().withMessage("Project category cannot be empty"),
     body("imageUrl").optional().trim().notEmpty().withMessage("Project image URL cannot be empty"),
     body("description").optional().trim(),
     body("stackUsed").optional().isArray().withMessage("Stack should be an array of technologies"),
     body("liveUrl").optional().trim().isURL().withMessage("Invalid URL format"),
+    body("agency").optional().trim(),
+    body("backlink").optional().trim().isURL(),
   ],
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);

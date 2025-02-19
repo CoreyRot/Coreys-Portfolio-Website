@@ -3,15 +3,14 @@ import gsap from "gsap";
 import OrbitingCircles from "../components/OrbitingCircles";
 
 import {
-  SiMongodb, SiExpress, SiLinux, SiApache, SiMysql, SiPhp,
-  SiNextdotjs, SiTypescript, SiGraphql, SiTailwindcss, SiBitbucket,
-  SiWordpress, SiPostgresql, SiGit, SiHtml5, SiCss3, SiJavascript,
-  SiShopify
+  SiMongodb, SiExpress, SiLinux, SiMysql, SiPhp,
+  SiNextdotjs, SiTypescript, SiTailwindcss, SiBitbucket,
+  SiWordpress, SiPostgresql, SiShopify, SiBootstrap
 } from "react-icons/si";
 
 import {
   FaNodeJs, FaReact, FaPython, FaHtml5, FaCss3Alt,
-  FaJsSquare, FaGitAlt
+  FaJsSquare, FaGitAlt, FaGithub
 } from "react-icons/fa";
 
 import "../styles/About.css";
@@ -33,18 +32,21 @@ const outerIcons = [
   { icon: <SiNextdotjs />, label: "Next.js" },
   { icon: <FaHtml5 />, label: "HTML5" },
   { icon: <FaCss3Alt />, label: "CSS3" },
-  { icon: <FaJsSquare />, label: "JavaScript" }
+  { icon: <FaJsSquare />, label: "JavaScript" },
+  { icon: <SiWordpress />, label: "WordPress" },
+
 ];
 
 const innerIcons = [
   { icon: <SiTypescript />, label: "TypeScript" },
   { icon: <SiTailwindcss />, label: "TailwindCSS" },
   { icon: <FaGitAlt />, label: "Git" },
+  { icon: <FaGithub />, label: "GitHub" },
   { icon: <SiBitbucket />, label: "Bitbucket" },
   { icon: <FaPython />, label: "Python" },
-  { icon: <SiWordpress />, label: "WordPress" },
   { icon: <SiPostgresql />, label: "PostgreSQL" },
-  { icon: <SiShopify />, label: "Shopify" }
+  { icon: <SiShopify />, label: "Shopify" },
+  { icon: <SiBootstrap />, label: "Bootstrap" }
 ];
 
 const About = () => {
@@ -120,7 +122,6 @@ const About = () => {
             <h3>My Tech Stacks</h3>
 
             {isMobile ? (
-              // ✅ Fallback Grid for Small Screens
               <div className="skills-grid">
                 {[...outerIcons, ...innerIcons].map((tech, index) => (
                   <div key={index} className="skill-icon" aria-label={tech.label}>
@@ -129,7 +130,6 @@ const About = () => {
                 ))}
               </div>
             ) : (
-              // ✅ Orbiting Circles for Large Screens
               <div className="about-skills-orbiting-circles">
                 <OrbitingCircles radius={200} iconSize={40}>
                   {outerIcons.map((tech, index) => (

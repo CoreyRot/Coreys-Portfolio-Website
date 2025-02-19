@@ -82,6 +82,8 @@ const ProjectDetails = () => {
             liveUrl={project.liveUrl} 
             description={project.description} 
             stackUsed={project.stackUsed} 
+            agency={project.agency} 
+            backlink={project.backlink}
           />
         </div>
       </div>
@@ -101,43 +103,47 @@ const ProjectImage = ({ imageUrl, title }) => (
   </div>
 );
 
-/** ✅ Project Info Component (Only Render Description & Stack If Present) */
-const ProjectInfo = ({ category, liveUrl, description, stackUsed }) => (
+/** ✅ Project Info Component */
+const ProjectInfo = ({ category, liveUrl, description, stackUsed, agency, backlink }) => (
   <div className="project-info">
     <h3>Project Information</h3>
     <ul>
       <li><strong>Category:</strong> {category || "N/A"}</li>
 
-      {/* ✅ Render Description ONLY If Present */}
       {description && description.length > 0 && (
         <li>
-          <strong>Description:</strong>
+          <strong>Project Overview:</strong>
           {Array.isArray(description) ? (
-            <div>
-              {description.map((line, index) => (
-                <p key={index}>{line}</p>
-              ))}
-            </div>
+            description.map((item, index) => <p key={index}>{item}</p>)
           ) : (
             <p>{description}</p>
           )}
         </li>
       )}
 
-      {/* ✅ Render Stack Used ONLY If Present */}
-      {stackUsed && stackUsed.length > 0 && (
-        <li>
-          <strong>Stack Used:</strong> {stackUsed.join(", ")}
-        </li>
-      )}
-
-      {/* ✅ Display Project URL If Available */}
       {liveUrl && (
         <li>
           <strong>Project URL: </strong> 
           <a href={liveUrl} target="_blank" rel="noopener noreferrer">Check Out The Project!</a>
         </li>
       )}
+
+      {stackUsed && stackUsed.length > 0 && (
+        <div className="stack-used-grid">
+          {stackUsed.map((stack, index) => (
+            <div key={index} className="stack-used-label">
+              {stack}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {agency && agency.length > 0 && (
+        <li>
+          <strong>Agency: </strong><a href={backlink} target="_blank" rel="noopener noreferrer">{agency}</a>  
+        </li>
+      )}
+
     </ul>
   </div>
 );

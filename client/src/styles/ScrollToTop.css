@@ -15,9 +15,8 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-}
-
-.scroll-to-top.show {
-  opacity: 1;
-  transform: translateY(0);
+  .show {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
