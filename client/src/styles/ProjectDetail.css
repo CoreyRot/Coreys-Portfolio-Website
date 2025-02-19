@@ -137,7 +137,7 @@
     padding: 25px;
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: -webkit-fill-available;
     z-index: 999;
 
     .project-navigation {
