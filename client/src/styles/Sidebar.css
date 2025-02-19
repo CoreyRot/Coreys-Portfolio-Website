@@ -105,6 +105,7 @@
   z-index: 10000;
   display: none;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 5px;
 
   @media (max-width: 1024px) {
     display: flex;
