@@ -16,9 +16,11 @@ import {
 import "../styles/About.css";
 
 const roles = [
-  "Front-End Developer",
-  "Full-Stack Developer",
+  "Front-End Web Developer",
+  "Full-Stack Web Developer",
   "WordPress Developer",
+  "UI/UX Developer",
+  "Web Designer",
 ];
 
 const outerIcons = [
@@ -26,7 +28,7 @@ const outerIcons = [
   { icon: <SiExpress />, label: "Express.js" },
   { icon: <FaReact />, label: "React" },
   { icon: <FaNodeJs />, label: "Node.js" },
-  { icon: <SiLinux />, label: "Linux" },
+  // { icon: <SiLinux />, label: "Linux" },
   { icon: <SiMysql />, label: "MySQL" },
   { icon: <SiPhp />, label: "PHP" },
   { icon: <SiNextdotjs />, label: "Next.js" },
@@ -38,13 +40,13 @@ const outerIcons = [
 ];
 
 const innerIcons = [
-  { icon: <SiTypescript />, label: "TypeScript" },
+  // { icon: <SiTypescript />, label: "TypeScript" },
   { icon: <SiTailwindcss />, label: "TailwindCSS" },
   { icon: <FaGitAlt />, label: "Git" },
   { icon: <FaGithub />, label: "GitHub" },
   { icon: <SiBitbucket />, label: "Bitbucket" },
-  { icon: <FaPython />, label: "Python" },
-  { icon: <SiPostgresql />, label: "PostgreSQL" },
+  // { icon: <FaPython />, label: "Python" },
+  // { icon: <SiPostgresql />, label: "PostgreSQL" },
   { icon: <SiShopify />, label: "Shopify" },
   { icon: <SiBootstrap />, label: "Bootstrap" }
 ];
