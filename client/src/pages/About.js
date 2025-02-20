@@ -101,10 +101,7 @@ const About = () => {
                 delivering engaging interactions and lightning-fast performance.
               </p>
               <p>
-                On the frontend, I bring ideas to life using <strong>React, Next.js, TypeScript, TailwindCSS, JavaScript, HTML,</strong> 
-                and <strong>CSS3 / SASS / SCSS.</strong>  
-                On the backend, I develop scalable, efficient applications with <strong>Node.js, Express.js, MongoDB, MySQL,</strong> 
-                and <strong>RESTful APIs.</strong>
+                On the frontend, I bring ideas to life using <strong>React, Next.js, TypeScript, TailwindCSS, JavaScript, HTML,</strong> and <strong>CSS3 / SASS / SCSS.</strong> On the backend, I develop scalable, efficient applications with <strong>Node.js, Express.js, MongoDB, MySQL,</strong> and <strong>RESTful APIs.</strong>
               </p>
               <p>
                 When I'm not coding, you'll find me hiking, camping, and indulging in my passion for cooking.  

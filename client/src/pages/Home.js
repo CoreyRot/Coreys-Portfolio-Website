@@ -7,11 +7,11 @@ const Home = () => {
       <div className="home-background">
         <div className="grid">
           <div className="cell">
-            <h1 className="heading-title">Welcome.</h1>
+            <h1 className="heading-title">Hey There!</h1>
             <div className="section-subheading">
-              <p>
-                My name is Corey, and I'm a web developer with a passion for creating engaging and user-friendly interfaces. I specialize in the MERN Stack. My goal is to help clients build high-quality websites and applications that meet their needs.
-              </p>
+              <p>I'm Corey, and i'm passionate about crafting intuitive and visually engaging digital experiences. Whether it's building dynamic applications or designing user-friendly websites, I focus on creating high-quality solutions that bring ideas to life.</p>
+
+              <p>Let's build something amazing together!</p>
             </div>
 
             <div className="button-group flex-container">
