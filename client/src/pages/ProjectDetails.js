@@ -130,6 +130,7 @@ const ProjectInfo = ({ category, liveUrl, description, stackUsed, agency, backli
 
       {stackUsed && stackUsed.length > 0 && (
         <div className="stack-used-grid">
+          <strong>Stack Used:</strong> 
           {stackUsed.map((stack, index) => (
             <div key={index} className="stack-used-label">
               {stack}

@@ -137,21 +137,6 @@ button {
   justify-content: center;
 }
 
-.text {
-  &-left {
-    text-align: left;
-  }
-  &-center {
-    text-align: center;
-  }
-  &-right {
-    text-align: right;
-  }
-  &-justify {
-    text-align: justify;
-  }
-}
-
 .grid {
   display: flex;
   flex-wrap: wrap;
