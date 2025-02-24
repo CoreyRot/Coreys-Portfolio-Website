@@ -27,11 +27,11 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 10px;
+        gap: 15px;
 
         .skill-icon {
           background: #e4e4e4;
-          padding: 12px;
+          padding: 1rem;
           border-radius: 5px;
           display: flex;
           align-items: center;
@@ -99,6 +99,7 @@
         width: 100%;
         text-align: center;
         display: block;
+        margin-top: 24px;
       }
     }
   }
@@ -106,14 +107,12 @@
     .about-grid {
       gap: 30px;
 
-      .about-text,
-      .about-skills {
-        max-width: 100%;
+      .btn {
+        margin-top: 14px;
       }
 
-      .skills-grid {
-        justify-content: center;
-        gap: 12px;
+      .about-text {
+        max-width: 100%;
       }
 
       .about-skills-orbiting-circles {
