@@ -54,11 +54,11 @@ const innerIcons = [
 const About = () => {
   const textRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
   // ✅ Optimized resize handler
   const handleResize = useCallback(() => {
-    setIsMobile(window.innerWidth < 800);
+    setIsMobile(window.innerWidth < 1024);
   }, []);
 
   useEffect(() => {

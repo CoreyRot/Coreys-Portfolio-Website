@@ -91,7 +91,7 @@
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 1024px) {
     .about-grid {
       grid-template-columns: 1fr;
       gap: 30px;
