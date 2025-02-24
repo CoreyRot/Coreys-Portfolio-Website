@@ -91,9 +91,13 @@
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 1024px) {
     .about-grid {
       grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 800px) {
+    .about-grid {
       gap: 30px;
 
       .about-text,
