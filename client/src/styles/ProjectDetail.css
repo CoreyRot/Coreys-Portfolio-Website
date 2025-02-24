@@ -46,7 +46,7 @@
         }
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 1025px) {
         flex-direction: column;
         align-items: flex-start;
         gap: 32px;
@@ -56,7 +56,7 @@
         }
       }
 
-      @media (max-width: 600px) {
+      @media (max-width: 1025px) {
         width: 80%;
         gap: 24px;
       }
