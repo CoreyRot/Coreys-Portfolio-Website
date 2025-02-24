@@ -94,6 +94,12 @@
   @media (max-width: 1350px) {
     .about-grid {
       grid-template-columns: 1fr;
+
+      .btn {
+        width: 100%;
+        text-align: center;
+        display: block;
+      }
     }
   }
   @media (max-width: 800px) {
@@ -103,12 +109,6 @@
       .about-text,
       .about-skills {
         max-width: 100%;
-      }
-
-      .btn {
-        width: 100%;
-        text-align: center;
-        display: block;
       }
 
       .skills-grid {
