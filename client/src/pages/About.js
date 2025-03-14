@@ -19,8 +19,7 @@ const roles = [
   "Front-End Web Developer",
   "Full-Stack Web Developer",
   "WordPress Developer",
-  "UI/UX Developer",
-  "Web Designer",
+  "UI/UX Designer",
 ];
 
 const outerIcons = [

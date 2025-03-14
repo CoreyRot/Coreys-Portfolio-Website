@@ -21,6 +21,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // ✅ CORS Configuration
 const allowedOrigins = [
   "http://localhost:3000",
+  "http://localhost:3002",
   "https://coreys-portfolio-website-murex.vercel.app",
   "https://www.coreydevstudio.com",
 ];

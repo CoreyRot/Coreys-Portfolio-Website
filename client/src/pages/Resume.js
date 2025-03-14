@@ -34,15 +34,7 @@ const SectionTitle = ({ title }) => <h3 className="resume-title">{title}</h3>;
 
 const ResumeSummary = () => (
   <div className="resume-item">
-    <p> Results-driven Web Developer with 3+ years of experience specializing in front-end & full-stack development. Expertise in WordPress, Shopify, and the M.E.R.N Stack, with a passion for building high-performance, user-friendly websites that drive engagement and business growth. Proven ability to lead projects, optimize workflows, and bridge the gap between development and marketing to enhance data-driven decision-making. </p>
-    <p>
-    <strong>Achievements include:</strong>
-    <ul>
-      <li>Reduced page load times by 25%, improving SEO and engagement.</li>
-      <li>Eliminated development backlogs, saving companies tens of thousands.</li>
-      <li>Increased e-commerce revenue for clients through optimized UX and strategy.</li>
-    </ul>
-    </p>
+    <p>Front-End WordPress & Full-Stack developer with 3+ years of experience specializing in WordPress and the M.E.R.N. stack. Passionate about building high-performance, user-friendly websites. Proven success in optimizing workflows, bridging development and marketing, and driving business growth through data-driven solutions. Expert in migrating traditional WordPress sites to headless architecture, implementing performance optimizations that reduced load times by 25%, and developing API-driven backends for seamless content management. Demonstrated ability to eliminate development backlogs, enhance e-commerce revenue through strategic UX improvements, and deliver measurable business results across multiple industries.</p>
   </div>
 );
 
@@ -57,13 +49,22 @@ const EducationItem = ({ degree, date, school }) => (
 const WorkExperience = () => {
   const jobs = [
     {
+      company: "Merged Media",
+      role: "Wordpress Developer • Permanent Full-time",
+      date: "03/2025 - Present",
+      details: [
+        "Transformed the company's development workflow by migrating from Elementor-based WordPress sites to a full-stack Headless WordPress solution, leveraging ACF and TailwindCSS for a modern, scalable, and high-performance front-end.",
+        "Developed and optimized a custom API-driven backend, ensuring seamless data retrieval and dynamic content management.",
+        "Independently manage the entire development lifecycle, from planning and architecture to deployment and optimization. Worked directly with designers and stakeholders to ensure seamless project execution, aligning technical solutions with business needs",
+      ],
+    },
+    {
       company: "triOS College Business Technology Healthcare Inc.",
-      role: "Freelance Web Developer & UX Consultant",
+      role: "Web & UI/UX Developer • Freelance",
       date: "12/2024 - 02/2025",
       details: [
-        "Redesigned & redeveloped a high-traffic company website, boosting lead conversions and organic traffic by improving UX, performance, and SEO strategies.",
-        "Integrated APIs for lead management, automating form submissions to streamline data collection and optimize user inquiries.",
-        "Improved website performance, reducing load times and ensuring a fully responsive mobile experience to enhance accessibility and engagement.",
+        "Improved website performance by reducing load times and ensuring a fully responsive mobile experience, enhancing accessibility and engagement. Boosted lead conversions by 25% within 2 months by optimizing UI/UX and implementing targeted SEO strategies for a high-traffic company website.",
+        "Automated lead management by integrating APIs, enhancing data collection efficiency and improving user inquiry response times within 2 months.",
       ],
     },
     {
@@ -71,10 +72,9 @@ const WorkExperience = () => {
       role: "Web Developer • Permanent Full-time",
       date: "12/2021 - 07/2024",
       details: [
-        "Developed & maintained custom-coded WordPress websites, utilizing Foundation 6, ACF, HTML, CSS/SASS/SCSS, JavaScript, PHP, and Node.js to build scalable, responsive sites.",
-        "Reduced page load times by 25%, leveraging Lighthouse metrics to improve SEO, engagement, and overall site performance.",
-        "Led all landing page development while bridging the gap between Digital Marketing & Web Development, implementing advanced data tracking to optimize marketing campaigns.",
-        "Eliminated 100% of the backlog for Digital Marketing Dev Tasks, preventing significant financial losses by streamlining workflows and accelerating project turnaround.",
+        "Spearheaded landing page development, seamlessly bridging the gap between Digital Marketing and Web Development by implementing advanced tracking, data analytics (GA4, GTM), and conversion optimization strategies to enhance campaign performance and maximize ROI.",
+        "Optimized website performance, achieving a 25% reduction in page load times using Lighthouse metrics, resulting in higher engagement and improved Core Web Vitals.",
+        "Eliminated a 100% backlog of Digital Marketing Dev Tasks, significantly accelerating project turnaround, improving workflow automation, and preventing a significant loss in potential revenue.",
       ],
     },
     {
@@ -91,10 +91,8 @@ const WorkExperience = () => {
       role: "E-Commerce Coordinator & Shopify Developer • Contractor",
       date: "09/2020 - 03/2021",
       details: [
-        "Developed & customized Shopify stores for 30+ clients, optimizing site structure, UX, and functionality to drive higher online sales.",
-        "Trained business owners on Facebook Ads, Google Ads, and Shopify management, helping them maximize conversions and scale their stores.",
-        "Provided advanced development support, assisting coordinators with custom Shopify coding, client consultations, and troubleshooting complex issues.",
-        "Made a direct impact, helping a struggling business owner increase revenue by 25%, allowing them to recover financially after COVID-related job loss.",
+        "Successfully developed 30+ Shopify stores, optimizing site structure, UX, and functionality to drive significant sales growth. Played a key role in boosting a struggling business’s revenue by 50%, aiding recovery from COVID-related setbacks. Trained business owners on Facebook Ads, Google Ads, and Shopify management to maximize conversions and scale their stores.",
+        "Delivered advanced development support, enhancing client satisfaction through custom Shopify coding and effective troubleshooting within 3 months.",
       ],
       sub: "ShopHere Program",
     },
