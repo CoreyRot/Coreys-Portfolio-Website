@@ -117,7 +117,7 @@ const About = () => {
 
           {/* ✅ Tech Stack Section */}
           <div className="about-skills">
-            <h3>My Tech Stacks</h3>
+            <h3>My Best Friends</h3>
 
             {isMobile ? (
               <div className="skills-grid">
