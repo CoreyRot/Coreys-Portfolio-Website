@@ -91,7 +91,7 @@ const WorkExperience = () => {
       role: "E-Commerce Coordinator & Shopify Developer • Contractor",
       date: "09/2020 - 03/2021",
       details: [
-        "Successfully developed 30+ Shopify stores, optimizing site structure, UX, and functionality to drive significant sales growth. Played a key role in boosting a struggling business’s revenue by 50%, aiding recovery from COVID-related setbacks. Trained business owners on Facebook Ads, Google Ads, and Shopify management to maximize conversions and scale their stores.",
+        "Successfully developed 30+ Shopify stores, optimizing site structure, UX, and functionality to drive significant sales growth. Played a key role in boosting a struggling business's revenue by 50%, aiding recovery from COVID-related setbacks. Trained business owners on Facebook Ads, Google Ads, and Shopify management to maximize conversions and scale their stores.",
         "Delivered advanced development support, enhancing client satisfaction through custom Shopify coding and effective troubleshooting within 3 months.",
       ],
       sub: "ShopHere Program",
