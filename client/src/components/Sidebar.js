@@ -71,7 +71,7 @@ const Sidebar = () => {
         <div className="social-icons">
             {/* ✅ Resume Download (Opens in New Tab) */}
             <a
-              href="https://firebasestorage.googleapis.com/v0/b/my-portfolio-1fc61.appspot.com/o/Corey's%20Resume.pdf?alt=media&token=7611125a-bf6c-4290-8418-5cecbd798f98"
+              href="https://firebasestorage.googleapis.com/v0/b/my-portfolio-1fc61.appspot.com/o/Corey's%20Resume%20(3).pdf?alt=media&token=4d9f96ef-0b62-4df2-a22d-7c3e886f1c22"
               target="_blank"
               rel="noopener noreferrer"
               className="resume-download"
