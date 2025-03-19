@@ -80,7 +80,6 @@ router.post("/", upload.single("file"), async (req, res) => {
     const emailSubject = `New ${formType} Inquiry from ${firstName} ${lastName}`;
     let emailHtml = `
       <h2>New Contact Form Submission</h2>
-      <p><strong>Type:</strong> ${formType}</p>
       <p><strong>Name:</strong> ${firstName} ${lastName}</p>
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Phone:</strong> ${phone}</p>

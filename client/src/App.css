@@ -39,8 +39,16 @@ canvas {
 }
 
 /* === Layout === */
+@media print, screen and (min-width: 40em) {
+  .container,
+  .container.fluid {
+    padding-right: 0.9375rem;
+    padding-left: 0.9375rem;
+  }
+}
 .container {
-  padding: 0 1.5rem;
+  padding-right: 0.625rem;
+  padding-left: 0.625rem;
 }
 
 .site-content__start {
