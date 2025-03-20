@@ -20,29 +20,28 @@ const roles = [
 ];
 
 const outerIcons = [
-  { icon: <SiMongodb />, label: "MongoDB" },
-  { icon: <SiExpress />, label: "Express.js" },
   { icon: <FaReact />, label: "React" },
-  { icon: <FaNodeJs />, label: "Node.js" },
-  // { icon: <SiLinux />, label: "Linux" },
-  { icon: <SiMysql />, label: "MySQL" },
-  { icon: <SiPhp />, label: "PHP" },
   { icon: <SiNextdotjs />, label: "Next.js" },
+  { icon: <SiTypescript />, label: "TypeScript" },
+  { icon: <FaJsSquare />, label: "JavaScript" },
+  { icon: <FaNodeJs />, label: "Node.js" },
+  { icon: <SiExpress />, label: "Express.js" },
+  { icon: <SiMongodb />, label: "MongoDB" },
+  { icon: <SiMysql />, label: "MySQL" },
   { icon: <FaHtml5 />, label: "HTML5" },
   { icon: <FaCss3Alt />, label: "CSS3" },
-  { icon: <FaJsSquare />, label: "JavaScript" },
-  { icon: <SiWordpress />, label: "WordPress" },
-
+  { icon: <SiTailwindcss />, label: "TailwindCSS" },
+  { icon: <SiPhp />, label: "PHP" },
+  { icon: <SiWordpress />, label: "WordPress" }
 ];
 
+
 const innerIcons = [
-  // { icon: <SiTypescript />, label: "TypeScript" },
-  { icon: <SiTailwindcss />, label: "TailwindCSS" },
   { icon: <FaGitAlt />, label: "Git" },
   { icon: <FaGithub />, label: "GitHub" },
   { icon: <SiBitbucket />, label: "Bitbucket" },
-  // { icon: <FaPython />, label: "Python" },
-  // { icon: <SiPostgresql />, label: "PostgreSQL" },
+  { icon: <FaPython />, label: "Python" },
+  { icon: <SiPostgresql />, label: "PostgreSQL" },
   { icon: <SiShopify />, label: "Shopify" },
   { icon: <SiBootstrap />, label: "Bootstrap" }
 ];
