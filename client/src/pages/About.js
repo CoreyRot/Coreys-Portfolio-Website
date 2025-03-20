@@ -16,7 +16,7 @@ import {
 import "../styles/About.css";
 
 const roles = [
-  "Front-End Developer", "Web Developer", "React Developer", "M.E.R.N Stack Developer", "Full Stack Developer", "WordPress Developer"
+  "Full Stack Developer", "M.E.R.N Stack Developer", "React Developer",  "Front-End Developer", "WordPress Developer",
 ];
 
 const outerIcons = [
