@@ -3,9 +3,9 @@ import gsap from "gsap";
 import OrbitingCircles from "../components/OrbitingCircles";
 
 import {
-  SiMongodb, SiExpress, SiLinux, SiMysql, SiPhp,
+  SiMongodb, SiExpress, SiMysql, SiPhp,
   SiNextdotjs, SiTypescript, SiTailwindcss, SiBitbucket,
-  SiWordpress, SiPostgresql, SiShopify, SiBootstrap
+  SiWordpress, SiPostgresql, SiShopify, SiBootstrap, SiFigma, SiFirebase
 } from "react-icons/si";
 
 import {
@@ -24,14 +24,14 @@ const outerIcons = [
   { icon: <SiNextdotjs />, label: "Next.js" },
   { icon: <SiTypescript />, label: "TypeScript" },
   { icon: <FaJsSquare />, label: "JavaScript" },
-  { icon: <FaNodeJs />, label: "Node.js" },
-  { icon: <SiExpress />, label: "Express.js" },
-  { icon: <SiMongodb />, label: "MongoDB" },
-  { icon: <SiMysql />, label: "MySQL" },
   { icon: <FaHtml5 />, label: "HTML5" },
   { icon: <FaCss3Alt />, label: "CSS3" },
   { icon: <SiTailwindcss />, label: "TailwindCSS" },
+  { icon: <FaNodeJs />, label: "Node.js" },
+  { icon: <SiExpress />, label: "Express.js" },
   { icon: <SiPhp />, label: "PHP" },
+  { icon: <SiMongodb />, label: "MongoDB" },
+  { icon: <SiMysql />, label: "MySQL" },
   { icon: <SiWordpress />, label: "WordPress" }
 ];
 
@@ -42,8 +42,10 @@ const innerIcons = [
   { icon: <SiBitbucket />, label: "Bitbucket" },
   { icon: <FaPython />, label: "Python" },
   { icon: <SiPostgresql />, label: "PostgreSQL" },
+  { icon: <SiFirebase />, label: "Firebase" },
   { icon: <SiShopify />, label: "Shopify" },
-  { icon: <SiBootstrap />, label: "Bootstrap" }
+  { icon: <SiBootstrap />, label: "Bootstrap" },
+  { icon: <SiFigma />, label: "Figma" },
 ];
 
 const About = () => {
