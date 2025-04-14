@@ -34,7 +34,7 @@ const SectionTitle = ({ title }) => <h3 className="resume-title">{title}</h3>;
 
 const ResumeSummary = () => (
   <div className="resume-item">
-    <p>Front-End WordPress & Full-Stack developer with 3+ years of experience specializing in WordPress and the M.E.R.N. stack. Passionate about building high-performance, user-friendly websites. Proven success in optimizing workflows, bridging development and marketing, and driving business growth through data-driven solutions. Expert in migrating traditional WordPress sites to headless architecture, implementing performance optimizations that reduced load times by 25%, and developing API-driven backends for seamless content management. Demonstrated ability to eliminate development backlogs, enhance e-commerce revenue through strategic UX improvements, and deliver measurable business results across multiple industries.</p>
+    <p>Front-End WordPress & Full-Stack developer with 6+ years of experience specializing in WordPress and the M.E.R.N. stack. Passionate about building high-performance, user-friendly websites. Proven success in optimizing workflows, bridging development and marketing, and driving business growth through data-driven solutions. Expert in migrating traditional WordPress sites to headless architecture, implementing performance optimizations that reduced load times by 25%, and developing API-driven backends for seamless content management. Demonstrated ability to eliminate development backlogs, enhance e-commerce revenue through strategic UX improvements, and deliver measurable business results across multiple industries.</p>
   </div>
 );
 

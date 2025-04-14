@@ -42,7 +42,7 @@ const Projects = () => {
     return activeFilter === "All" ? projects : projects.filter((p) => p.category === activeFilter);
   }, [activeFilter, projects]);
 
-  if (loading) return <p>Loading projects...</p>;
+  if (loading) return <div className="container"><p style={{ color: "white" }}>Loading projects...</p></div>;
   if (error) return <p className="error-message">⚠️ {error}</p>;
 
   return (
