@@ -69,9 +69,8 @@ const Sidebar = () => {
           </ul>
         </nav>
         <div className="social-icons">
-            {/* ✅ Resume Download (Opens in New Tab) */}
             <a
-              href="https://firebasestorage.googleapis.com/v0/b/my-portfolio-1fc61.appspot.com/o/Corey's%20Resume%20(3).pdf?alt=media&token=4d9f96ef-0b62-4df2-a22d-7c3e886f1c22"
+              href="https://firebasestorage.googleapis.com/v0/b/my-portfolio-1fc61.appspot.com/o/Corey%20-%20Resume%20-%202025.pdf?alt=media&token=872b0d9d-8522-4a09-bb61-2e6500c945a0"
               target="_blank"
               rel="noopener noreferrer"
               className="resume-download"
@@ -79,7 +78,6 @@ const Sidebar = () => {
             >
               <AiOutlineFileText />
             </a>
-            {/* ✅ LinkedIn Profile */}
             <a 
               href="https://www.linkedin.com/in/corey-rotstein/" 
               target="_blank" 

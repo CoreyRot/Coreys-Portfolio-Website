@@ -34,7 +34,7 @@ const SectionTitle = ({ title }) => <h3 className="resume-title">{title}</h3>;
 
 const ResumeSummary = () => (
   <div className="resume-item">
-    <p>Front-End WordPress & Full-Stack developer with 6+ years of experience specializing in WordPress and the M.E.R.N. stack. Passionate about building high-performance, user-friendly websites. Proven success in optimizing workflows, bridging development and marketing, and driving business growth through data-driven solutions. Expert in migrating traditional WordPress sites to headless architecture, implementing performance optimizations that reduced load times by 25%, and developing API-driven backends for seamless content management. Demonstrated ability to eliminate development backlogs, enhance e-commerce revenue through strategic UX improvements, and deliver measurable business results across multiple industries.</p>
+    <p>Frontend & WordPress Developer with 6+ years of agency and freelance experience specializing in custom WordPress solutions and modern JavaScript frameworks. Demonstrated expertise in optimizing site performance (25% faster load times), creating headless CMS architectures, and developing responsive, user-centric interfaces. Proven track record of eliminating development backlogs, streamlining workflows, and increasing conversion rates through strategic UX improvements. Adept at bridging technical and marketing teams to deliver scalable, data-driven web solutions that drive business results.</p>
   </div>
 );
 
@@ -50,48 +50,39 @@ const WorkExperience = () => {
   const jobs = [
     {
       company: "Merged Media",
-      role: "Wordpress Developer • Permanent Full-time",
-      date: "03/2025 - Present",
+      role: "Wordpress Developer • Contract",
+      date: "2025",
       details: [
-        "Transformed the company's development workflow by migrating from Elementor-based WordPress sites to a full-stack Headless WordPress solution, leveraging ACF and TailwindCSS for a modern, scalable, and high-performance front-end.",
-        "Developed and optimized a custom API-driven backend, ensuring seamless data retrieval and dynamic content management.",
-        "Independently manage the entire development lifecycle, from planning and architecture to deployment and optimization. Worked directly with designers and stakeholders to ensure seamless project execution, aligning technical solutions with business needs",
+        "Architected, developed, and implemented a custom WordPress solution replacing Elementor builds, utilizing ACF, PHP, Tailwind CSS, and Webpack, revolutionizing the agency's development workflow.",
+        "Engineered a full-stack SaaS website builder with Next.js, React, Prisma, Supabase, and Headless WordPress, featuring live editing capabilities, client dashboards, and one-click publishing.",
+        "Developed reusable component libraries and starter templates that reduced project build times by over 50% and enhanced cross-team collaboration.",
       ],
     },
     {
       company: "triOS College Business Technology Healthcare Inc.",
       role: "Web & UI/UX Developer • Freelance",
-      date: "12/2024 - 02/2025",
+      date: "2024 - 2025",
       details: [
-        "Improved website performance by reducing load times and ensuring a fully responsive mobile experience, enhancing accessibility and engagement. Boosted lead conversions by 25% within 2 months by optimizing UI/UX and implementing targeted SEO strategies for a high-traffic company website.",
-        "Automated lead management by integrating APIs, enhancing data collection efficiency and improving user inquiry response times within 2 months.",
+        "Optimized website performance and implemented responsive design, reducing load times and improving mobile UX, resulting in a 25% increase in lead conversions within 2 months.",
+        "Developed and integrated custom API solutions that automated lead management workflows, significantly improving data collection efficiency and customer response times.",
       ],
     },
     {
       company: "NVISION",
       role: "Web Developer • Permanent Full-time",
-      date: "12/2021 - 07/2024",
+      date: "2021 - 2024",
       details: [
-        "Spearheaded landing page development, seamlessly bridging the gap between Digital Marketing and Web Development by implementing advanced tracking, data analytics (GA4, GTM), and conversion optimization strategies to enhance campaign performance and maximize ROI.",
-        "Optimized website performance, achieving a 25% reduction in page load times using Lighthouse metrics, resulting in higher engagement and improved Core Web Vitals.",
-        "Eliminated a 100% backlog of Digital Marketing Dev Tasks, significantly accelerating project turnaround, improving workflow automation, and preventing a significant loss in potential revenue.",
+        "Spearheaded landing page development that bridged marketing and development teams, implementing advanced tracking and analytics (GA4, GTM) that maximized campaign ROI.",
+        "Optimized site performance achieving a 25% reduction in page load times through Core Web Vitals and Lighthouse metrics optimization/",
+        "Eliminated 100% of backlogged digital marketing development tasks, preventing revenue loss and accelerating project delivery timelines.",
       ],
-    },
-    {
-      company: "Communitech",
-      role: "Graphic Designer • Contractor",
-      date: "03/2021 - 07/2021",
-      details: [
-        "Led end-to-end branding projects, delivering cohesive digital and print assets, including logos, icons, and custom graphics, to strengthen brand identity and achieve client goals.",
-      ],
-      sub: "FutureProof Program",
     },
     {
       company: "Digital Main Street",
       role: "E-Commerce Coordinator & Shopify Developer • Contractor",
-      date: "09/2020 - 03/2021",
+      date: "2020 - 2021",
       details: [
-        "Successfully developed 30+ Shopify stores, optimizing site structure, UX, and functionality to drive significant sales growth. Played a key role in boosting a struggling business's revenue by 50%, aiding recovery from COVID-related setbacks. Trained business owners on Facebook Ads, Google Ads, and Shopify management to maximize conversions and scale their stores.",
+        "Successfully developed 30+ Shopify stores, optimizing site structure, UX, and functionality to drive significant sales growth. Played a key role in boosting a struggling business’s revenue by 50%, aiding recovery from COVID-related setbacks. Trained business owners on Facebook Ads, Google Ads, and Shopify management to maximize conversions and scale their stores.",
         "Delivered advanced development support, enhancing client satisfaction through custom Shopify coding and effective troubleshooting within 3 months.",
       ],
       sub: "ShopHere Program",
