@@ -7,7 +7,7 @@ import {
   AiOutlineMail,
 } from "react-icons/ai";
 import { BsImage, BsPencilSquare } from "react-icons/bs";
-import { FaLinkedinIn, FaGitHub } from "react-icons/fa";
+import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { IoClose, IoMenu } from "react-icons/io5";
 
 import "../../styles/Sidebar.css";
