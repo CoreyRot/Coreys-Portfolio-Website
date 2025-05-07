@@ -119,6 +119,14 @@ const Sidebar = () => {
           >
             <FaLinkedinIn />
           </a>
+          <a
+            href="https://github.com/CoreyRot"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit GitHub Profile"
+          >
+            <FaGithub />
+          </a>
         </div>
       </aside>
     </>
