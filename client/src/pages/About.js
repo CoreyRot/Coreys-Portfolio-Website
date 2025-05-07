@@ -109,7 +109,8 @@ const About = () => {
               </p>
             </div>
             <div className="button-group flex-container">
-              <a href="#blogs" className="btn"><span>Check Out My Posts</span></a>
+              <a href="https://firebasestorage.googleapis.com/v0/b/my-portfolio-1fc61.appspot.com/o/Corey_Rotstein_Web_Resume.pdf?alt=media&token=ccf640ad-a650-4cf1-83a3-da73ea57cb7b"
+              target="_blank" className="btn" rel="noreferrer"><span>Download My Resume</span></a>
             </div>
           </div>
 

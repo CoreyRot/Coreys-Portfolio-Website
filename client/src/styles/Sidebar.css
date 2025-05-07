@@ -20,17 +20,13 @@
   .profile-section {
     text-align: center;
     align-self: center;
-
-    .profile-img {
+    a {
+      display: flex;
+      align-items: center;
       width: 100px;
       height: 100px;
-      a {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        img {
-          max-width: 100%;
-        }
+      img {
+        max-width: 100%;
       }
     }
   }
