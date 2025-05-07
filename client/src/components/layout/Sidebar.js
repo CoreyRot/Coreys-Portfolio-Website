@@ -10,7 +10,7 @@ import { BsImage, BsPencilSquare } from "react-icons/bs";
 import { FaLinkedinIn, FaGitHub } from "react-icons/fa";
 import { IoClose, IoMenu } from "react-icons/io5";
 
-import "../../styles/Sidebar.css"; // Consider migrating to Tailwind or CSS Modules
+import "../../styles/Sidebar.css";
 
 const navItems = [
   { icon: <AiOutlineHome />, label: "Home", section: "home" },
@@ -28,7 +28,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 🔄 Handle responsive open/close
+  // Handle responsive open/close
   useEffect(() => {
     const handleResize = () => {
       if (typeof window !== "undefined") {
