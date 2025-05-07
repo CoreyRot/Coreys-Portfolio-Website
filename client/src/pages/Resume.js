@@ -50,12 +50,12 @@ const WorkExperience = () => {
   const jobs = [
     {
       company: "Merged Media",
-      role: "Wordpress Developer • Contract",
+      role: "Full Stack Web Developer • Contract",
       date: "2025",
       details: [
-        "Architected, developed, and implemented a custom WordPress solution replacing Elementor builds, utilizing ACF, PHP, Tailwind CSS, and Webpack, revolutionizing the agency's development workflow.",
-        "Engineered a full-stack SaaS website builder with Next.js, React, Prisma, Supabase, and Headless WordPress, featuring live editing capabilities, client dashboards, and one-click publishing.",
-        "Developed reusable component libraries and starter templates that reduced project build times by over 50% and enhanced cross-team collaboration.",
+        "Rebuilt the agency’s development workflow by replacing Elementor with a custom headless WordPress setup using ACF, TailwindCSS, PHP, and Webpack.",
+        "Developed a full-stack, SaaS-style site builder (Next.js, React, PostgreSQL, Headless WordPress, and Tailwind CSS) with live editing, client dashboards, authentication, and one-click publishing.",
+        "Created reusable components and starter templates / themes that cut project build time by over 50% and improved team collaboration.",
       ],
     },
     {
@@ -63,8 +63,7 @@ const WorkExperience = () => {
       role: "Web & UI/UX Developer • Freelance",
       date: "2024 - 2025",
       details: [
-        "Optimized website performance and implemented responsive design, reducing load times and improving mobile UX, resulting in a 25% increase in lead conversions within 2 months.",
-        "Developed and integrated custom API solutions that automated lead management workflows, significantly improving data collection efficiency and customer response times.",
+        "Optimized website performance and UX by reducing load times, improving responsive design, and integrating custom API-based lead capture; boosting mobile conversions by 25% and automating lead workflows.",
       ],
     },
     {
@@ -72,9 +71,9 @@ const WorkExperience = () => {
       role: "Web Developer • Permanent Full-time",
       date: "2021 - 2024",
       details: [
-        "Spearheaded landing page development that bridged marketing and development teams, implementing advanced tracking and analytics (GA4, GTM) that maximized campaign ROI.",
-        "Optimized site performance achieving a 25% reduction in page load times through Core Web Vitals and Lighthouse metrics optimization/",
-        "Eliminated 100% of backlogged digital marketing development tasks, preventing revenue loss and accelerating project delivery timelines.",
+        "Developed and maintained responsive WordPress sites using Foundation 6, ACF, HTML, SCSS, JavaScript, PHP, and Node.js; achieving a 25% reduction in page load times and improved cross-browser performance.",
+        "Cleared 100% of a backlog by streamlining handoffs with other departments, improving workflow e ciency and contributing to increased revenue.",
+        "Implemented GA4 and GTM to track user behavior and key events, significantly enhancing analytics accuracy and campaign performance reporting.",
       ],
     },
     {
