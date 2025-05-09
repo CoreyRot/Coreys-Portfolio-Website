@@ -1,0 +1,197 @@
+.pill-header {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1440px;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  padding: 15px 20px;
+  color: white;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.pill-header.scrolled {
+  background-color: rgba(0, 0, 0, 0.95);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.logo {
+  height: 30px;
+  width: auto;
+}
+
+.logo-text {
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.desktop-nav {
+  display: none;
+}
+
+.cta-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Desktop only class to hide elements on mobile */
+.desktop-only {
+  display: flex;
+}
+
+.cta-button,
+.back-button {
+  color: white !important;
+  position: relative;
+  text-align: center;
+
+  &::before,
+  &::after {
+    border-color: white !important;
+  }
+}
+
+/* Make mobile menu button always visible */
+.mobile-menu-btn {
+  display: flex !important; /* Always visible */
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: white !important;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 !important;
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  max-width: 1400px;
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  z-index: 999;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-nav.open {
+  display: block;
+  opacity: 1;
+}
+
+/* Mobile action buttons at the top of mobile menu */
+.mobile-action-buttons {
+  display: none;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.mobile-nav-links button {
+  color: white !important;
+  position: relative;
+
+  &::before,
+  &::after {
+    border-color: white !important;
+  }
+}
+
+.social-icons-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-icons a svg {
+  font-size: 1.2rem;
+  transition: all 0.3s;
+}
+
+.social-icons a:hover svg {
+  fill: #198754;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pill-header {
+    padding: 10px 15px;
+  }
+
+  /* Hide the desktop buttons on mobile */
+  .desktop-only {
+    display: none;
+  }
+  .mobile-action-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    flex-wrap: row wrap;
+    border-bottom: 1px solid white;
+  }
+
+  .header-container {
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pill-header {
+    top: 10px;
+    border-radius: 30px;
+  }
+
+  .logo-text {
+    font-size: 1rem;
+  }
+}

@@ -42,14 +42,14 @@ const Projects = () => {
     return activeFilter === "All" ? projects : projects.filter((p) => p.category === activeFilter);
   }, [activeFilter, projects]);
 
-  if (loading) return <div className="container"><p style={{ color: "white" }}>Loading projects...</p></div>;
+  if (loading) return <div className="container"><p style={{ color: "white" }}>Loading my work...</p></div>;
   if (error) return <p className="error-message">⚠️ {error}</p>;
 
   return (
     <div className="container">
       <div className="projects-background">
-        <h2 className="section-title">Projects</h2>
-        <p className="section-subheading">My projects, ranging from web applications to branding designs.</p>
+        <h2 className="section-title">My Work</h2>
+        <p className="section-subheading">My works, ranging from web applications to branding designs.</p>
 
         {/* ✅ Category Filters */}
         <div className="filters flex-container">
@@ -77,7 +77,7 @@ const Projects = () => {
               </Link>
             ))
           ) : (
-            <p className="no-projects">No projects available.</p>
+            <p className="no-projects">Nothing available.</p>
           )}
 
           {/* ✅ Contact Card */}

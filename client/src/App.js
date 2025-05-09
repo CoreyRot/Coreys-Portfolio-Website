@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,19 +6,21 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import Sidebar from "./components/layout/Sidebar";
+import Header from "./components/layout/Header";
 import CanvasBackground from "./components/background/CanvasBackground";
 import ScrollToTop from "./components/utils/ScrollToTop";
 
-import Home from "./pages/Home";
 import About from "./pages/About";
 import Resume from "./pages/Resume";
 import Projects from "./pages/Projects";
 import ProjectDetails from "./pages/ProjectDetails";
-import Blog from "./pages/Blog";
+import Article from "./pages/Blog";
 import BlogDetails from "./pages/BlogDetails";
 import MoreComingSoon from "./pages/MoreComingSoon";
 import Contact from "./pages/Contact";
+
+import IntroGrid from "./components/IntroGrid";
+
 
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
@@ -50,7 +52,7 @@ const ScrollToAnchor = () => {
 const AppLayout = () => (
   <div className="app-layout">
     <CanvasBackground />
-    <Sidebar />
+    <Header />
     <main id="content" className="site-content__start">
       <Routes>
         {/* Multi-section homepage */}
@@ -71,11 +73,10 @@ const AppLayout = () => (
  */
 const MainSections = () => (
   <>
-    <section id="home" className="home"><Home /></section>
     <section id="about" className="about"><About /></section>
     <section id="projects" className="projects"><Projects /></section>
     <section id="resume" className="resume"><Resume /></section>
-    <section id="blogs" className="blogs"><Blog /></section>
+    <section id="articles" className="blogs"><Article /></section>
     <section id="contact" className="contact"><Contact /></section>
   </>
 );
@@ -83,12 +84,20 @@ const MainSections = () => (
 /** 
  * App wrapper with Speed Insights and Router 
  */
-const App = () => (
-  <Router>
-    <SpeedInsights />
-    <ScrollToAnchor />
-    <AppLayout />
-  </Router>
-);
+const App = () => {
+  const [introDone, setIntroDone] = useState(false);
+
+  return (
+    <Router>
+      <SpeedInsights />
+      <ScrollToAnchor />
+      {!introDone ? (
+        <IntroGrid onFinish={() => setIntroDone(true)} />
+      ) : (
+        <AppLayout />
+      )}
+    </Router>
+  );
+};
 
 export default App;

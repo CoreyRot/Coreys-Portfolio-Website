@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import he from "he";
 import axios from "axios";
 import "../styles/BlogDetails.css";
+import PillHeader from "../components/layout/Header"; // Import PillHeader
 
 const WORDPRESS_API_URL =
   "https://public-api.wordpress.com/rest/v1.1/sites/free59822.wordpress.com/posts/?orderby=date&order=asc";
@@ -62,40 +63,29 @@ const BlogDetails = () => {
     navigate(`/blogs/${blogs[newIndex].slug}`);
   };
 
-  const handleBack = () => {
-    navigate("/#blogs");
-  };
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="error-message">⚠️ {error}</p>;
 
   return (
-    <section className="blog-detail">
-      <BlogHeader title={blog.title} handleBack={handleBack} />
-      <div className="container">
-        <div className="blog-main blog-background">
-          <BlogImage imageUrl={blog.featured_image} title={blog.title} />
-          <BlogContent content={blog.content} />
+    <>
+      {/* Use PillHeader with blog title */}
+      <PillHeader blogTitle={blog.title} />
+      
+      <section className="blog-detail">
+        <div className="container">
+          <div className="blog-main blog-background">
+            <BlogImage imageUrl={blog.featured_image} title={blog.title} />
+            <BlogContent content={blog.content} />
+          </div>
         </div>
-      </div>
-      {/* ✅ Blog Navigation */}
-      <BlogNavigation blogs={blogs} blog={blog} navigateToBlog={navigateToBlog} />
-    </section>
+        {/* Blog Navigation */}
+        <BlogNavigation blogs={blogs} blog={blog} navigateToBlog={navigateToBlog} />
+      </section>
+    </>
   );
 };
 
-/** ✅ Reusable Components */
-const BlogHeader = ({ title, handleBack }) => (
-  <header className="blog-header">
-    <div className="blog-header-grid">
-      <h1>{he.decode(title)}</h1>
-      <button className="back-button" onClick={handleBack}>
-        <span>Back to Posts</span>
-      </button>
-    </div>
-  </header>
-);
-
+/** Reusable Components */
 const BlogImage = ({ imageUrl, title }) => (
   <div className="blog-image">
     <img

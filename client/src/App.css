@@ -40,31 +40,21 @@ canvas {
 
 /* === Layout === */
 .container {
-  padding-right: 0.9375rem;
-  padding-left: 0.9375rem;
-  @media (max-width: 640px) {
-    padding-right: 0.625rem;
-    padding-left: 0.625rem;
-  }
+  width: 100%;
 }
 
-.site-content__start {
-  margin-left: 270px;
-  transition: margin-left 0.3s ease-in-out;
-  position: relative;
-
-  @media (max-width: 1024px) {
-    margin-left: 0;
-  }
+.large-container {
+  width: 100%;
+  max-width: 77.5rem;
 }
 
 /* === Button Styles === */
 .btn,
 button {
   position: relative;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 8px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
   color: #198754;
   background-color: transparent;
   border: none;
@@ -76,7 +66,7 @@ button {
   &:hover {
     color: #145c32;
 
-    &:not(.mobile-menu-btn):not(.sidebar .nav-links li button):not(
+    &:not(.mobile-menu-btn):not(.mobile-nav-links li button):not(
         .scroll-to-top
       ) {
       &::before,
@@ -86,9 +76,7 @@ button {
     }
   }
 
-  &:not(.mobile-menu-btn):not(.sidebar .nav-links li button):not(
-      .scroll-to-top
-    ) {
+  &:not(.mobile-menu-btn):not(.nav-links li button):not(.scroll-to-top) {
     &::before,
     &::after {
       content: "";
@@ -96,7 +84,8 @@ button {
       width: 10px;
       height: 10px;
       border: 2px solid #198754;
-      transition: all 0.3s ease;
+      border-radius: 0;
+      transition: all 0.4s ease;
     }
 
     &::before {
@@ -120,6 +109,7 @@ button {
       &::after {
         width: 100%;
         height: 100%;
+        border-radius: 30px;
       }
     }
   }
@@ -157,17 +147,6 @@ button {
 }
 
 /* === Section Styling === */
-section {
-  padding: 40px 0;
-  overflow: clip;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  @media (max-width: 500px) {
-    padding: 20px 0;
-  }
-}
-
 .heading-title,
 .section-title {
   font-weight: 700;
@@ -177,7 +156,7 @@ section {
 .section-title {
   padding-bottom: 20px;
   position: relative;
-
+  margin-top: 50px;
   &::after {
     content: "";
     position: absolute;
@@ -192,18 +171,29 @@ section {
 
 /* === Background Sections === */
 .home-background,
-.about-background,
-.resume-background,
-.projects-background,
 .project-info,
-.contact-background,
-.blog-background,
 .more-coming-soon-background {
   background: #fafafa;
   padding: 50px;
-  border-radius: 5px;
+  border-radius: 30px;
   color: black;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  @media (max-width: 850px) {
+    padding: 25px;
+  }
+  @media (max-width: 450px) {
+    padding: 25px 15px;
+  }
+}
+
+.about-background,
+.resume-background,
+.projects-background,
+.contact-background,
+.blog-background {
+  background: #fafafa;
+  padding: 50px;
+  color: black;
   @media (max-width: 850px) {
     padding: 25px;
   }

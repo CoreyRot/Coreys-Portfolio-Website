@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import API_URL from "../config";
 import "../styles/ProjectDetail.css";
+import PillHeader from "../components/layout/Header";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -59,51 +60,46 @@ const ProjectDetails = () => {
     navigate(`/projects/${projects[newIndex]._id}`);
   };
 
-  const handleBack = () => {
-    navigate("/#projects");
-  };
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="error-message">⚠️ {error}</p>;
 
   return (
-    <section className="project-detail">
-      <header className="project-header">
-        <div className="project-header-grid">
-          <h1>{project.title}</h1>
-          <button className="back-button" onClick={handleBack}>Back to Projects</button>
+    <>
+      {/* Use PillHeader with project title */}
+      <PillHeader projectTitle={project.title} />
+      
+      <section className="project-detail">
+        <div className="container">
+          <div className="project-main">
+            <ProjectImage imageUrl={project.imageUrl} title={project.title} />
+            <ProjectInfo 
+              category={project.category} 
+              liveUrl={project.liveUrl} 
+              description={project.description} 
+              stackUsed={project.stackUsed} 
+              agency={project.agency} 
+              backlink={project.backlink}
+            />
+          </div>
         </div>
-      </header>
-      <div className="container">
-        <div className="project-main">
-          <ProjectImage imageUrl={project.imageUrl} title={project.title} />
-          <ProjectInfo 
-            category={project.category} 
-            liveUrl={project.liveUrl} 
-            description={project.description} 
-            stackUsed={project.stackUsed} 
-            agency={project.agency} 
-            backlink={project.backlink}
-          />
-        </div>
-      </div>
-      <ProjectNavigation
-        projects={projects}
-        project={project}
-        navigateToProject={navigateToProject}
-      />
-    </section>
+        <ProjectNavigation
+          projects={projects}
+          project={project}
+          navigateToProject={navigateToProject}
+        />
+      </section>
+    </>
   );
 };
 
-/** ✅ Project Image Component */
+/** Project Image Component */
 const ProjectImage = ({ imageUrl, title }) => (
   <div className="project-image">
     <img src={imageUrl || "https://via.placeholder.com/600x400"} alt={title} />
   </div>
 );
 
-/** ✅ Project Info Component */
+/** Project Info Component */
 const ProjectInfo = ({ category, liveUrl, description, stackUsed, agency, backlink }) => (
   <div className="project-info">
     <h2 className="section-title">Project Information</h2>
@@ -149,7 +145,7 @@ const ProjectInfo = ({ category, liveUrl, description, stackUsed, agency, backli
   </div>
 );
 
-/** ✅ Project Navigation Component */
+/** Project Navigation Component */
 const ProjectNavigation = ({ projects, project, navigateToProject }) => {
   const currentIndex = projects.findIndex((p) => p._id === project._id);
 

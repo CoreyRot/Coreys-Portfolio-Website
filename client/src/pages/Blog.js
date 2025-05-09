@@ -43,7 +43,7 @@ const Blog = () => {
   return (
     <div className="container">
       <div className="blog-background">
-        <h2 className="section-title">Posts</h2>
+        <h2 className="section-title">Articles</h2>
 
         {/* ✅ Featured Blog */}
         {blogs.featured && <FeaturedBlog blog={blogs.featured} />}
