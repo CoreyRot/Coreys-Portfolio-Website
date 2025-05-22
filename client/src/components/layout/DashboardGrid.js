@@ -22,35 +22,63 @@ const sections = [
     id: "about", 
     condensedComponent: <About />,
     expandedComponent: <AboutExpanded />,
-    animation: "slideFromLeft"
+    animation: "slideFromLeft",
+    gridStyle: {
+      gridColumn: "span 6 / span 6",
+      "@media (min-width: 768px)": { gridColumn: "span 6 / span 6" },
+      "@media (min-width: 1024px)": { gridColumn: "span 4 / span 4" }
+    }
   },
   { 
     id: "projects", 
     condensedComponent: <Project />,
     expandedComponent: <ProjectExpanded />,
-    animation: "slideFromTop"
+    animation: "slideFromTop",
+    gridStyle: {
+      gridColumn: "span 6 / span 6",
+      "@media (min-width: 768px)": { gridColumn: "span 3 / span 3", gridRow: "span 2 / span 2" },
+      "@media (min-width: 1024px)": { gridColumn: "span 2 / span 2" }
+    }
   },
   { 
     id: "skills", 
     condensedComponent: <Skills />,
-    animation: "slideFromLeft"
+    animation: "slideFromLeft",
+    gridStyle: {
+      gridColumn: "span 6 / span 6",
+      "@media (min-width: 768px)": { gridColumn: "span 3 / span 3" },
+      "@media (min-width: 1024px)": { gridColumn: "span 2 / span 2" }
+    }
   },
   { 
     id: "contact", 
     condensedComponent: <Contact />,
     expandedComponent: <ContactExpanded />,
-    animation: "flip"
+    animation: "flip",
+    gridStyle: {
+      gridColumn: "span 6 / span 6",
+      "@media (min-width: 768px)": { gridColumn: "span 3 / span 3" },
+      "@media (min-width: 1024px)": { gridColumn: "span 2 / span 2" }
+    }
   },
   { 
     id: "services", 
     condensedComponent: <Services />,
-    animation: "slideFromBottom"
+    animation: "slideFromBottom",
+    gridStyle: {
+      gridColumn: "span 6 / span 6",
+      "@media (min-width: 768px)": { gridColumn: "span 3 / span 3" }
+    }
   },
   { 
     id: "articles", 
     condensedComponent: <Article />,
     expandedComponent: <ArticleExpanded />,
-    animation: "slideFromBottom"
+    animation: "slideFromBottom",
+    gridStyle: {
+      gridColumn: "span 6 / span 6",
+      "@media (min-width: 768px)": { gridColumn: "span 3 / span 3" }
+    }
   },
 ];
 
@@ -81,25 +109,57 @@ const animationConfigs = {
   scaleRotate: {
     initial: { scale: 0, rotation: -180, opacity: 0 },
     animate: { scale: 1, rotation: 0, opacity: 1, duration: 1, ease: "back.out(1.7)" }
-  },
-  fadeInScale: {
-    initial: { scale: 0.5, opacity: 0 },
-    animate: { scale: 1, opacity: 1, duration: 0.8, ease: "power2.out" }
-  },
-  slideInRotate: {
-    initial: { x: -50, y: -50, rotation: -45, opacity: 0 },
-    animate: { x: 0, y: 0, rotation: 0, opacity: 1, duration: 1, ease: "power3.out" }
+  }
+};
+
+// Responsive grid styles
+const getResponsiveGridStyle = (windowWidth) => {
+  if (windowWidth >= 1024) {
+    return {
+      about: { gridColumn: "span 4" },
+      projects: { gridColumn: "span 2", gridRow: "span 2" },
+      skills: { gridColumn: "span 2" },
+      contact: { gridColumn: "span 2" },
+      services: { gridColumn: "span 3" },
+      articles: { gridColumn: "span 3" }
+    };
+  } else if (windowWidth >= 768) {
+    return {
+      about: { gridColumn: "span 6" },
+      projects: { gridColumn: "span 3", gridRow: "span 2" },
+      skills: { gridColumn: "span 3" },
+      contact: { gridColumn: "span 3" },
+      services: { gridColumn: "span 3" },
+      articles: { gridColumn: "span 3" }
+    };
+  } else {
+    return {
+      about: { gridColumn: "span 6" },
+      projects: { gridColumn: "span 6" },
+      skills: { gridColumn: "span 6" },
+      contact: { gridColumn: "span 6" },
+      services: { gridColumn: "span 6" },
+      articles: { gridColumn: "span 6" }
+    };
   }
 };
 
 const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [hasIntroPlayed, setHasIntroPlayed] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   
   const tilesRef = useRef([]);
   const contentRef = useRef(null);
   const containerRef = useRef(null);
   const tileElementsRef = useRef([]);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   // Set up tiles refs
   useEffect(() => {
@@ -136,16 +196,15 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
         
         tl.to(tile, {
           ...config.animate,
-          delay: index * 0.15 // Stagger delay
-        }, index === 0 ? 0.3 : "-=0.6"); // Start first tile after 0.3s, others overlap
+          delay: index * 0.15
+        }, index === 0 ? 0.3 : "-=0.6");
       }
     });
 
-    // Add a subtle hover effect after intro
+    // Add hover effects
     tl.call(() => {
       tileElementsRef.current.forEach((tile) => {
         if (tile) {
-          // Add hover animation
           tile.addEventListener('mouseenter', () => {
             gsap.to(tile, { 
               scale: 1.05, 
@@ -170,11 +229,9 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
   // Watch for expandedId changes and trigger animations
   useEffect(() => {
     if (expandedId && !isAnimating) {
-      // Reset content styling before animation
       if (contentRef.current) {
         gsap.set(contentRef.current, { opacity: 0, y: 50 });
       }
-      // Ensure container is hidden initially
       if (containerRef.current) {
         containerRef.current.classList.remove('visible');
       }
@@ -182,24 +239,18 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
     }
   }, [expandedId]);
   
-  // Animate tiles and content when showing expanded view
   const animateOpen = () => {
-    if (isAnimating) return; // Prevent multiple animations
+    if (isAnimating) return;
     
     setIsAnimating(true);
-    
-    // Prevent scrolling
     document.body.classList.add('expanded-view-open');
     
-    // Ensure content starts in the right position
     if (contentRef.current) {
       gsap.set(contentRef.current, { opacity: 0, y: 50 });
     }
     
-    // First animate the tiles
     const tl = gsap.timeline();
     
-    // Animate the tiles in sequence
     tl.to(tilesRef.current, {
       duration: 0.2,
       scaleY: 1,
@@ -207,14 +258,12 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
       stagger: 0.1,
       ease: "power2.inOut",
       onComplete: () => {
-        // When tiles are fully visible, make the container visible
         if (containerRef.current) {
           containerRef.current.classList.add('visible');
         }
       }
     });
     
-    // Then fade in the content with a nice entrance
     tl.to(contentRef.current, {
       opacity: 1,
       y: 0,
@@ -225,13 +274,10 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
     });
   };
   
-  // Animate tiles and content when hiding expanded view
   const animateClose = () => {
     setIsAnimating(true);
-    
     const tl = gsap.timeline();
     
-    // First fade out the content
     tl.to(contentRef.current, {
       opacity: 0,
       y: 50,
@@ -239,14 +285,12 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
       ease: "power2.in"
     });
     
-    // Hide the container
     tl.add(() => {
       if (containerRef.current) {
         containerRef.current.classList.remove('visible');
       }
     });
     
-    // Then animate the tiles out in reverse order
     tl.to(tilesRef.current, {
       duration: 0.2,
       scaleY: 0,
@@ -261,14 +305,10 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
     });
   };
   
-  // Update the handleTileClick function to check if the section has an expandedComponent
   const handleTileClick = (id) => {
     if (isAnimating) return;
     
-    // Get the section that was clicked
     const clickedSection = sections.find(s => s.id === id);
-    
-    // Only proceed if this section has an expandedComponent
     if (!clickedSection.expandedComponent) return;
     
     if (expandedId === id) {
@@ -278,7 +318,6 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
     }
   };
   
-  // Handle close button click
   const handleCloseClick = (e) => {
     e.stopPropagation();
     if (!isAnimating) {
@@ -286,7 +325,6 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
     }
   };
   
-  // Handle escape key
   useEffect(() => {
     const handleEscKey = (e) => {
       if (e.key === "Escape" && expandedId && !isAnimating) {
@@ -298,9 +336,24 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
     return () => window.removeEventListener("keydown", handleEscKey);
   }, [expandedId, isAnimating]);
 
+  const gridStyles = getResponsiveGridStyle(windowWidth);
+
+  // Inline styles for the grid container to ensure it works
+  const dashboardGridStyle = {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'grid',
+    width: '100%',
+    gridAutoRows: windowWidth <= 768 ? '19rem' : '21rem',
+    gridTemplateColumns: 'repeat(6, minmax(0, 1fr))',
+    gap: '1rem',
+    margin: '5rem 0',
+    position: 'relative'
+  };
+
   return (
     <div className="container">
-      <div className="dashboard-grid">
+      <div className="dashboard-grid" style={dashboardGridStyle}>
         {sections.map(({ id, condensedComponent }, index) => (
           <section
             key={id}
@@ -309,7 +362,22 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
             className={`tile tile-${id} ${expandedId === id ? 'active-tile' : ''}`}
             onClick={() => handleTileClick(id)}
             style={{ 
-              opacity: 0, // Start invisible for intro animation
+              opacity: 0,
+              cursor: 
+                id === 'skills' || id === 'services' ? 'auto' : 'pointer',
+              ...gridStyles[id],
+              // Ensure grid positioning works
+              position: 'relative',
+              overflow: 'hidden',
+              borderRadius: '1rem',
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
+              boxShadow: 'inset 0 -20px 80px -20px #ffffff1f',
+              border: '1px solid #ffffff1a',
+              backdropFilter: 'blur(10px)',
+              transform: 'translateZ(0)',
+              transition: 'all 0.5s ease',
+              padding: '0.9375rem',
+              zIndex: 1
             }}
           >
             {condensedComponent}
@@ -318,7 +386,6 @@ const DashboardGrid = ({ expandedId, onTileToggle, onTileClose }) => {
         
         {expandedId && (
           <div className="expanded-overlay">
-            {/* Transition tiles for the animation */}
             <ul className="transition-tiles">
               {[...Array(TILE_COUNT)].map((_, index) => (
                 <li 
