@@ -1,0 +1,383 @@
+.about-container {
+  width: 100%;
+  color: white;
+
+  .tabs-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    gap: 20px;
+  }
+
+  .tab-icon {
+    font-size: 18px;
+  }
+
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: white;
+  }
+
+  .section-subheading {
+    p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+      font-size: 16px;
+      color: #d1d1d1;
+    }
+  }
+
+  .morph-text {
+    color: rgba(15, 255, 80);
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .section-icon {
+    color: #a0a0a0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 20px;
+      background-color: rgba(15, 255, 80);
+      margin-right: 10px;
+      border-radius: 2px;
+    }
+  }
+
+  .experience-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+
+    .experience-summary {
+      color: #a0a0a0;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .work-timeline {
+      position: relative;
+      padding-left: 25px;
+      border-left: 2px solid rgba(15, 255, 80);
+      margin-left: 10px;
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 40px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .timeline-dot {
+          position: absolute;
+          left: -33px;
+          top: 0;
+          width: 12px;
+          height: 12px;
+          background-color: rgba(15, 255, 80);
+          border-radius: 50%;
+        }
+
+        .job-header {
+          margin-bottom: 15px;
+
+          h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+          }
+        }
+
+        .job-role,
+        .job-subprogram {
+          font-size: 14px;
+          color: #a0a0a0;
+          margin-bottom: 5px;
+
+          &.job-subprogram {
+            font-style: italic;
+          }
+        }
+
+        .job-duration {
+          display: inline-block;
+          background-color: rgba(15, 255, 80, 0.2);
+          color: white;
+          font-size: 14px;
+          padding: 5px 15px;
+          border-radius: 20px;
+          margin: 5px 0 10px;
+        }
+
+        .flex-container {
+          display: flex;
+          flex-direction: row;
+          gap: 3rem;
+          @media (max-width: 700px) {
+            flex-direction: column;
+          }
+        }
+
+        .job-responsibilities {
+          list-style: none;
+          padding: 0;
+          max-width: 767px;
+          li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 15px;
+            color: #d1d1d1;
+            line-height: 1.5;
+
+            &::before {
+              content: "";
+              position: absolute;
+              left: 0;
+              top: 8px;
+              width: 8px;
+              height: 8px;
+              background-color: rgba(15, 255, 80);
+              border-radius: 50%;
+            }
+          }
+        }
+
+        .job-skills {
+          display: flex;
+          flex-flow: column wrap;
+          gap: 1rem;
+
+          .job-skill-section {
+            margin-bottom: 15px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            .job-skill-header {
+              display: flex;
+              align-items: center;
+              margin-bottom: 10px;
+              gap: 0.5rem;
+
+              h4 {
+                font-size: 16px;
+                font-weight: 600;
+                margin: 0;
+                color: #b8b8b8;
+              }
+            }
+
+            .job-skill-cards {
+              display: flex;
+              gap: 10px;
+              flex-wrap: wrap;
+
+              .job-skill-card {
+                box-shadow: inset 0 -20px 80px -20px rgba(15, 255, 80, 0.5);
+                border: 1px solid rgba(15, 255, 80, 0.5);
+                border-radius: 1rem;
+                padding: 5px 10px;
+                font-size: 14px;
+                color: #d1d1d1;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+              }
+            }
+
+            .job-skill-tags {
+              display: flex;
+              gap: 8px;
+              flex-wrap: wrap;
+
+              .skill-tag {
+                box-shadow: inset 0 -20px 80px -20px rgba(15, 255, 80, 0.5);
+                border: 1px solid rgba(15, 255, 80, 0.5);
+                border-radius: 1rem;
+                padding: 5px 10px;
+                font-size: 14px;
+                color: #d1d1d1;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.education-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.education-timeline {
+  margin-top: 3rem;
+}
+
+.education-item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.education-item::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 55px;
+  bottom: -30px;
+  width: 2px;
+  background-color: rgba(15, 255, 80);
+}
+
+.education-item:last-child::before {
+  display: none;
+}
+
+.education-icon {
+  width: 45px;
+  height: 45px;
+  background-color: rgba(15, 255, 80, 0.2);
+  color: rgba(15, 255, 80);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.education-content {
+  flex-grow: 1;
+}
+
+.degree {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(15, 255, 80);
+  margin-bottom: 5px;
+}
+
+.school {
+  font-size: 16px;
+  color: #d1d1d1;
+  margin-bottom: 5px;
+}
+
+.duration {
+  font-size: 14px;
+  color: #a0a0a0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.certification-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 3rem;
+}
+
+.certification-card {
+  box-shadow: inset 0 -20px 80px -20px rgba(15, 255, 80, 0.5);
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.certification-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: rgba(15, 255, 80);
+}
+
+.certification-icon {
+  width: 36px;
+  height: 36px;
+  background-color: rgba(15, 255, 80, 0.2);
+  color: rgba(15, 255, 80);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.certification-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.issuer {
+  font-size: 14px;
+  color: #a0a0a0;
+  margin-bottom: 15px;
+}
+
+.credential-link {
+  color: rgba(15, 255, 80);
+  text-decoration: none;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.year {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 14px;
+  color: #a0a0a0;
+}
+
+/* Add responsive fallback classes */
+@media (max-width: 1200px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .education-container,
+  .certification-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-cards {
+    flex-direction: column;
+  }
+}

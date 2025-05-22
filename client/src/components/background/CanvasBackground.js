@@ -20,10 +20,10 @@ const CanvasBackground = () => {
     constructor(x, y) {
       this.x = x;
       this.y = y;
-      this.radius = Math.random() * 1.5 + 0.5;
+      this.radius = Math.random() * 0.5 + 0.5;
       this.color = randomColor();
-      this.vx = (Math.random() - 0.5) * 1;
-      this.vy = (Math.random() - 0.5) * 1;
+      this.vx = (Math.random() - 0.5) * 2;
+      this.vy = (Math.random() - 0.5) * 2;
     }
 
     move(canvasWidth, canvasHeight) {
@@ -56,7 +56,7 @@ const CanvasBackground = () => {
   const drawLines = (ctx, canvasWidth) => {
     if (canvasWidth <= 1024) return; // Disable connections on mobile
 
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
     ctx.lineWidth = 1;
 
     particlesRef.current.forEach((particle) => {

@@ -1,0 +1,132 @@
+.featured-blog {
+  display: flex;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .featured-image {
+    position: relative;
+    flex: 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+
+      @media (max-width: 1024px) {
+        border-radius: 10px 10px 0 0;
+      }
+    }
+
+    .featured-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #198754;
+      color: white;
+      padding: 5px 10px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+  }
+
+  .featured-content {
+    flex: 1;
+    padding: 20px;
+    background: #1a1a1a;
+
+    .blog-date {
+      font-size: 14px;
+      color: #6c757d;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .read-more {
+      font-weight: bold;
+      text-decoration: none;
+      color: #198754;
+      display: inline-block;
+      margin-top: 10px;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        text-decoration: underline;
+        color: #145c32;
+      }
+    }
+  }
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-item {
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    img {
+      width: 100%;
+      height: 18rem;
+      object-fit: cover;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .blog-item-content {
+      padding: 20px;
+
+      h4 {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .read-more {
+        font-weight: bold;
+        text-decoration: none;
+        color: #198754;
+        display: inline-block;
+        margin-top: 10px;
+        transition: color 0.3s ease-in-out;
+
+        &:hover {
+          text-decoration: underline;
+          color: #145c32;
+        }
+      }
+    }
+  }
+}

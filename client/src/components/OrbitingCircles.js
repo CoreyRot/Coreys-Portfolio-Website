@@ -7,7 +7,7 @@ const OrbitingCircles = ({
   radius = 160,
   angle = 72,
   iconSize = 40,
-  speed = 1,
+  speed = 1.8,
 }) => {
   const calculatedDuration = duration / speed;
 

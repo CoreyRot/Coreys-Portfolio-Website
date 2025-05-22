@@ -8,26 +8,15 @@ import {
 
 import Header from "./components/layout/Header";
 import CanvasBackground from "./components/background/CanvasBackground";
-import ScrollToTop from "./components/utils/ScrollToTop";
 
-import About from "./pages/About";
-import Resume from "./pages/Resume";
-import Projects from "./pages/Projects";
-import ProjectDetails from "./pages/ProjectDetails";
-import Article from "./pages/Blog";
-import BlogDetails from "./pages/BlogDetails";
-import MoreComingSoon from "./pages/MoreComingSoon";
-import Contact from "./pages/Contact";
+import ProjectDetails from "./components/tiles/inner-tiles/ProjectDetails";
+import BlogDetails from "./components/tiles/inner-tiles/BlogDetails";
 
+import DashboardGrid from "./components/layout/DashboardGrid";
 import IntroGrid from "./components/IntroGrid";
-
-
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 
-/** 
- * Scroll to anchor on hash change 
- */
 const ScrollToAnchor = () => {
   const { hash } = useLocation();
 
@@ -46,44 +35,47 @@ const ScrollToAnchor = () => {
   return null;
 };
 
-/** 
- * Full-page layout wrapper 
- */
-const AppLayout = () => (
-  <div className="app-layout">
-    <CanvasBackground />
-    <Header />
-    <main id="content" className="site-content__start">
-      <Routes>
-        {/* Multi-section homepage */}
-        <Route path="/" element={<MainSections />} />
+const AppLayout = () => {
+  // Lift the expanded tile state up to share between Header and DashboardGrid
+  const [expandedTileId, setExpandedTileId] = useState(null);
 
-        {/* Dynamic routes */}
-        <Route path="/projects/:id" element={<ProjectDetails />} />
-        <Route path="/blogs/:id" element={<BlogDetails />} />
-        <Route path="/projects/more-coming-soon" element={<MoreComingSoon />} />
-      </Routes>
-    </main>
-    <ScrollToTop />
-  </div>
-);
+  // Handler to open/close tiles - this will be passed to both components
+  const handleTileToggle = (tileId) => {
+    setExpandedTileId(prevId => prevId === tileId ? null : tileId);
+  };
 
-/** 
- * Main homepage sections (anchor targets) 
- */
-const MainSections = () => (
-  <>
-    <section id="about" className="about"><About /></section>
-    <section id="projects" className="projects"><Projects /></section>
-    <section id="resume" className="resume"><Resume /></section>
-    <section id="articles" className="blogs"><Article /></section>
-    <section id="contact" className="contact"><Contact /></section>
-  </>
-);
+  // Handler specifically for navigation - always opens the tile
+  const handleNavigationOpen = (tileId) => {
+    setExpandedTileId(tileId);
+  };
 
-/** 
- * App wrapper with Speed Insights and Router 
- */
+  return (
+    <div className="app-layout">
+      <CanvasBackground />
+      <Header 
+        onNavigationClick={handleNavigationOpen}
+        expandedTileId={expandedTileId}
+      />
+      <main id="content" className="site-content__start">
+        <Routes>
+          <Route 
+            path="/" 
+            element={
+              <DashboardGrid 
+                expandedId={expandedTileId}
+                onTileToggle={handleTileToggle}
+                onTileClose={() => setExpandedTileId(null)}
+              />
+            } 
+          />
+          <Route path="/projects/:id" element={<ProjectDetails />} />
+          <Route path="/blogs/:id" element={<BlogDetails />} />
+        </Routes>
+      </main>
+    </div>
+  );
+};
+
 const App = () => {
   const [introDone, setIntroDone] = useState(false);
 

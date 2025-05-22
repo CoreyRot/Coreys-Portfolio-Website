@@ -1,0 +1,50 @@
+/* Orbiting circles */
+.skills-orbiting-circles {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.orbiting-circles-container {
+  position: relative;
+  width: 100%;
+  height: 30rem;
+}
+
+.orbiting-circles-container:nth-child(2) {
+  position: absolute;
+  top: 0;
+}
+
+.orbiting-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  margin: calc(var(--icon-size) / -2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 45px;
+  border-radius: 50%;
+  animation: orbit var(--duration) linear infinite;
+  transform: rotate(var(--angle)) translateY(var(--radius))
+    rotate(calc(-1 * var(--angle)));
+}
+
+.orbiting-circle svg {
+  fill: #fff !important;
+}
+
+.orbiting-circle.reverse {
+  animation-direction: reverse;
+}
+
+/* Animation */
+@keyframes orbit {
+  100% {
+    transform: rotate(calc(var(--angle) + 360deg)) translateY(var(--radius))
+      rotate(calc(-1 * (var(--angle) + 360deg)));
+  }
+}

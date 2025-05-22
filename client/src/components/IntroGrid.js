@@ -18,6 +18,9 @@ const chunkArray = (arr, size) =>
 
 const techRows = chunkArray(megaTechStack, 7);
 
+// Number of tiles to use in the transition animation
+const TILE_COUNT = 5;
+
 // Preload images function
 const preloadIcons = () =>
   new Promise((resolve) => {
@@ -31,9 +34,13 @@ const IntroGrid = ({ onFinish }) => {
   const homeBackgroundRef = useRef(null);
   const introTextRef = useRef(null);
   const contentRef = useRef(null);
+  const transitionTilesRef = useRef([]);
+  const transitionWrapperRef = useRef(null);
   
   // State
   const [loaded, setLoaded] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   
   // Initialize smooth scroll
   useEffect(() => {
@@ -56,6 +63,11 @@ const IntroGrid = ({ onFinish }) => {
     return () => {
       lenis.destroy();
     };
+  }, []);
+  
+  // Set up transition tiles refs
+  useEffect(() => {
+    transitionTilesRef.current = transitionTilesRef.current.slice(0, TILE_COUNT);
   }, []);
   
   // Grid item animations after load
@@ -96,7 +108,6 @@ const IntroGrid = ({ onFinish }) => {
     
     // Store ref values to fix the exhaustive-deps warning
     const exploreButton = exploreRef.current;
-    const homeBackground = homeBackgroundRef.current;
     const introText = introTextRef.current;
     
     // Config for row animations
@@ -182,6 +193,9 @@ const IntroGrid = ({ onFinish }) => {
         
     // Render loop for animations
     const render = () => {
+      // Skip rendering if transitioning
+      if (isTransitioning) return;
+      
       const mappedValues = {
         translateX: calculateMappedX(),
         skewX: calculateMappedSkew(),
@@ -229,49 +243,56 @@ const IntroGrid = ({ onFinish }) => {
       }
     };
     
-    // Center expanding transition
+    // Tile-based transition
     const enterFullview = () => {
-      // Timeline for the transition
+      if (isAnimating) return;
+      setIsAnimating(true);
+      setIsTransitioning(true);
+      
+      // Make sure the transition wrapper is visible
+      if (transitionWrapperRef.current) {
+        transitionWrapperRef.current.style.display = 'flex';
+        transitionWrapperRef.current.style.zIndex = '1000';
+      }
+      
+      // Fade out the content and explore button
       const tl = gsap.timeline();
       
-      // First fade out the content
       tl.to(introText, {
         opacity: 0,
         duration: 0.3,
         ease: "power2.out"
       })
-      // Then, directly use a scale transform for expansion from center
-      .to(homeBackground, {
-        scale: 20, // Large scale value to ensure it covers the screen
-        duration: 0.6,
-        ease: "power2.inOut",
-        onStart: () => {
-          // Add class to hide content when expansion starts
-          homeBackground.classList.add('home-background--expanded');
-        },
-        onComplete: () => {
-          stopRendering();
-          // Call onFinish to transition to main app
-          setTimeout(() => {
-            if (onFinish) onFinish();
-          }, 100);
-        }
-      }, "+=0.1")
-      // Fade out grid simultaneously
-      .to(grid, {
-        opacity: 0,
-        duration: 0.6
-      }, "-=0.6")
-      // Hide explore button
       .to(exploreButton, {
         opacity: 0,
         duration: 0.3
+      }, 0)
+      // Fade out grid 
+      .to(grid, {
+        opacity: 0,
+        duration: 0.4
       }, 0);
       
-      // Remove scrolling lock when complete
-      setTimeout(() => {
-        document.body.classList.remove('noscroll');
-      }, 1000);
+      // Then animate the transition tiles
+      tl.to(transitionTilesRef.current, {
+        duration: 0.2,
+        scaleY: 1,
+        transformOrigin: "bottom left",
+        stagger: 0.1,
+        ease: "power2.inOut",
+        onComplete: () => {
+          // Stop the background animations
+          stopRendering();
+          
+          // After tiles cover the screen, trigger the onFinish callback
+          setTimeout(() => {
+            if (onFinish) onFinish();
+            setIsAnimating(false);
+            // Remove scrolling lock when complete
+            document.body.classList.remove('noscroll');
+          }, 300);
+        }
+      });
     };
     
     // Set up event listeners
@@ -296,7 +317,7 @@ const IntroGrid = ({ onFinish }) => {
       exploreButton?.removeEventListener('click', enterFullview);
       exploreButton?.removeEventListener('touchstart', enterFullview);
     };
-  }, [loaded, onFinish]);
+  }, [loaded, onFinish, isAnimating, isTransitioning]);
   
   return (
     <div className={`loading ${loaded ? "loaded" : ""}`}>
@@ -320,7 +341,7 @@ const IntroGrid = ({ onFinish }) => {
 
           <div className="home-background" ref={homeBackgroundRef}>
             <div className="home-content" ref={introTextRef}>
-              <h1 className="heading-title">Hiya, I'm Corey</h1>
+              <h1 className="heading-title">Hi, I'm Corey</h1>
               <div className="section-subheading">
                 <p>I'm passionate about crafting intuitive and visually engaging digital experiences. Whether it's building dynamic applications or designing user-friendly websites, I focus on creating high-quality solutions that bring ideas to life.</p>
                 <p>Let's build something amazing together!</p>
@@ -348,6 +369,18 @@ const IntroGrid = ({ onFinish }) => {
         <section ref={contentRef} className="content">
           {/* Content section can be added here if needed */}
         </section>
+        
+        {/* Transition tiles for the animation */}
+        <div className="expanded-overlay" style={{ display: 'none' }} ref={transitionWrapperRef}>
+          <ul className="transition-tiles">
+            {[...Array(TILE_COUNT)].map((_, index) => (
+              <li 
+                key={index} 
+                ref={el => (transitionTilesRef.current[index] = el)}
+              />
+            ))}
+          </ul>
+        </div>
       </main>
     </div>
   );

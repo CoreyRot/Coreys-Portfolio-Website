@@ -12,6 +12,7 @@
 
 body {
   font-family: "Montserrat", sans-serif;
+  color: white;
 }
 
 html {
@@ -41,13 +42,17 @@ canvas {
 /* === Layout === */
 .container {
   width: 100%;
+  max-width: 80rem;
+  padding-right: 0.625rem;
+  padding-left: 0.625rem;
+  margin: 0 auto;
 }
-
-.large-container {
-  width: 100%;
-  max-width: 77.5rem;
+@media print, screen and (min-width: 40em) {
+  .container {
+    padding-right: 0.9375rem;
+    padding-left: 0.9375rem;
+  }
 }
-
 /* === Button Styles === */
 .btn,
 button {
@@ -55,23 +60,21 @@ button {
   padding: 8px 20px;
   font-weight: 600;
   font-size: 0.9rem;
-  color: #198754;
+  color: white;
   background-color: transparent;
   border: none;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
-  transition: color 0.3s ease-in-out;
 
   &:hover {
-    color: #145c32;
-
+    color: white;
     &:not(.mobile-menu-btn):not(.mobile-nav-links li button):not(
         .scroll-to-top
       ) {
       &::before,
       &::after {
-        border-color: #145c32;
+        border-color: white;
       }
     }
   }
@@ -83,9 +86,9 @@ button {
       position: absolute;
       width: 10px;
       height: 10px;
-      border: 2px solid #198754;
+      border: 2px solid white;
       border-radius: 0;
-      transition: all 0.4s ease;
+      transition: all 0.35s ease;
     }
 
     &::before {
@@ -115,37 +118,6 @@ button {
   }
 }
 
-/* === Utilities === */
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-
-  @media (max-width: 600px) {
-    gap: 24px;
-  }
-}
-
-.align-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-
-  .cell {
-    flex: 0 0 auto;
-    min-height: 0;
-    min-width: 0;
-    width: 100%;
-  }
-}
-
 /* === Section Styling === */
 .heading-title,
 .section-title {
@@ -156,74 +128,39 @@ button {
 .section-title {
   padding-bottom: 20px;
   position: relative;
-  margin-top: 50px;
   &::after {
     content: "";
     position: absolute;
-    display: block;
-    width: 50px;
-    height: 3px;
-    background: #198754;
     left: 0;
-    bottom: 0;
-  }
-}
-
-/* === Background Sections === */
-.home-background,
-.project-info,
-.more-coming-soon-background {
-  background: #fafafa;
-  padding: 50px;
-  border-radius: 30px;
-  color: black;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  @media (max-width: 850px) {
-    padding: 25px;
-  }
-  @media (max-width: 450px) {
-    padding: 25px 15px;
-  }
-}
-
-.about-background,
-.resume-background,
-.projects-background,
-.contact-background,
-.blog-background {
-  background: #fafafa;
-  padding: 50px;
-  color: black;
-  @media (max-width: 850px) {
-    padding: 25px;
-  }
-  @media (max-width: 450px) {
-    padding: 25px 15px;
+    bottom: -0.5rem;
+    width: 25%;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(15, 255, 80, 0.8), transparent);
   }
 }
 
 /* === Typography === */
 h1,
 h2,
-h3,
-h4 {
+h3 {
   font-weight: 700;
-  line-height: 1.2;
 }
 
 h1 {
-  font-size: 56px;
+  font-size: 3rem;
+  line-height: 1;
 }
 h2 {
-  font-size: 40px;
-  font-weight: 600;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 h3 {
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 h4 {
-  font-size: 22px;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
   font-weight: 500;
 }
 
@@ -233,50 +170,50 @@ p {
   margin-bottom: 1rem;
 }
 
-/* === Responsive Typography === */
-@media (max-width: 1024px) {
-  h1 {
-    font-size: 48px;
-  }
-  h2 {
-    font-size: 36px;
-  }
-  h3 {
-    font-size: 26px;
-  }
-  h4 {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 42px;
-  }
-  h2 {
-    font-size: 32px;
-  }
-  h3 {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 36px;
-  }
-  h2 {
-    font-size: 28px;
-  }
-  h3 {
-    font-size: 22px;
-  }
-  h4 {
-    font-size: 16px;
-  }
-}
-
 /* === Fix for Shadow Host === */
 #shadow-host-companion {
   min-height: 100%;
+}
+/* Expanded Overlay */
+.expanded-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
+
+/* Transition tiles for the reveal animation */
+.transition-tiles {
+  display: flex;
+  position: absolute;
+  z-index: 8;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  pointer-events: none;
+  list-style-type: none;
+  padding: 0;
+}
+
+.transition-tiles li {
+  transform: scaleY(0);
+  background: #1a1a1a;
+  width: 20%;
+  height: 100%;
+}
+
+/* Media queries for mobile devices */
+@media (max-width: 768px) {
+  /* Adjust tile animation for mobile */
+  .transition-tiles li {
+    width: 25%; /* 4 tiles instead of 5 on mobile */
+  }
 }

@@ -1,0 +1,48 @@
+.article-container {
+  .section-header {
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+  }
+}
+.marquee {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.marquee-track {
+  display: flex;
+  width: fit-content;
+  animation: scroll-marquee 30s linear infinite;
+}
+
+.marquee-card {
+  flex: 0 0 auto;
+  width: 250px;
+  height: 140px;
+  margin: 0 0.5rem;
+  border-radius: 12px;
+  padding: 16px;
+  color: #fff;
+  background-color: #272727;
+}
+
+.feature-title {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.feature-description {
+  font-size: 12px;
+  color: #aaa;
+  line-height: 1.2;
+}
+
+@keyframes scroll-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

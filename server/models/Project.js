@@ -9,6 +9,7 @@ const ProjectSchema = new mongoose.Schema({
   liveUrl: { type: String },
   agency: { type: String },
   backlink: { type: String },
+  index: { type: Number, required: true }
 });
 
 module.exports = mongoose.model("Project", ProjectSchema, "project");
