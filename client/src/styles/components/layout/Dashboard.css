@@ -56,7 +56,7 @@
 }
 
 /* Responsive grid layout */
-.tile.tile-about {
+#about {
   @media (min-width: 48rem) {
     grid-column: span 6 / span 6;
   }
@@ -65,7 +65,7 @@
   }
 }
 
-.tile.tile-projects {
+#projects {
   @media (min-width: 48rem) {
     grid-column: span 3 / span 3;
     grid-row: span 2 / span 2;
@@ -75,7 +75,7 @@
   }
 }
 
-.tile.tile-skills {
+#skills {
   @media (min-width: 48rem) {
     grid-column: span 3 / span 3;
     grid-row: span 1 / span 1;
@@ -86,21 +86,21 @@
   cursor: auto;
 }
 
-.tile.tile-articles {
+#articles {
   @media (min-width: 48rem) {
     grid-column: span 3 / span 3;
   }
   padding-left: 0;
   padding-right: 0;
 }
-.tile.tile-services {
+#services {
   @media (min-width: 48rem) {
     grid-column: span 3 / span 3;
   }
   cursor: auto;
 }
 
-.tile.tile-contact {
+#contact {
   @media (min-width: 48rem) {
     grid-column: span 3 / span 3;
   }
