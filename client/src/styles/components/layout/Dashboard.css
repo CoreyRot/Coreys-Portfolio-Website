@@ -66,22 +66,22 @@
 }
 
 #projects {
+  @media (min-width: 64rem) {
+    grid-column: span 2 / span 2;
+  }
   @media (min-width: 48rem) {
     grid-column: span 3 / span 3;
     grid-row: span 2 / span 2;
   }
-  @media (min-width: 64rem) {
-    grid-column: span 2 / span 2;
-  }
 }
 
 #skills {
+  @media (min-width: 64rem) {
+    grid-column: span 2 / span 2;
+  }
   @media (min-width: 48rem) {
     grid-column: span 3 / span 3;
     grid-row: span 1 / span 1;
-  }
-  @media (min-width: 64rem) {
-    grid-column: span 2 / span 2;
   }
   cursor: auto;
 }
@@ -101,11 +101,11 @@
 }
 
 #contact {
-  @media (min-width: 48rem) {
-    grid-column: span 3 / span 3;
-  }
   @media (min-width: 64rem) {
     grid-column: span 2 / span 2;
+  }
+  @media (min-width: 48rem) {
+    grid-column: span 3 / span 3;
   }
 }
 
